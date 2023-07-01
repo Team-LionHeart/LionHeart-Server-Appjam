@@ -1,0 +1,18 @@
+dependencies {
+    implementation project(':lionheart-common')
+    implementation project(':lionheart-domain')
+    implementation project(':lionheart-external')
+
+    // spring mvc
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+//    // redis
+//    implementation "org.springframework.boot:spring-boot-starter-data-redis"
+//    implementation "org.springframework.session:spring-session-data-redis"
+//
+    // swagger
+    implementation 'org.springdoc:springdoc-openapi-ui:1.5.4'
+//
+//    // s3
+//    implementation "org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE"
+}

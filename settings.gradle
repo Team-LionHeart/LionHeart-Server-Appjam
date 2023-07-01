@@ -1,1 +1,5 @@
 rootProject.name = 'LionHeart-Server'
+include 'lionheart-api'
+include 'lionheart-common'
+include 'lionheart-domain'
+include 'lionheart-external'

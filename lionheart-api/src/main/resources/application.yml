@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+spring:
+  profiles:
+    active: local
+
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operationsSorter: alpha
+    tagsSorter: alpha
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    docExpansion: none
+  paths-to-match:
+    - /api/**
