@@ -1,6 +1,6 @@
 package com.chiwawa.lionheart.common.exception;
 
-public class ValidationException extends BlossomException {
+public class ValidationException extends LionHeartException {
 
 	public ValidationException(String message) {
 		super(message, ErrorCode.VALIDATION_EXCEPTION);
