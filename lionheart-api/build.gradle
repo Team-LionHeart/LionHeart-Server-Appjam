@@ -1,3 +1,7 @@
+jar {
+    enabled = false
+}
+
 dependencies {
     implementation project(':lionheart-common')
     implementation project(':lionheart-domain')
