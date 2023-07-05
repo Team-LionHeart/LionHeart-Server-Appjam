@@ -13,10 +13,10 @@ public class ServerProfileController {
 
     private final Environment env;
 
-    @GetMapping("/progile")
+    @GetMapping("/profile")
     public String getProfile() {
         return Arrays.stream(env.getActiveProfiles())
                 .findFirst()
-                .get();
+                .orElse("");
     }
 }
