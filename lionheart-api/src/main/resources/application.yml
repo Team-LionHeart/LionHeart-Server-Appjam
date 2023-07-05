@@ -7,7 +7,7 @@ server:
 
 spring:
   profiles:
-    active: local
+    active: dev1
 
 springdoc:
   default-consumes-media-type: application/json
