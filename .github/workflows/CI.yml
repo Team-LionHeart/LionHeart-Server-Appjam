@@ -10,9 +10,9 @@ name: Java CI with Gradle
 # main 브랜치에 push 또는 pull_request 시에 동작
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "develop" ]
 
 permissions:
   contents: read
@@ -59,6 +59,6 @@ jobs:
       run: chmod +x gradlew
     
     - name: Build with Gradle # 실제 application build(-x 옵션을 통해 테스트는 제외)
-      run: ./gradlew build -x test
+      run: ./gradlew clean build -x test
         
     
