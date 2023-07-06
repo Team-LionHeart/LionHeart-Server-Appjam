@@ -43,16 +43,14 @@ jobs:
         cd ./src/main/resources
         
         # 프로퍼티 파일 생성
-        touch ./application-prod.yml ./application-dev1.yml ./application-dev2.yml
+        touch ./application-prod.yml ./application-dev.yml
         
         # Github-Secrets에 설정한 값을 프로퍼티 파일에 씌우기
         echo "${{ secrets.PROD_APPLICATION }}" >> ./application-prod.yml
-        echo "${{ secrets.DEV1_APPLICATION }}" >> ./application-dev1.yml
-        echo "${{ secrets.DEV2_APPLICATION }}" >> ./application-dev2.yml
+        echo "${{ secrets.DEV_APPLICATION }}" >> ./application-dev.yml
         
         # 프로퍼티 파일 확인
-        cat ./application-dev1.yml
-        cat ./application-dev2.yml
+        cat ./application-dev.yml
         cat ./application-prod.yml
       shell: bash
       

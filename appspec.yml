@@ -1,6 +1,7 @@
 version: 0.0
 os: linux
 
+# source 경로에 있는 파일을 EC2 인스턴스의 destination에 배포, 만약 해당 지점에 이미 파일들이 존재하면 overwrite
 files:
   - source:  /
     destination: /home/ubuntu/app
