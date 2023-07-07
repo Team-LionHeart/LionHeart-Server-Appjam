@@ -44,7 +44,7 @@ else
 fi
 
 echo "> 배포"
-if [ ${HOST_NAME} == "blossom-prod-server" ]; then
+if [ ${HOST_NAME} == "lionheart-prod-server" ]; then
   nohup java -jar -Duser.timezone=Asia/Seoul -Dserver.port=$IDLE_PORT -Dspring.profiles.active=prod $IDLE_APPLICATION_PATH >> /home/ubuntu/app/nohup.out 2>&1 &
   exit 0
 else
