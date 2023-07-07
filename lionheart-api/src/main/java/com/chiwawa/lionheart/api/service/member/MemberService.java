@@ -1,6 +1,5 @@
 package com.chiwawa.lionheart.api.service.member;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +15,6 @@ import lombok.RequiredArgsConstructor;
 public class MemberService {
 
 	private final MemberRepository memberRepository;
-	//	private final S3Provider s3Provider;
-
-	@Value(value = "${spring.profiles.active}")
-	private String profile;
 
 	public Long registerMember(CreateMemberRequestDto request) {
 		MemberServiceUtils.validateNotExistsMember(memberRepository, request.getSocialId(), request.getSocialType());

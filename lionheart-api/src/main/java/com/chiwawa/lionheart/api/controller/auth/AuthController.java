@@ -37,8 +37,8 @@ public class AuthController {
 	@PostMapping("/auth/signup")
 	public ApiResponse<TokenResponse> signUp(@Valid @RequestBody SignUpRequest request) {
 		AuthService authService = authServiceProvider.getAuthService(request.getSocialType());
-		Long userId = authService.signUp(request);
-		TokenResponse tokenInfo = createTokenService.createTokenInfo(userId);
+		Long memberId = authService.signUp(request);
+		TokenResponse tokenInfo = createTokenService.createTokenInfo(memberId);
 		return ApiResponse.success(tokenInfo);
 	}
 
@@ -46,16 +46,16 @@ public class AuthController {
 	@PostMapping("/auth/login")
 	public ApiResponse<TokenResponse> login(@Valid @RequestBody LoginRequest request) {
 		AuthService authService = authServiceProvider.getAuthService(request.getSocialType());
-		Long userId = authService.login(request);
-		TokenResponse tokenInfo = createTokenService.createTokenInfo(userId);
+		Long memberId = authService.login(request);
+		TokenResponse tokenInfo = createTokenService.createTokenInfo(memberId);
 		return ApiResponse.success(tokenInfo);
 	}
 
 	@Operation(summary = "[인증] 로그아웃")
 	@Auth
 	@PostMapping("/auth/logout")
-	public ApiResponse<String> logout(@MemberId Long userId) {
-		commonAuthService.logout(userId);
+	public ApiResponse<String> logout(@MemberId Long memberId) {
+		commonAuthService.logout(memberId);
 		return ApiResponse.SUCCESS;
 	}
 

@@ -23,20 +23,20 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class CreateTokenService {
 
-	private final MemberRepository userRepository;
+	private final MemberRepository memberRepository;
 
 	private final RedisTemplate redisTemplate;
 
 	private final JwtUtils jwtUtils;
 
-	public TokenResponse createTokenInfo(Long userId) {
-		List<String> tokens = jwtUtils.createTokenInfo(userId);
+	public TokenResponse createTokenInfo(Long memberId) {
+		List<String> tokens = jwtUtils.createTokenInfo(memberId);
 		return TokenResponse.of(tokens.get(0), tokens.get(1));
 	}
 
 	public TokenResponse reissueToken(TokenRequest request) {
 		Long memberId = jwtUtils.getMemberIdFromJwt(request.getAccessToken());
-		Member member = MemberServiceUtils.findMemberById(userRepository, memberId);
+		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
 		if (!jwtUtils.validateToken(request.getRefreshToken())) {
 			throw new UnAuthorizedException(String.format("주어진 리프레시 토큰 (%s) 이 유효하지 않습니다.", request.getRefreshToken()));
 		}

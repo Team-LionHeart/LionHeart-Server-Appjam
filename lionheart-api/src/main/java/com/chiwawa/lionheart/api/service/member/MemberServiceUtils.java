@@ -17,8 +17,8 @@ public class MemberServiceUtils {
 	static void validateNotExistsMember(MemberRepository memberRepository, String socialId,
 		MemberSocialType socialType) {
 		if (memberRepository.existsBySocialIdAndSocialType(socialId, socialType)) {
-			throw new ConflictException(String.format("이미 존재하는 유저 (%s - %s) 입니다", socialId, socialType),
-				CONFLICT_USER_EXCEPTION);
+			throw new ConflictException(String.format("이미 존재하는 회원 (%s - %s) 입니다", socialId, socialType),
+				CONFLICT_MEMBER_EXCEPTION);
 		}
 	}
 
@@ -26,16 +26,16 @@ public class MemberServiceUtils {
 		MemberSocialType socialType) {
 		Member member = memberRepository.findMemberBySocialIdAndSocialType(socialId, socialType);
 		if (member == null) {
-			throw new NotFoundException(String.format("존재하지 않는 유저 (%s) (%s) 입니다", socialType, socialId),
-				NOT_FOUND_USER_EXCEPTION);
+			throw new NotFoundException(String.format("존재하지 않는 회원 (%s) (%s) 입니다", socialType, socialId),
+				NOT_FOUND_MEMBER_EXCEPTION);
 		}
 		return member;
 	}
 
-	public static Member findMemberById(MemberRepository userRepository, Long userId) {
-		Member member = userRepository.findMemberById(userId);
+	public static Member findMemberById(MemberRepository memberRepository, Long memberId) {
+		Member member = memberRepository.findMemberById(memberId);
 		if (member == null) {
-			throw new NotFoundException(String.format("존재하지 않는 유저 (%s) 입니다", userId), NOT_FOUND_USER_EXCEPTION);
+			throw new NotFoundException(String.format("존재하지 않는 회원 (%s) 입니다", memberId), NOT_FOUND_MEMBER_EXCEPTION);
 		}
 		return member;
 	}

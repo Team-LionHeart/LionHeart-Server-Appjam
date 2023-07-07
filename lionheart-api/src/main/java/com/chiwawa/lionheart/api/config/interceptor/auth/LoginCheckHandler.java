@@ -16,14 +16,14 @@ public class LoginCheckHandler {
 
 	private final JwtUtils jwtUtils;
 
-	public Long getUserId(HttpServletRequest request) {
+	public Long getMemberId(HttpServletRequest request) {
 		String bearerToken = request.getHeader("Authorization");
 		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
 			String accessToken = bearerToken.substring("Bearer ".length());
 			if (jwtUtils.validateToken(accessToken)) {
-				Long userId = jwtUtils.getMemberIdFromJwt(accessToken);
-				if (userId != null) {
-					return userId;
+				Long memberId = jwtUtils.getMemberIdFromJwt(accessToken);
+				if (memberId != null) {
+					return memberId;
 				}
 			}
 		}

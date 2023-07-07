@@ -40,7 +40,7 @@ public class JwtUtils {
 		this.secretKey = Keys.hmacShaKeyFor(keyBytes);
 	}
 
-	public List<String> createTokenInfo(Long userId) {
+	public List<String> createTokenInfo(Long memberId) {
 
 		long now = (new Date()).getTime();
 		Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
@@ -48,7 +48,7 @@ public class JwtUtils {
 
 		// Access Token 생성
 		String accessToken = Jwts.builder()
-			.claim(JwtKey.MEMBER_ID, userId)
+			.claim(JwtKey.MEMBER_ID, memberId)
 			.setExpiration(accessTokenExpiresIn)
 			.signWith(secretKey, SignatureAlgorithm.HS512)
 			.compact();
@@ -60,13 +60,13 @@ public class JwtUtils {
 			.compact();
 
 		redisTemplate.opsForValue()
-			.set(RedisKey.REFRESH_TOKEN + userId, refreshToken, REFRESH_TOKEN_EXPIRE_TIME, TimeUnit.MILLISECONDS);
+			.set(RedisKey.REFRESH_TOKEN + memberId, refreshToken, REFRESH_TOKEN_EXPIRE_TIME, TimeUnit.MILLISECONDS);
 
 		return List.of(accessToken, refreshToken);
 	}
 
-	public void expireRefreshToken(Long userId) {
-		redisTemplate.opsForValue().set(RedisKey.REFRESH_TOKEN + userId, "", EXPIRED_TIME, TimeUnit.MILLISECONDS);
+	public void expireRefreshToken(Long memberId) {
+		redisTemplate.opsForValue().set(RedisKey.REFRESH_TOKEN + memberId, "", EXPIRED_TIME, TimeUnit.MILLISECONDS);
 	}
 
 	public boolean validateToken(String token) {

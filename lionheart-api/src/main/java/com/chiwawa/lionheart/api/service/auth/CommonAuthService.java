@@ -15,12 +15,12 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class CommonAuthService {
 
-	private final MemberRepository userRepository;
+	private final MemberRepository memberRepository;
 
 	private final JwtUtils jwtUtils;
 
-	public void logout(Long userId) {
-		Member member = MemberServiceUtils.findMemberById(userRepository, userId);
+	public void logout(Long memberId) {
+		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
 		jwtUtils.expireRefreshToken(member.getId());
 	}
 }

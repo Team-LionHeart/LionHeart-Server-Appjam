@@ -28,7 +28,7 @@ public class MemberIdResolver implements HandlerMethodArgumentResolver {
 		Object object = webRequest.getAttribute(JwtKey.MEMBER_ID, 0);
 		if (object == null) {
 			throw new InternalServerException(
-				String.format("USER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(), parameter.getMethod()));
+				String.format("MEMBER_ID를 가져오지 못했습니다. (%s - %s)", parameter.getClass(), parameter.getMethod()));
 		}
 		return object;
 	}
