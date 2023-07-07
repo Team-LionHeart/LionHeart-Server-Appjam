@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Constraint {
 
-	public static final int USER_NICKNAME_MAX = 5;
+	public static final int MEMBER_NICKNAME_MAX = 5;
 }
