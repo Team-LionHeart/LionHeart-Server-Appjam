@@ -1,6 +1,6 @@
 name: Java CI with Gradle on PROD
 
-# main 브랜치에 push 또는 pull_request 시에 동작
+# main 브랜치에 pull_request 시에 동작
 on:
   pull_request:
     branches: [ "main" ]

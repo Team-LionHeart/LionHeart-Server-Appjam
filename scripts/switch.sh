@@ -2,7 +2,7 @@
 echo "> 현재 구동중인 Port 확인"
 CURRENT_PORT=$(cat /etc/nginx/conf.d/service-url.inc | grep -Po '[0-9]+' | tail -1)
 
-# 쉬고 있는 set 찾기: set1이 사용중이면 set2가 쉬고 있고, 반대면 set1이 쉬고 있음
+# 쉬고 있는 port 찾기: 8081이 사용중이면 8082가 쉬고 있고, 반대면 8081이 쉬고 있음
 if [ $CURRENT_PORT -eq 8081 ]
 then
   IDLE_PORT=8082

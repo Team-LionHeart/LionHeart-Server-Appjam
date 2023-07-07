@@ -1,5 +1,6 @@
 name: Java CD with Gradle on PROD
 
+# main 브랜치에 push 시에 동작
 on:
   push:
     branches: [ "main" ]
