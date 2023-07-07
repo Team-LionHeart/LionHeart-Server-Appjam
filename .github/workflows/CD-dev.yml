@@ -31,7 +31,7 @@ jobs:
       - name: make application.yml 파일 생성
         run: |
           ## cd application.yml
-          cd ./src/main/resources
+          cd ./lionheart-api/src/main/resources/
           
           # application.yml 파일 생성
           touch ./application-dev.yml
