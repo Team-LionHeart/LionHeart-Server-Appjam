@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "USER")
+@Table(name = "MEMBER")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -41,6 +41,8 @@ public class Member extends BaseEntity {
 	public static Member newInstance(String socialId, MemberSocialType socialType) {
 		return Member.builder()
 			.socialInfo(SocialInfo.of(socialId, socialType))
+			.fcmToken("")
+			.nickname("")
 			.build();
 	}
 }
