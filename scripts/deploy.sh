@@ -50,7 +50,7 @@ if [ ${HOST_NAME} == "lionheart-prod-server" ]; then
 else
   nohup java -jar -Duser.timezone=Asia/Seoul -Dserver.port=$IDLE_PORT -Dspring.profiles.active=dev $IDLE_APPLICATION_PATH >> /home/ubuntu/app/nohup.out 2>&1 &
   exit 0
-
+fi
 
 echo "> $HOST_NAME 10초 후 Health check 시작"
 sleep 10
