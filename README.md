@@ -4,7 +4,7 @@
 
 
 <br><br>
-##  🍎 LionHeart-Server Developers
+##  💻 LionHeart-Server Developers
 
 
 
