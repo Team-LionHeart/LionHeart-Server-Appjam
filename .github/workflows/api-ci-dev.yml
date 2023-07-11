@@ -4,7 +4,7 @@ name: API Server Java CI with Gradle on DEV
 on:
   pull_request:
     branches: [ "develop" ]
-    paths:
+    paths: # 아래 패키지에 변경사항이 있는 pull-request 만 동작
       - lionheart-api/**
       - lionheart-domain/**
       - lionheart-common/**

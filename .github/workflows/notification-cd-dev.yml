@@ -4,7 +4,7 @@ name: Notification Server Java CD with Gradle on DEV
 on:
   push:
     branches: [ "develop" ]
-    paths:
+    paths: # 아래 패키지에 변경사항이 있는 pull-request 만 동작
       - lionheart-notification/**
       - lionheart-domain/**
       - lionheart-common/**
