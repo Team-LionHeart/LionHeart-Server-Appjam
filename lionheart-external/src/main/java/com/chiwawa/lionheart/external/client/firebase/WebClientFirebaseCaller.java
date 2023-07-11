@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.chiwawa.lionheart.common.exception.BadGatewayException;
@@ -25,12 +26,13 @@ public class WebClientFirebaseCaller implements FirebaseApiCaller {
 
 	@Override
 	public void requestFcmMessaging(String accessToken, String requestBody) {
-		webClient.get()
+		webClient.post()
 			.uri(uri)
 			.headers(headers -> {
 				headers.setBearerAuth(accessToken);
 				headers.setContentType(MediaType.APPLICATION_JSON);
 			})
+			.body(BodyInserters.fromValue(requestBody))
 			.retrieve()
 			.onStatus(HttpStatus::is4xxClientError, clientResponse ->
 				Mono.error(new ValidationException(
