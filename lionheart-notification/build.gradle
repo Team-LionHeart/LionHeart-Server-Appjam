@@ -1,0 +1,14 @@
+jar {
+    enabled = false
+}
+
+dependencies {
+    implementation project(":lionheart-domain")
+    implementation project(":lionheart-common")
+    implementation project(":lionheart-external")
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE"
+    implementation "org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE"
+    implementation "com.google.firebase:firebase-admin:6.8.1"
+}
