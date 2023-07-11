@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS `MEMBER`;
 DROP TABLE IF EXISTS `ONBOARDING`;
+DROP TABLE IF EXISTS `SETTING`;
 DROP TABLE IF EXISTS `ARTICLE`;
 DROP TABLE IF EXISTS `ARTICLE_IMAGE`;
 DROP TABLE IF EXISTS `CATEGORY`;
@@ -28,6 +29,15 @@ CREATE TABLE `ONBOARDING`
     `BABY_NICKNAME`  varchar(30) NOT NULL,
     `CREATED_AT`     datetime    NOT NULL,
     `MODIFED_AT`     datetime    NOT NULL
+);
+
+CREATE TABLE `SETTING`
+(
+    `SETTING_ID`          bigint auto_increment primary key,
+    `MEMBER_ID`           bigint      NOT NULL,
+    `NOTIFICATION_STATUS` varchar(30) NOT NULL,
+    `CREATED_AT`          datetime    NOT NULL,
+    `MODIFED_AT`          datetime    NOT NULL
 );
 
 CREATE TABLE `ARTICLE`
