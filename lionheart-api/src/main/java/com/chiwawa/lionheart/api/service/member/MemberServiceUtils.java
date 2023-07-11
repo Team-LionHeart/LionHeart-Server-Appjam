@@ -22,7 +22,7 @@ public class MemberServiceUtils {
 		MemberSocialType socialType) {
 		if (memberRepository.existsBySocialIdAndSocialType(socialId, socialType)) {
 			throw new ConflictException(
-				MessageUtils.generateString(ALREADY_EXIST_MEMBER_ERROR_MESSAGE, socialId, socialType),
+				MessageUtils.generate(ALREADY_EXIST_MEMBER_ERROR_MESSAGE, socialId, socialType),
 				CONFLICT_MEMBER_EXCEPTION);
 		}
 	}
@@ -31,14 +31,14 @@ public class MemberServiceUtils {
 		MemberSocialType socialType) {
 		Optional<Member> member = memberRepository.findMemberBySocialIdAndSocialType(socialId, socialType);
 		return member.orElseThrow(() -> new NotFoundException(
-			MessageUtils.generateString(NOT_EXIST_MEMBER_SOCIAL_DATA_ERROR_MESSAGE, socialType, socialId),
+			MessageUtils.generate(NOT_EXIST_MEMBER_SOCIAL_DATA_ERROR_MESSAGE, socialType, socialId),
 			NOT_FOUND_MEMBER_EXCEPTION));
 	}
 
 	public static Member findMemberById(MemberRepository memberRepository, Long memberId) {
 		Optional<Member> member = memberRepository.findMemberById(memberId);
 		return member.orElseThrow(() ->
-			new NotFoundException(MessageUtils.generateString(NOT_EXIST_MEMBER_ID_ERROR_MESSAGE, memberId),
+			new NotFoundException(MessageUtils.generate(NOT_EXIST_MEMBER_ID_ERROR_MESSAGE, memberId),
 				NOT_FOUND_MEMBER_EXCEPTION));
 
 	}

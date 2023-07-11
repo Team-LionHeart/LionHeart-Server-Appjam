@@ -32,7 +32,7 @@ public class MemberIdResolver implements HandlerMethodArgumentResolver {
 
 		Optional<Object> object = Optional.ofNullable(webRequest.getAttribute(JwtKey.MEMBER_ID, 0));
 		return object.orElseThrow(() -> new InternalServerException(
-			MessageUtils.generateString(CAN_NOT_GET_MEMBER_ID_ERROR_MESSAGE, parameter.getClass(),
+			MessageUtils.generate(CAN_NOT_GET_MEMBER_ID_ERROR_MESSAGE, parameter.getClass(),
 				parameter.getMethod())));
 
 	}

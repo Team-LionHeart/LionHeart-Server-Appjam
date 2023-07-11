@@ -42,17 +42,17 @@ public class CreateTokenService {
 		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
 		if (!jwtUtils.validateToken(request.getRefreshToken())) {
 			throw new UnAuthorizedException(
-				MessageUtils.generateString(INVALID_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
+				MessageUtils.generate(INVALID_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
 		}
 		String refreshToken = (String)redisTemplate.opsForValue().get(RedisKey.REFRESH_TOKEN + memberId);
 		if (Objects.isNull(refreshToken)) {
 			throw new UnAuthorizedException(
-				MessageUtils.generateString(EXPIRED_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
+				MessageUtils.generate(EXPIRED_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
 		}
 		if (!refreshToken.equals(request.getRefreshToken())) {
 			jwtUtils.expireRefreshToken(member.getId());
 			throw new UnAuthorizedException(
-				MessageUtils.generateString(WRONG_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
+				MessageUtils.generate(WRONG_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
 		}
 		List<String> tokens = jwtUtils.createTokenInfo(memberId);
 		return TokenResponse.of(tokens.get(0), tokens.get(1));

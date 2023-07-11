@@ -29,6 +29,6 @@ public class LoginCheckHandler {
 				}
 			}
 		}
-		throw new UnAuthorizedException(MessageUtils.generateString(WRONG_JWT_ERROR_MESSAGE, bearerToken));
+		throw new UnAuthorizedException(MessageUtils.generate(WRONG_JWT_ERROR_MESSAGE, bearerToken));
 	}
 }
