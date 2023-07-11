@@ -11,6 +11,7 @@ spring:
       schema-locations: classpath:sql/schema.sql
   #      data-locations: classpath:sql/data.sql
 
+
   jpa:
     hibernate:
       ddl-auto: none
@@ -25,6 +26,9 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+jwt:
+  secret: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
 
 cloud:
   firebase:

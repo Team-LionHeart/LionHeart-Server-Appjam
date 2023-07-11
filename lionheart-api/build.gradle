@@ -10,10 +10,10 @@ dependencies {
     // spring mvc
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-//    // redis
-//    implementation "org.springframework.boot:spring-boot-starter-data-redis"
-//    implementation "org.springframework.session:spring-session-data-redis"
-//
+    // redis
+    implementation "org.springframework.boot:spring-boot-starter-data-redis"
+    implementation "org.springframework.session:spring-session-data-redis"
+
     // swagger
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.4'
 //
