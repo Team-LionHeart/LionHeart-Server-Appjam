@@ -52,6 +52,9 @@ public class Member extends BaseEntity {
 	private Onboarding onboarding;
 
 	@OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private Setting setting;
+
+	@OneToOne(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Challenge challenge;
 
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
