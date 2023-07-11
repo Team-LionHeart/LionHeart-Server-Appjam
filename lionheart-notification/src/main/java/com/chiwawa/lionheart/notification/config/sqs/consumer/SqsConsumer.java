@@ -29,7 +29,7 @@ public class SqsConsumer {
 	public void consume(@Payload String info, @Headers Map<String, String> headers, Acknowledgment ack) {
 		try {
 			log.info(String.format("====> [SQS Queue Response]\n" + "info: %s\n" + "header: %s\n", info, headers));
-			switch (headers.get(MessageType.TYPE)) {
+			switch (headers.get(MessageType.MESSAGE_TYPE_HEADER)) {
 				case MessageType.FIREBASE:
 					FirebaseDto firebaseDto = objectMapper.readValue(info, FirebaseDto.class);
 					firebaseCloudMessageService.sendMessageTo(

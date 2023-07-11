@@ -47,7 +47,7 @@ public class SqsProducer {
 
 	private Map<String, MessageAttributeValue> createMessageAttributes(String type) {
 		final String dataType = "String";
-		return Map.of(MessageType.TYPE, new MessageAttributeValue()
+		return Map.of(MessageType.MESSAGE_TYPE_HEADER, new MessageAttributeValue()
 			.withDataType(dataType)
 			.withStringValue(type));
 	}

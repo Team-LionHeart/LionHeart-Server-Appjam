@@ -1,15 +1,15 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lionheart?useSSL=false&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&autoReconnection=true
-    username: lionheart
-    password: lionheart
+    url: ${AWS_RDS_URL_DEV}
+    username: ${AWS_RDS_USERNAME_DEV}
+    password: ${AWS_RDS_PASSWORD_DEV}
 
   sql:
     init:
       mode: always
       schema-locations: classpath:sql/schema.sql
-  #      data-locations: classpath:sql/data.sql
+      #data-locations: classpath:sql/data.sql
 
   jpa:
     hibernate:
@@ -23,8 +23,8 @@ spring:
         default_batch_fetch_size: 1000
 
   redis:
-    host: localhost
-    port: 6379
+    host: ${AWS_ELASTICACHE_HOST_DEV}
+    port: ${AWS_ELASTICACHE_PORT_DEV}
 
 cloud:
   firebase:
