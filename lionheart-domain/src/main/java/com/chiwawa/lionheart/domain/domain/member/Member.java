@@ -64,7 +64,6 @@ public class Member extends BaseEntity {
 		return Member.builder()
 			.socialInfo(SocialInfo.of(socialId, socialType))
 			.fcmToken("")
-			.nickname("")
 			.build();
 	}
 }
