@@ -38,6 +38,12 @@ public class Article extends BaseEntity {
 	@Column(name = "TITLE", nullable = false, length = 100)
 	private String title;
 
+	@Column(name = "MAIN_IMAGE_URL", nullable = false, length = 300)
+	private String mainImageUrl;
+
+	@Column(name = "MAIN_IMAGE_CAPTION", nullable = false, length = 100)
+	private String mainImageCaption;
+
 	@Column(name = "AUTHOR", nullable = false, length = 30)
 	private String author;
 
@@ -49,9 +55,6 @@ public class Article extends BaseEntity {
 
 	@Column(name = "TIME", nullable = false)
 	private byte time;
-
-	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private final List<ArticleImage> articleImages = new ArrayList<>();
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleContent> articleContents = new ArrayList<>();

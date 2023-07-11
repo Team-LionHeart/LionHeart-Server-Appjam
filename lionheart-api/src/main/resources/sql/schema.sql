@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS `MEMBER`;
 DROP TABLE IF EXISTS `ONBOARDING`;
 DROP TABLE IF EXISTS `ARTICLE`;
-DROP TABLE IF EXISTS `ARTICLE_IMAGE`;
 DROP TABLE IF EXISTS `CATEGORY`;
 DROP TABLE IF EXISTS `ARTICLE_CATEGORY`;
 DROP TABLE IF EXISTS `ARTICLE_BOOKMARK`;
@@ -32,15 +31,17 @@ CREATE TABLE `ONBOARDING`
 
 CREATE TABLE `ARTICLE`
 (
-    `ARTICLE_ID` bigint auto_increment primary key,
-    `TITLE`      varchar(100) NOT NULL,
-    `AUTHOR`     varchar(30)  NOT NULL,
-    `WEEK`       tinyint      NOT NULL,
-    `DAY`        tinyint      NOT NULL,
-    `TIME`       tinyint      NOT NULL,
-    `POSTED_AT`  datetime     NOT NULL,
-    `CREATED_AT` datetime     NOT NULL,
-    `MODIFED_AT` datetime     NOT NULL
+    `ARTICLE_ID`         bigint       NOT NULL,
+    `TITLE`              varchar(100) NOT NULL,
+    `AUTHOR`             varchar(30)  NOT NULL,
+    `MAIN_IMAGE_URL`     varchar(300) NOT NULL,
+    `MAIN_IMAGE_CAPTION` varhcar(100) NOT NULL,
+    `WEEK`               tinyint      NOT NULL,
+    `DAY`                tinyint      NOT NULL,
+    `TIME`               tinyint      NOT NULL,
+    `POSTED_AT`          datetime     NOT NULL,
+    `CREATED_AT`         datetime     NOT NULL,
+    `MODIFED_AT`         datetime     NOT NULL
 );
 
 CREATE TABLE `ARTICLE_IMAGE`
@@ -101,10 +102,11 @@ CREATE TABLE `CHALLENGE`
 
 CREATE TABLE `ARTICLE_CONTENT`
 (
-    `ARTICLE_CONTENT_ID` bigint auto_increment primary key,
+    `ARTICLE_CONTENT_ID` bigint      NOT NULL,
     `ARTICLE_ID`         bigint      NOT NULL,
-    `CONTENT`            text        NOT NULL,
     `TYPE`               varchar(30) NOT NULL,
+    `CONTENT`            text        NOT NULL,
+    `CAPTION`            varchar(100) NULL,
     `CREATED_AT`         datetime    NOT NULL,
     `MODIFED_AT`         datetime    NOT NULL
 );
