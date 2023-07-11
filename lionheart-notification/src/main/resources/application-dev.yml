@@ -38,3 +38,6 @@ cloud:
       uri: ${FIREBASE_URI}
     config:
       path: ${FIREBASE_PATH}
+
+jwt:
+  secret: ${JWT_SECRET_DEV}

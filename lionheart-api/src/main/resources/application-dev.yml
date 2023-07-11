@@ -30,3 +30,6 @@ cloud:
   firebase:
     credentials:
       uri: ${FIREBASE_URI}
+
+jwt:
+  secret: ${JWT_SECRET_DEV}

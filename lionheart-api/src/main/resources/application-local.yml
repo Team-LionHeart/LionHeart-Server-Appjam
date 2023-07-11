@@ -27,10 +27,10 @@ spring:
     host: localhost
     port: 6379
 
-jwt:
-  secret: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
-
 cloud:
   firebase:
     credentials:
       uri: ${FIREBASE_URI}
+
+jwt:
+  secret: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
