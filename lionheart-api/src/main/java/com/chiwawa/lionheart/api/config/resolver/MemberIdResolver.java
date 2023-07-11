@@ -14,7 +14,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import com.chiwawa.lionheart.api.config.interceptor.auth.Auth;
 import com.chiwawa.lionheart.common.constant.JwtKey;
 import com.chiwawa.lionheart.common.exception.model.InternalServerException;
-import com.chiwawa.lionheart.common.util.StringUtils;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 
 @Component
 public class MemberIdResolver implements HandlerMethodArgumentResolver {
@@ -32,7 +32,7 @@ public class MemberIdResolver implements HandlerMethodArgumentResolver {
 
 		Optional<Object> object = Optional.ofNullable(webRequest.getAttribute(JwtKey.MEMBER_ID, 0));
 		return object.orElseThrow(() -> new InternalServerException(
-			StringUtils.generateString(CAN_NOT_GET_MEMBER_ID_ERROR_MESSAGE, parameter.getClass(),
+			MessageUtils.generateString(CAN_NOT_GET_MEMBER_ID_ERROR_MESSAGE, parameter.getClass(),
 				parameter.getMethod())));
 
 	}

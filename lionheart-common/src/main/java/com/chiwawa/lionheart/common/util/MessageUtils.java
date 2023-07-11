@@ -1,6 +1,6 @@
 package com.chiwawa.lionheart.common.util;
 
-public class StringUtils {
+public class MessageUtils {
 
 	public static <P1> String generateString(String message, P1 param1) {
 		return String.format(message, param1);

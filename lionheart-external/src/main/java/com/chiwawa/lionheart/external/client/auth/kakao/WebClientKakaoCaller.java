@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.chiwawa.lionheart.common.exception.model.BadGatewayException;
 import com.chiwawa.lionheart.common.exception.model.ValidationException;
-import com.chiwawa.lionheart.common.util.StringUtils;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.external.client.auth.kakao.dto.response.KakaoProfileResponse;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class WebClientKakaoCaller implements KakaoApiCaller {
 			.retrieve()
 			.onStatus(HttpStatus::is4xxClientError, clientResponse ->
 				Mono.error(new ValidationException(
-					StringUtils.generateString(WRONG_KAKAO_ACCESS_TOKEN_ERROR_MESSAGE, accessToken),
+					MessageUtils.generateString(WRONG_KAKAO_ACCESS_TOKEN_ERROR_MESSAGE, accessToken),
 					VALIDATION_INVALID_TOKEN_EXCEPTION)))
 			.onStatus(HttpStatus::is5xxServerError, clientResponse ->
 				Mono.error(new BadGatewayException(KAKAO_LOGIN_ERROR_MESSAGE)))

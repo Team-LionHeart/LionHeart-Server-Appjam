@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import com.chiwawa.lionheart.common.exception.model.ConflictException;
 import com.chiwawa.lionheart.common.exception.model.NotFoundException;
-import com.chiwawa.lionheart.common.util.StringUtils;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 import com.chiwawa.lionheart.domain.domain.member.MemberSocialType;
 import com.chiwawa.lionheart.domain.domain.member.repository.MemberRepository;
@@ -22,7 +22,7 @@ public class MemberServiceUtils {
 		MemberSocialType socialType) {
 		if (memberRepository.existsBySocialIdAndSocialType(socialId, socialType)) {
 			throw new ConflictException(
-				StringUtils.generateString(ALREADY_EXIST_MEMBER_ERROR_MESSAGE, socialId, socialType),
+				MessageUtils.generateString(ALREADY_EXIST_MEMBER_ERROR_MESSAGE, socialId, socialType),
 				CONFLICT_MEMBER_EXCEPTION);
 		}
 	}
@@ -31,14 +31,14 @@ public class MemberServiceUtils {
 		MemberSocialType socialType) {
 		Optional<Member> member = memberRepository.findMemberBySocialIdAndSocialType(socialId, socialType);
 		return member.orElseThrow(() -> new NotFoundException(
-			StringUtils.generateString(NOT_EXIST_MEMBER_SOCIAL_DATA_ERROR_MESSAGE, socialType, socialId),
+			MessageUtils.generateString(NOT_EXIST_MEMBER_SOCIAL_DATA_ERROR_MESSAGE, socialType, socialId),
 			NOT_FOUND_MEMBER_EXCEPTION));
 	}
 
 	public static Member findMemberById(MemberRepository memberRepository, Long memberId) {
 		Optional<Member> member = memberRepository.findMemberById(memberId);
 		return member.orElseThrow(() ->
-			new NotFoundException(StringUtils.generateString(NOT_EXIST_MEMBER_ID_ERROR_MESSAGE, memberId),
+			new NotFoundException(MessageUtils.generateString(NOT_EXIST_MEMBER_ID_ERROR_MESSAGE, memberId),
 				NOT_FOUND_MEMBER_EXCEPTION));
 
 	}

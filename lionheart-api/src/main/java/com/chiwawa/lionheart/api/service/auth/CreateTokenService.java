@@ -15,7 +15,7 @@ import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.common.constant.RedisKey;
 import com.chiwawa.lionheart.common.exception.model.UnAuthorizedException;
 import com.chiwawa.lionheart.common.util.JwtUtils;
-import com.chiwawa.lionheart.common.util.StringUtils;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 import com.chiwawa.lionheart.domain.domain.member.repository.MemberRepository;
 
@@ -42,17 +42,17 @@ public class CreateTokenService {
 		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
 		if (!jwtUtils.validateToken(request.getRefreshToken())) {
 			throw new UnAuthorizedException(
-				StringUtils.generateString(INVALID_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
+				MessageUtils.generateString(INVALID_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
 		}
 		String refreshToken = (String)redisTemplate.opsForValue().get(RedisKey.REFRESH_TOKEN + memberId);
 		if (Objects.isNull(refreshToken)) {
 			throw new UnAuthorizedException(
-				StringUtils.generateString(EXPIRED_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
+				MessageUtils.generateString(EXPIRED_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
 		}
 		if (!refreshToken.equals(request.getRefreshToken())) {
 			jwtUtils.expireRefreshToken(member.getId());
 			throw new UnAuthorizedException(
-				StringUtils.generateString(WRONG_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
+				MessageUtils.generateString(WRONG_JWT_REFRESH_TOKEN_ERROR_MESSAGE, request.getRefreshToken()));
 		}
 		List<String> tokens = jwtUtils.createTokenInfo(memberId);
 		return TokenResponse.of(tokens.get(0), tokens.get(1));

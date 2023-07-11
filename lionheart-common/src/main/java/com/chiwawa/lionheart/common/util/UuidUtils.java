@@ -1,6 +1,6 @@
 package com.chiwawa.lionheart.common.util;
 
-import static com.chiwawa.lionheart.common.util.StringUtils.*;
+import static com.chiwawa.lionheart.common.util.MessageUtils.*;
 
 import java.util.UUID;
 

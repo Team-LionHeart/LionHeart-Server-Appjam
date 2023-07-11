@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.chiwawa.lionheart.common.exception.model.UnAuthorizedException;
 import com.chiwawa.lionheart.common.util.JwtUtils;
-import com.chiwawa.lionheart.common.util.StringUtils;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,6 +29,6 @@ public class LoginCheckHandler {
 				}
 			}
 		}
-		throw new UnAuthorizedException(StringUtils.generateString(WRONG_JWT_ERROR_MESSAGE, bearerToken));
+		throw new UnAuthorizedException(MessageUtils.generateString(WRONG_JWT_ERROR_MESSAGE, bearerToken));
 	}
 }
