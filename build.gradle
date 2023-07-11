@@ -1,46 +1,53 @@
 buildscript {
-	ext {
-		springBootVersion = "2.6.3"
-	}
+    ext {
+        springBootVersion = "2.6.3"
+    }
 
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 subprojects {
-	group = "com.chiwawa"
+    group = "com.chiwawa"
 
-	apply plugin: "java-library"
-	apply plugin: "org.springframework.boot"
-	apply plugin: "io.spring.dependency-management"
+    apply plugin: "java-library"
+    apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
 
-	sourceCompatibility = "11"
+    sourceCompatibility = "11"
 
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	configurations {
-		compileOnly {
-			extendsFrom annotationProcessor
-		}
-	}
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
 
-	dependencies {
-		implementation "org.springframework.boot:spring-boot-starter-validation"
-		testImplementation "org.springframework.boot:spring-boot-starter-test"
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-validation"
+        testImplementation "org.springframework.boot:spring-boot-starter-test"
 
-		// lombok
-		compileOnly "org.projectlombok:lombok"
-		annotationProcessor "org.projectlombok:lombok"
-	}
+        // lombok
+        compileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
 
-	test {
-		useJUnitPlatform()
-	}
+        // Health Check
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+        // Secret Manager
+        implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.3'
+        implementation 'org.springframework.cloud:spring-cloud-starter-aws-secrets-manager-config:2.2.6.RELEASE'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
