@@ -1,5 +1,7 @@
 package com.chiwawa.lionheart.common.util;
 
+import static com.chiwawa.lionheart.common.util.StringUtils.*;
+
 import java.util.UUID;
 
 import lombok.Getter;
@@ -8,8 +10,9 @@ import lombok.Getter;
 public class UuidUtils {
 
 	private static final String VERSION = "v1";
+	private static final String UUID_FORMAT = "%s-%s";
 
 	public static String generate() {
-		return String.format("%s-%s", VERSION, UUID.randomUUID());
+		return generateString(UUID_FORMAT, VERSION, UUID.randomUUID());
 	}
 }

@@ -1,4 +1,6 @@
-package com.chiwawa.lionheart.common.exception;
+package com.chiwawa.lionheart.common.exception.model;
+
+import com.chiwawa.lionheart.common.exception.ErrorCode;
 
 public class ForbiddenException extends LionHeartException {
 

@@ -13,13 +13,16 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 public class SwaggerConfig {
+	private final static String TITLE = "LionHeart API Server";
+	private final static String DESCRIPTION = "LionHeart API Docs";
+	private final static String VERSION = "1.0.0";
 
 	@Bean
 	public OpenAPI openAPI() {
 		Info info = new Info()
-			.title("LionHeart API Server")
-			.description("LionHeart API Docs")
-			.version("1.0.0");
+			.title(TITLE)
+			.description(DESCRIPTION)
+			.version(VERSION);
 
 		SecurityScheme securityScheme = new SecurityScheme()
 			.type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")

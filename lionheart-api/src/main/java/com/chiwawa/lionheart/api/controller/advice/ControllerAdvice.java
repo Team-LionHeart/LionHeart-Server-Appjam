@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.chiwawa.lionheart.common.dto.ApiResponse;
-import com.chiwawa.lionheart.common.exception.BadGatewayException;
-import com.chiwawa.lionheart.common.exception.ConflictException;
-import com.chiwawa.lionheart.common.exception.ForbiddenException;
-import com.chiwawa.lionheart.common.exception.NotFoundException;
-import com.chiwawa.lionheart.common.exception.UnAuthorizedException;
-import com.chiwawa.lionheart.common.exception.ValidationException;
+import com.chiwawa.lionheart.common.exception.model.BadGatewayException;
+import com.chiwawa.lionheart.common.exception.model.ConflictException;
+import com.chiwawa.lionheart.common.exception.model.ForbiddenException;
+import com.chiwawa.lionheart.common.exception.model.NotFoundException;
+import com.chiwawa.lionheart.common.exception.model.UnAuthorizedException;
+import com.chiwawa.lionheart.common.exception.model.ValidationException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 import lombok.RequiredArgsConstructor;
