@@ -1,5 +1,6 @@
 package com.chiwawa.lionheart.external.client.firebase;
 
+import static com.chiwawa.lionheart.common.constant.message.FirebaseErrorMessage.*;
 import static com.chiwawa.lionheart.common.exception.ErrorCode.*;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.chiwawa.lionheart.common.exception.BadGatewayException;
 import com.chiwawa.lionheart.common.exception.ValidationException;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
@@ -36,9 +38,10 @@ public class WebClientFirebaseCaller implements FirebaseApiCaller {
 			.retrieve()
 			.onStatus(HttpStatus::is4xxClientError, clientResponse ->
 				Mono.error(new ValidationException(
-					String.format("잘못된 파이어베이스 액세스 토큰 (%s) 입니다.", accessToken), VALIDATION_INVALID_TOKEN_EXCEPTION)))
+					MessageUtils.generate(WRONG_FIREBASE_ACCESS_TOKEN_ERROR_MESSAGE, accessToken),
+					VALIDATION_INVALID_TOKEN_EXCEPTION)))
 			.onStatus(HttpStatus::is5xxServerError, clientResponse ->
-				Mono.error(new BadGatewayException("파이어베이스 연동 중 에러가 발생하였습니다.")))
+				Mono.error(new BadGatewayException(FIREBASE_INTERLOCK_ERROR_MESSAGE)))
 			.toBodilessEntity()
 			.block();
 	}

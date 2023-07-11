@@ -1,5 +1,6 @@
 package com.chiwawa.lionheart.notification.service.firebase;
 
+import static com.chiwawa.lionheart.common.constant.message.FirebaseErrorMessage.*;
 import static com.chiwawa.lionheart.common.exception.ErrorCode.*;
 
 import java.util.List;
@@ -22,9 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class FirebaseCloudMessageService {
 
+	private static final String GOOGLE_CLOUD_AUTH_URL = "https://www.googleapis.com/auth/cloud-platform";
 	@Value("${cloud.firebase.config.path}")
 	private String firebaseConfigPath;
-
 	private final ObjectMapper objectMapper;
 	private final FirebaseApiCaller firebaseApiCaller;
 
@@ -44,7 +45,7 @@ public class FirebaseCloudMessageService {
 			return objectMapper.writeValueAsString(fcmMessage);
 		} catch (Exception exception) {
 			log.error(exception.getMessage(), exception);
-			throw new InternalServerException("FCM makeMessage exception", INTERNAL_SERVER_EXCEPTION);
+			throw new InternalServerException(FCM_MAKE_MESSAGE_ERROR, INTERNAL_SERVER_EXCEPTION);
 		}
 	}
 
@@ -52,12 +53,12 @@ public class FirebaseCloudMessageService {
 		try {
 			GoogleCredentials googleCredentials = GoogleCredentials
 				.fromStream(new ClassPathResource(firebaseConfigPath).getInputStream())
-				.createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
+				.createScoped(List.of(GOOGLE_CLOUD_AUTH_URL));
 			googleCredentials.refreshIfExpired();
 			return googleCredentials.getAccessToken().getTokenValue();
 		} catch (Exception exception) {
 			log.error(exception.getMessage(), exception);
-			throw new InternalServerException("FCM getAccessToken exception", INTERNAL_SERVER_EXCEPTION);
+			throw new InternalServerException(FCM_GET_ACCESS_TOKEN_ERROR, INTERNAL_SERVER_EXCEPTION);
 		}
 	}
 }

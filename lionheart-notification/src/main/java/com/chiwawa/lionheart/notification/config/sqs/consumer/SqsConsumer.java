@@ -10,6 +10,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import com.chiwawa.lionheart.common.constant.MessageType;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.notification.config.sqs.dto.FirebaseDto;
 import com.chiwawa.lionheart.notification.service.firebase.FirebaseCloudMessageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,11 +25,13 @@ public class SqsConsumer {
 
 	private final ObjectMapper objectMapper;
 	private final FirebaseCloudMessageService firebaseCloudMessageService;
+	private static final String SQS_CONSUME_LOG_MESSAGE =
+		"====> [SQS Queue Response]\n" + "info: %s\n" + "header: %s\n";
 
 	@SqsListener(value = "${cloud.aws.sqs.notification.name}", deletionPolicy = SqsMessageDeletionPolicy.NEVER)
 	public void consume(@Payload String info, @Headers Map<String, String> headers, Acknowledgment ack) {
 		try {
-			log.info(String.format("====> [SQS Queue Response]\n" + "info: %s\n" + "header: %s\n", info, headers));
+			log.info(MessageUtils.generate(SQS_CONSUME_LOG_MESSAGE, info, headers));
 			switch (headers.get(MessageType.MESSAGE_TYPE_HEADER)) {
 				case MessageType.FIREBASE:
 					FirebaseDto firebaseDto = objectMapper.readValue(info, FirebaseDto.class);

@@ -10,6 +10,7 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.chiwawa.lionheart.common.constant.MessageType;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.notification.config.sqs.dto.MessageDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,9 +24,9 @@ public class SqsProducer {
 	private String url;
 
 	private static final String messageGroupId = "sqs";
-
 	private final ObjectMapper objectMapper;
 	private final AmazonSQS amazonSqs;
+	private static final String SQS_QUEUE_REQUEST_LOG_MESSAGE = "====> [SQS Queue Request] : %s ";
 
 	public SqsProducer(ObjectMapper objectMapper, AmazonSQS amazonSqs) {
 		this.objectMapper = objectMapper;
@@ -39,7 +40,7 @@ public class SqsProducer {
 				.withMessageDeduplicationId(UUID.randomUUID().toString())
 				.withMessageAttributes(createMessageAttributes(dto.getType()));
 			amazonSqs.sendMessage(sendMessageRequest);
-			log.info(String.format("====> [SQS Queue Request] : %s ", dto));
+			log.info(MessageUtils.generate(SQS_QUEUE_REQUEST_LOG_MESSAGE, dto));
 		} catch (JsonProcessingException exception) {
 			log.error(exception.getMessage(), exception);
 		}
