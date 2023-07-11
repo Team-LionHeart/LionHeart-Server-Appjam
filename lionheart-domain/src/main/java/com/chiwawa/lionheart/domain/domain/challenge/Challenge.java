@@ -35,7 +35,7 @@ public class Challenge extends BaseEntity {
 	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MEMBER_ID", nullable = false)
+	@JoinColumn(name = "MEMBER_ID", nullable = true)
 	private Member member;
 
 	@Column(name = "LEVEL", nullable = false, length = 30)
@@ -45,4 +45,12 @@ public class Challenge extends BaseEntity {
 	@Column(name = "POPUP", nullable = false, length = 30)
 	@Enumerated(EnumType.STRING)
 	private ChallengePopupType popup;
+
+	public static Challenge newInstance(Member member) {
+		return Challenge.builder()
+			.member(member)
+			.level(ChallengeLevelType.LEVEL_ONE)
+			.popup(ChallengePopupType.START)
+			.build();
+	}
 }

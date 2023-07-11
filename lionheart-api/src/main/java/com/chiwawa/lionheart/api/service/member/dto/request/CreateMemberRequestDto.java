@@ -18,11 +18,18 @@ public class CreateMemberRequestDto {
 
 	private String socialId;
 	private MemberSocialType socialType;
+	private String fcmToken;
+	private byte pregnantWeeks;
+	private String babyNickname;
 
-	public static CreateMemberRequestDto of(String socialId, MemberSocialType socialType) {
+	public static CreateMemberRequestDto of(String socialId, MemberSocialType socialType, String fcmToken,
+		byte pregnantWeeks, String babyNickname) {
 		return CreateMemberRequestDto.builder()
 			.socialId(socialId)
 			.socialType(socialType)
+			.fcmToken(fcmToken)
+			.pregnantWeeks(pregnantWeeks)
+			.babyNickname(babyNickname)
 			.build();
 	}
 }

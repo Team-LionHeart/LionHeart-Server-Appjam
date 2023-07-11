@@ -63,10 +63,26 @@ public class Member extends BaseEntity {
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleBookmark> articleBookmarks = new ArrayList<>();
 
-	public static Member newInstance(String socialId, MemberSocialType socialType) {
+	public static Member newInstance(String socialId, MemberSocialType socialType, String fcmToken) {
 		return Member.builder()
 			.socialInfo(SocialInfo.of(socialId, socialType))
-			.fcmToken("")
+			.fcmToken(fcmToken)
 			.build();
+	}
+
+	public void setOnboarding(Onboarding onboarding) {
+		this.onboarding = onboarding;
+	}
+
+	public void setSetting(Setting setting) {
+		this.setting = setting;
+	}
+
+	public void setChallenge(Challenge challenge) {
+		this.challenge = challenge;
+	}
+
+	public void updateFcmToken(String fcmToken) {
+		this.fcmToken = fcmToken;
 	}
 }

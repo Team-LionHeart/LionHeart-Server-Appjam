@@ -32,7 +32,7 @@ public class Onboarding extends BaseEntity {
 	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MEMBER_ID", nullable = false)
+	@JoinColumn(name = "MEMBER_ID", nullable = true)
 	private Member member;
 
 	@Column(name = "PREGNANT_WEEKS", nullable = false)
@@ -40,4 +40,12 @@ public class Onboarding extends BaseEntity {
 
 	@Column(name = "BABY_NICKNAME", nullable = false, length = 30)
 	private String babyNickname;
+
+	public static Onboarding newInstance(Member member, byte pregnantWeeks, String babyNickname) {
+		return builder()
+			.member(member)
+			.pregnantWeeks(pregnantWeeks)
+			.babyNickname(babyNickname)
+			.build();
+	}
 }

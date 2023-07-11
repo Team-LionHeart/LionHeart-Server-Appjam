@@ -27,7 +27,19 @@ public class SignUpRequest {
 	@NotBlank(message = "{auth.token.notBlank}")
 	private String token;
 
+	@Schema(description = "fcm 토큰", example = "dfdafjdslkfjslfjslifsjvmdsklvdosijsmvsdjvosadjvosd")
+	@NotBlank(message = "{auth.fcmToken.notBlank}")
+	private String fcmToken;
+
+	@Schema(description = "임신 주차", example = "23")
+	@NotNull(message = "{onboarding.pregnantWeeks.notNull}")
+	private byte pregnantWeeks;
+
+	@Schema(description = "태명", example = "금쪽이")
+	@NotNull(message = "{onboarding.babyNickname.notNull}")
+	private String babyNickname;
+
 	public CreateMemberRequestDto toCreateUserDto(String socialId) {
-		return CreateMemberRequestDto.of(socialId, socialType);
+		return CreateMemberRequestDto.of(socialId, socialType, fcmToken, pregnantWeeks, babyNickname);
 	}
 }
