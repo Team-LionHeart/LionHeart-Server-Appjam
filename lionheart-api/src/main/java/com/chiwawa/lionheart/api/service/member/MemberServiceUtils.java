@@ -11,6 +11,8 @@ import com.chiwawa.lionheart.domain.domain.member.repository.MemberRepository;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberServiceUtils {
 
@@ -24,20 +26,16 @@ public class MemberServiceUtils {
 
 	public static Member findMemberBySocialIdAndSocialType(MemberRepository memberRepository, String socialId,
 		MemberSocialType socialType) {
-		Member member = memberRepository.findMemberBySocialIdAndSocialType(socialId, socialType);
-		if (member == null) {
-			throw new NotFoundException(String.format("존재하지 않는 회원 (%s) (%s) 입니다", socialType, socialId),
-				NOT_FOUND_MEMBER_EXCEPTION);
-		}
-		return member;
+		Optional<Member> member = memberRepository.findMemberBySocialIdAndSocialType(socialId, socialType);
+		return member.orElseThrow(() -> new NotFoundException(String.format("존재하지 않는 회원 (%s) (%s) 입니다", socialType, socialId),
+				NOT_FOUND_MEMBER_EXCEPTION));
 	}
 
 	public static Member findMemberById(MemberRepository memberRepository, Long memberId) {
-		Member member = memberRepository.findMemberById(memberId);
-		if (member == null) {
-			throw new NotFoundException(String.format("존재하지 않는 회원 (%s) 입니다", memberId), NOT_FOUND_MEMBER_EXCEPTION);
-		}
-		return member;
+		Optional<Member> member = memberRepository.findMemberById(memberId);
+		return member.orElseThrow(() ->
+				new NotFoundException(String.format("존재하지 않는 회원 (%s) 입니다", memberId), NOT_FOUND_MEMBER_EXCEPTION));
+
 	}
 
 }
