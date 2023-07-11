@@ -11,6 +11,8 @@ import com.chiwawa.lionheart.common.constant.JwtKey;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
@@ -23,8 +25,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		HandlerMethod handlerMethod = (HandlerMethod)handler;
-		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
-		if (auth == null) {
+		Optional<Auth> auth = Optional.ofNullable(handlerMethod.getMethodAnnotation(Auth.class));
+		if (auth.isEmpty()) {
 			return true;
 		}
 		Long memberId = loginCheckHandler.getMemberId(request);

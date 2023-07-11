@@ -1,5 +1,7 @@
 package com.chiwawa.lionheart.common.util;
 
+import static com.chiwawa.lionheart.common.constant.message.AuthErrorMessage.*;
+
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
@@ -74,15 +76,15 @@ public class JwtUtils {
 			Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
 			return true;
 		} catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException | DecodingException e) {
-			log.warn("Invalid JWT Token", e);
+			log.warn(INVALID_JWT_TOKEN_ERROR_MESSAGE, e);
 		} catch (ExpiredJwtException e) {
-			log.warn("Expired JWT Token", e);
+			log.warn(EXPIRED_JWT_TOKEN_ERROR_MESSAGE, e);
 		} catch (UnsupportedJwtException e) {
-			log.warn("Unsupported JWT Token", e);
+			log.warn(UNSUPPORTED_JWT_TOKEN_ERROR_MESSAGE, e);
 		} catch (IllegalArgumentException e) {
-			log.warn("JWT claims string is empty.", e);
+			log.warn(EMPTY_CLAIMS_JWT_TOKEN_ERROR_MESSAGE, e);
 		} catch (Exception e) {
-			log.error("Unhandled JWT exception", e);
+			log.error(UNHANDLED_JWT_TOKEN_ERROR_MESSAGE, e);
 		}
 		return false;
 	}
