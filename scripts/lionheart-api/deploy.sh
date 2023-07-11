@@ -1,11 +1,11 @@
 #!/bin/bash
 HOST_NAME=$(cat /etc/hostname)
-BUILD_PATH=$(ls /home/ubuntu/app/lionheart-api.jar)
+BUILD_PATH=$(ls /home/ubuntu/api-server/lionheart-api.jar)
 JAR_NAME=$(basename $BUILD_PATH)
 echo "> build 파일명: $JAR_NAME"
 
 echo "> build 파일 복사"
-DEPLOY_PATH=/home/ubuntu/app/nonstop/jar/
+DEPLOY_PATH=/home/ubuntu/api-server/nonstop/jar/
 cp $BUILD_PATH $DEPLOY_PATH
 
 echo "> 현재 구동중인 PORT 확인"
@@ -45,10 +45,10 @@ fi
 
 echo "> 배포"
 if [ ${HOST_NAME} == "lionheart-prod-server" ]; then
-  nohup java -jar -Duser.timezone=Asia/Seoul -Dserver.port=$IDLE_PORT -Dspring.profiles.active=prod $IDLE_APPLICATION_PATH >> /home/ubuntu/app/nohup.out 2>&1 &
+  nohup java -jar -Duser.timezone=Asia/Seoul -Dserver.port=$IDLE_PORT -Dspring.profiles.active=prod $IDLE_APPLICATION_PATH >> /home/ubuntu/api-server/nohup.out 2>&1 &
   exit 0
 else
-  nohup java -jar -Duser.timezone=Asia/Seoul -Dserver.port=$IDLE_PORT -Dspring.profiles.active=dev $IDLE_APPLICATION_PATH >> /home/ubuntu/app/nohup.out 2>&1 &
+  nohup java -jar -Duser.timezone=Asia/Seoul -Dserver.port=$IDLE_PORT -Dspring.profiles.active=dev $IDLE_APPLICATION_PATH >> /home/ubuntu/api-server/nohup.out 2>&1 &
   exit 0
 fi
 

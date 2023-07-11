@@ -1,9 +1,14 @@
-name: Java CD with Gradle on DEV
+name: API Server Java CD with Gradle on DEV
 
 # develop 브랜치에 push 시에 동작
 on:
   push:
     branches: [ "develop" ]
+    paths:
+      - lionheart-api/**
+      - lionheart-domain/**
+      - lionheart-common/**
+      - lionheart-external/**
 
 env:
   S3_BUCKET_NAME: lionheart-s3
@@ -27,28 +32,22 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      # 3) 프로퍼티 파일 생성
-      - name: make application.yml 파일 생성
-        run: |
-          ## cd application.yml
-          cd ./lionheart-api/src/main/resources/
-          
-          # application.yml 파일 생성
-          touch ./application-dev.yml
-          
-          # GitHub-Actions 에서 설정한 값을 application.yml 파일에 쓰기
-          echo "${{ secrets.DEV_APPLICATION }}" >> ./application-dev.yml
-          
-          # application.yml 파일 확인
-          cat ./application-dev.yml
-        shell: bash
+      # 3) AWS Secrets Manger 환경변수 사용
+      - name: Read secrets from AWS Secrets Manager into environment variables
+        uses: abhilash1in/aws-secrets-manager-action@v1.1.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_DEV }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_DEV }}
+          aws-region: ap-northeast-2
+          secrets: /secret/lionheart-dev
+          parse-json: false
 
       # build
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build with Gradle # 실제 application build(-x 옵션을 통해 test는 제외)
-        run: ./gradlew build -x test
+        run: ./gradlew lionheart-api:bootJar -x test
 
       # 디렉토리 생성
       - name: Make Directory
@@ -58,37 +57,33 @@ jobs:
       - name: Copy Jar
         run: cp ./lionheart-api/build/libs/*.jar ./deploy
 
-      # appspec.yml 파일 복사
-      - name: Copy appspec.yml
-        run: cp appspec.yml ./deploy
-
-      # script files 복사
-      - name: Copy script
-        run: cp ./scripts/*.sh ./deploy
+      # appspec.yml, script files 복사
+      - name: Copy files
+        run: cp ./scripts/lionheart-api/* ./deploy
 
       - name: Make zip file
-        run: zip -r ./lionheart_server.zip ./deploy
+        run: zip -r ./lionheart-api.zip ./deploy
         shell: bash
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_DEV_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_DEV_SECRET_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_DEV }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY_DEV }}
           aws-region: ap-northeast-2
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-2 ./lionheart_server.zip s3://$S3_BUCKET_NAME/
+        run: aws s3 cp --region ap-northeast-2 ./lionheart-api.zip s3://$S3_BUCKET_NAME/
 
       # Deploy (codeDeploy 변동 시, run 스크립트 수정)
       - name: Deploy
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_DEV_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_DEV_SECRET_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_DEV }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_DEV }}
         run:
           aws deploy create-deployment
           --application-name lionheart-codeDeploy
-          --deployment-group-name lionheart-codedeploy-group
+          --deployment-group-name API_SERVER
           --file-exists-behavior OVERWRITE
-          --s3-location bucket=lionheart-s3,bundleType=zip,key=lionheart_server.zip
+          --s3-location bucket=lionheart-s3,bundleType=zip,key=lionheart-api.zip
           --region ap-northeast-2

@@ -25,3 +25,8 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+cloud:
+  firebase:
+    credentials:
+      uri: ${FIREBASE_URI}

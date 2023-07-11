@@ -25,3 +25,8 @@ spring:
   redis:
     host: ${AWS_ELASTICACHE_HOST_DEV}
     port: ${AWS_ELASTICACHE_PORT_DEV}
+
+cloud:
+  firebase:
+    credentials:
+      uri: ${FIREBASE_URI}
