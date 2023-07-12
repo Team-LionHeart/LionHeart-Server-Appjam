@@ -52,7 +52,7 @@ public class ArticleRetrieveService {
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			memberId, article);
 
-		ArticleContent content = articleContentRepository.findArticleFirstContentByArticle(article)
+		ArticleContent content = articleContentRepository.findArticleFirstBodyByArticle(article)
 			.orElseThrow(() -> new NotFoundException(
 				MessageUtils.generate(NOT_EXIST_ARTICLE_CONTENT_ERROR_MESSAGE, article.getId()),
 				ErrorCode.NOT_FOUND_ARTICLE_CONTENT_EXCEPTION));

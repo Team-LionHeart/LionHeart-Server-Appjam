@@ -1,6 +1,6 @@
 package com.chiwawa.lionheart.domain.domain.articlebookmark.repository;
 
-import static com.chiwawa.lionheart.domain.domain.article.articlebookmark.QArticleBookmark.*;
+import static com.chiwawa.lionheart.domain.domain.articlebookmark.QArticleBookmark.*;
 
 import java.util.Optional;
 

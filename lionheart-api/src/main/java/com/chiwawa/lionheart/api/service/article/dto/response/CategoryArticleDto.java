@@ -21,20 +21,20 @@ public class CategoryArticleDto {
 
 	private String title;
 	private String mainImageUrl;
-	private String content;
+	private String firstBodyContent;
 	private int time;
 	private Boolean isMarked;
-	private List<String> tag;
+	private List<String> tags;
 
 	public static CategoryArticleDto of(Article article, ArticleContent content, List<String> tag,
 		boolean isMarked) {
 		return CategoryArticleDto.builder()
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
-			.content(content.getContent())
+			.firstBodyContent(content.getContent())
 			.time(article.getTime())
 			.isMarked(isMarked)
-			.tag(tag)
+			.tags(tag)
 			.build();
 	}
 }
