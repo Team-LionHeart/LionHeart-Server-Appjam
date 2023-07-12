@@ -1,6 +1,8 @@
 package com.chiwawa.lionheart.api.service.article;
 
-import static com.chiwawa.lionheart.common.constant.message.CategoryErrorMessage.*;
+import static com.chiwawa.lionheart.api.service.article.articleContent.ArticleContentServiceUtils.*;
+import static com.chiwawa.lionheart.api.service.article.articleTag.ArticleTagServiceUtils.*;
+import static com.chiwawa.lionheart.api.service.member.MemberServiceUtils.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -10,12 +12,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.chiwawa.lionheart.api.service.article.articleTag.ArticleTagServiceUtils;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
-import com.chiwawa.lionheart.common.exception.ErrorCode;
-import com.chiwawa.lionheart.common.exception.NotFoundException;
-import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.Category;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
@@ -24,6 +22,7 @@ import com.chiwawa.lionheart.domain.domain.article.articleTag.repository.Article
 import com.chiwawa.lionheart.domain.domain.article.repository.ArticleRepository;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.repository.ArticleBookmarkRepository;
+import com.chiwawa.lionheart.domain.domain.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +35,7 @@ public class ArticleRetrieveService {
 	private final ArticleBookmarkRepository articleBookmarkRepository;
 	private final ArticleContentRepository articleContentRepository;
 	private final ArticleTagRepository articleTagRepository;
+	private final MemberRepository memberRepository;
 
 	public CategoryArticleResponse findArticlesByCategory(Long memberId, Category category) {
 
@@ -50,15 +50,13 @@ public class ArticleRetrieveService {
 
 	// TODO: DB 조회 성능을 위해 리팩토링
 	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
+
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
-			memberId, article);
+			findMemberById(memberRepository, memberId), article);
 
-		ArticleContent content = articleContentRepository.findArticleFirstBodyByArticle(article)
-			.orElseThrow(() -> new NotFoundException(
-				MessageUtils.generate(NOT_EXIST_ARTICLE_CONTENT_ERROR_MESSAGE, article.getId()),
-				ErrorCode.NOT_FOUND_ARTICLE_CONTENT_EXCEPTION));
+		ArticleContent content = findArticleFirstBodyByArticle(articleContentRepository, article);
 
-		List<String> articleTags = ArticleTagServiceUtils.findArticleTagsByArticle(articleTagRepository, article);
+		List<String> articleTags = findArticleTagsByArticle(articleTagRepository, article);
 
 		return CategoryArticleDto.of(article, content, articleTags, bookmark.isPresent());
 	}
