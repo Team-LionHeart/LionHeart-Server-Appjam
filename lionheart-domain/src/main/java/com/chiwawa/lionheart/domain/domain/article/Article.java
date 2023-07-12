@@ -13,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
+import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
+import com.chiwawa.lionheart.domain.domain.article.articleTag.ArticleTag;
+import com.chiwawa.lionheart.domain.domain.article.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.common.BaseEntity;
 
 import lombok.AccessLevel;
@@ -38,6 +40,9 @@ public class Article extends BaseEntity {
 	@Column(name = "TITLE", nullable = false, length = 100)
 	private String title;
 
+	@Column(name = "CATEGORY", nullable = false, length = 30)
+	private Category category;
+
 	@Column(name = "MAIN_IMAGE_URL", nullable = false, length = 300)
 	private String mainImageUrl;
 
@@ -60,7 +65,7 @@ public class Article extends BaseEntity {
 	private final List<ArticleContent> articleContents = new ArrayList<>();
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private final List<ArticleCategory> articleCategories = new ArrayList<>();
+	private final List<ArticleTag> articleTags = new ArrayList<>();
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleBookmark> articleBookmarks = new ArrayList<>();

@@ -1,42 +1,21 @@
 package com.chiwawa.lionheart.domain.domain.article;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.chiwawa.lionheart.domain.domain.common.BaseEntity;
-
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@Table(name = "CATEGORY")
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder(access = AccessLevel.PRIVATE)
-public class Category extends BaseEntity {
+public enum Category {
+	BUDGET("예산"),
+	PHYSICAL_CHANGE("신체 변화"),
+	MARITAL_RELATIONSHIP("부부 관계"),
+	HOSPITAL_INFORMATION("병원 정보"),
+	SUPPORT_SYSTEM("지원 제도"),
+	PRENATAL_EDUCATION("태교"),
+	BABY_GOODS("아기 용품"),
+	DAD_TIPS("아빠들의 팁"),
+	;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CATEGORY_ID")
-	private Long id;
-
-	@Column(name = "CATEGORY_NAME", nullable = false, length = 30)
-	private String categoryName;
-
-	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private final List<ArticleCategory> articleCategories = new ArrayList<>();
+	private final String value;
 }
