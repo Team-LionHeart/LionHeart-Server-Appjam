@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.chiwawa.lionheart.api.service.member.dto.request.CreateMemberRequestDto;
+import com.chiwawa.lionheart.api.service.member.dto.request.CreateMemberRequest;
 import com.chiwawa.lionheart.domain.domain.member.MemberSocialType;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,7 +45,7 @@ public class SignUpRequest {
 	@NotNull(message = "{onboarding.babyNickname.notNull}")
 	private String babyNickname;
 
-	public CreateMemberRequestDto toCreateMemberDto(String socialId) {
-		return CreateMemberRequestDto.of(socialId, socialType, fcmToken, pregnantWeeks, babyNickname);
+	public CreateMemberRequest toCreateMemberDto(String socialId) {
+		return CreateMemberRequest.of(socialId, socialType, fcmToken, pregnantWeeks, babyNickname);
 	}
 }
