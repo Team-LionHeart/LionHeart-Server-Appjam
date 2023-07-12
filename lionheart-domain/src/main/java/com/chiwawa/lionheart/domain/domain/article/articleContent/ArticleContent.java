@@ -41,7 +41,7 @@ public class ArticleContent extends BaseEntity {
 	@Column(name = "CONTENT", nullable = false)
 	private String content;
 
-	@Column(name = "CAPTION", nullable = false)
+	@Column(name = "CAPTION", nullable = false, length = 100)
 	private String caption;
 
 	@Column(name = "ORDER", nullable = false)
