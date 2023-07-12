@@ -48,6 +48,7 @@ public class ArticleRetrieveService {
 		return CategoryArticleResponse.of(categoryArticles);
 	}
 
+	// TODO: DB 조회 성능을 위해 리팩토링
 	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			memberId, article);
