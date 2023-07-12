@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
+import com.chiwawa.lionheart.domain.domain.article.articleTag.ArticleTag;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.common.BaseEntity;
 
@@ -38,6 +40,15 @@ public class Article extends BaseEntity {
 	@Column(name = "TITLE", nullable = false, length = 100)
 	private String title;
 
+	@Column(name = "CATEGORY", nullable = false, length = 30)
+	private Category category;
+
+	@Column(name = "MAIN_IMAGE_URL", nullable = false, length = 300)
+	private String mainImageUrl;
+
+	@Column(name = "MAIN_IMAGE_CAPTION", nullable = false, length = 100)
+	private String mainImageCaption;
+
 	@Column(name = "AUTHOR", nullable = false, length = 30)
 	private String author;
 
@@ -47,17 +58,14 @@ public class Article extends BaseEntity {
 	@Column(name = "DAY", nullable = false)
 	private byte day;
 
-	@Column(name = "TIME", nullable = false)
-	private byte time;
-
-	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private final List<ArticleImage> articleImages = new ArrayList<>();
+	@Column(name = "REQUIRED_TIME", nullable = false)
+	private byte requiredTime;
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleContent> articleContents = new ArrayList<>();
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-	private final List<ArticleCategory> articleCategories = new ArrayList<>();
+	private final List<ArticleTag> articleTags = new ArrayList<>();
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleBookmark> articleBookmarks = new ArrayList<>();

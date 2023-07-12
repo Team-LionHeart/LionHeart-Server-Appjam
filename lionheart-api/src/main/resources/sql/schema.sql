@@ -1,14 +1,14 @@
 DROP TABLE IF EXISTS `MEMBER`;
 DROP TABLE IF EXISTS `ONBOARDING`;
-DROP TABLE IF EXISTS `SETTING`;
 DROP TABLE IF EXISTS `ARTICLE`;
-DROP TABLE IF EXISTS `ARTICLE_IMAGE`;
+DROP TABLE IF EXISTS `SETTING`;
 DROP TABLE IF EXISTS `CATEGORY`;
 DROP TABLE IF EXISTS `ARTICLE_CATEGORY`;
 DROP TABLE IF EXISTS `ARTICLE_BOOKMARK`;
 DROP TABLE IF EXISTS `ATTENDANCE`;
 DROP TABLE IF EXISTS `CHALLENGE`;
 DROP TABLE IF EXISTS `ARTICLE_CONTENT`;
+DROP TABLE IF EXISTS `ARTICLE_TAG`;
 
 CREATE TABLE `MEMBER`
 (
@@ -31,55 +31,19 @@ CREATE TABLE `ONBOARDING`
     `MODIFIED_AT`    datetime    NOT NULL
 );
 
-CREATE TABLE `SETTING`
-(
-    `SETTING_ID`          bigint auto_increment primary key,
-    `MEMBER_ID`           bigint      NOT NULL,
-    `NOTIFICATION_STATUS` varchar(30) NOT NULL,
-    `CREATED_AT`          datetime    NOT NULL,
-    `MODIFIED_AT`         datetime    NOT NULL
-);
-
 CREATE TABLE `ARTICLE`
 (
-    `ARTICLE_ID`  bigint auto_increment primary key,
-    `TITLE`       varchar(100) NOT NULL,
-    `AUTHOR`      varchar(30)  NOT NULL,
-    `WEEK`        tinyint      NOT NULL,
-    `DAY`         tinyint      NOT NULL,
-    `TIME`        tinyint      NOT NULL,
-    `POSTED_AT`   datetime     NOT NULL,
-    `CREATED_AT`  datetime     NOT NULL,
-    `MODIFIED_AT` datetime     NOT NULL
-);
-
-CREATE TABLE `ARTICLE_IMAGE`
-(
-    `ARTICLE_IMAGE_ID`  bigint auto_increment primary key,
-    `ARTICLE_ID`        bigint       NOT NULL,
-    `ARTICLE_IMAGE_URL` varchar(300) NOT NULL,
-    `IMAGE_DESCRIPTION` varchar(100) NOT NULL,
-    `IMAGE_ORDER`       tinyint      NOT NULL,
-    `CREATED_AT`        datetime     NOT NULL,
-    `MODIFIED_AT`       datetime     NOT NULL
-);
-
-CREATE TABLE `CATEGORY`
-(
-    `CATEGORY_ID`  bigint auto_increment primary key,
-    `CATEGORY_NAME` varchar(30) NOT NULL,
-    `CREATED_AT`    datetime    NOT NULL,
-    `MODIFIED_AT`   datetime    NOT NULL
-);
-
-CREATE TABLE `ARTICLE_CATEGORY`
-(
-    `ARTICLE_CATEGORY_ID` bigint auto_increment primary key,
-    `CATEGORY_ID`         bigint      NOT NULL,
-    `ARTICLE_ID`          bigint      NOT NULL,
-    `CATEGORY_NAME`       varchar(30) NOT NULL,
-    `CREATED_AT`          datetime    NOT NULL,
-    `MODIFIED_AT`         datetime    NOT NULL
+    `ARTICLE_ID`         bigint auto_increment primary key,
+    `TITLE`              varchar(100) NOT NULL,
+    `AUTHOR`             varchar(30)  NOT NULL,
+    `MAIN_IMAGE_URL`     varchar(300) NOT NULL,
+    `MAIN_IMAGE_CAPTION` varchar(100) NOT NULL,
+    `WEEK`               tinyint      NOT NULL,
+    `DAY`                tinyint      NOT NULL,
+    `REQUIRED_TIME`      tinyint      NOT NULL,
+    `POSTED_AT`          datetime     NOT NULL,
+    `CREATED_AT`         datetime     NOT NULL,
+    `MODIFIED_AT`        datetime     NOT NULL
 );
 
 CREATE TABLE `ARTICLE_BOOKMARK`
@@ -113,8 +77,28 @@ CREATE TABLE `ARTICLE_CONTENT`
 (
     `ARTICLE_CONTENT_ID` bigint auto_increment primary key,
     `ARTICLE_ID`         bigint      NOT NULL,
-    `CONTENT`            text        NOT NULL,
     `TYPE`               varchar(30) NOT NULL,
+    `ORDER`              tinyint     NOT NULL,
+    `CONTENT`            text        NOT NULL,
+    `CAPTION`            varchar(100) NULL,
     `CREATED_AT`         datetime    NOT NULL,
     `MODIFIED_AT`        datetime    NOT NULL
+);
+
+CREATE TABLE `ARTICLE_TAG`
+(
+    `ARTICLE_TAG_ID` bigint auto_increment primary key,
+    `ARTICLE_ID`     bigint      NOT NULL,
+    `TAG_NAME`       varchar(30) NOT NULL,
+    `CREATED_AT`     datetime    NOT NULL,
+    `MODIFIED_AT`    datetime    NOT NULL
+);
+
+CREATE TABLE `SETTING`
+(
+    `SETTING_ID`          bigint auto_increment primary key,
+    `MEMBER_ID`           bigint      NOT NULL,
+    `NOTIFICATION_STATUS` varchar(30) NOT NULL,
+    `CREATED_AT`          datetime    NOT NULL,
+    `MODIFIED_AT`         datetime    NOT NULL
 );
