@@ -13,7 +13,7 @@ public class ArticleTagServiceUtils {
 		List<ArticleTag> articleTags = articleTagRepository.findArticleTagsByArticle(article);
 
 		return articleTags.stream()
-			.map(tag -> tag.getTagName())
+			.map(ArticleTag::getTagName)
 			.collect(Collectors.toList());
 	}
 }
