@@ -2,10 +2,10 @@ package com.chiwawa.lionheart.api.service.article;
 
 import static com.chiwawa.lionheart.common.constant.message.CategoryErrorMessage.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,27 +38,26 @@ public class ArticleRetrieveService {
 	private final ArticleTagRepository articleTagRepository;
 
 	public CategoryArticleResponse findArticlesByCategory(Long memberId, Category category) {
-		List<CategoryArticleDto> categoryArticles = new ArrayList<>();
 
-		List<Article> articles = articleRepository.findByCategory(category);
-		for (Article article : articles) {
-			categoryArticles.add(formatCategoryArticleResponse(memberId, article));
-		}
+		List<CategoryArticleDto> categoryArticles = articleRepository.findArticleByCategory(category)
+			.stream()
+			.map(c -> formatCategoryArticleResponse(memberId, c))
+			.collect(Collectors.toList());
 
 		Collections.shuffle(categoryArticles);
 		return CategoryArticleResponse.of(categoryArticles);
 	}
 
 	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
-		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findByMemberIdAndArticleId(
+		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			memberId, article);
 
-		ArticleContent content = articleContentRepository.findFirstContentByArticle(article)
+		ArticleContent content = articleContentRepository.findArticleFirstContentByArticle(article)
 			.orElseThrow(() -> new NotFoundException(
 				MessageUtils.generate(NOT_EXIST_ARTICLE_CONTENT_ERROR_MESSAGE, article.getId()),
 				ErrorCode.NOT_FOUND_ARTICLE_CONTENT_EXCEPTION));
 
-		List<String> articleTags = ArticleTagServiceUtils.findArticleTagByArticle(articleTagRepository, article);
+		List<String> articleTags = ArticleTagServiceUtils.findArticleTagsByArticle(articleTagRepository, article);
 
 		return CategoryArticleDto.of(article, content, articleTags, bookmark.isPresent());
 	}
