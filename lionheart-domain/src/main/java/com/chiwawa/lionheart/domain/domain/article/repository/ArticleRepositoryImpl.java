@@ -15,7 +15,7 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public List<Article> findByCategory(Category category) {
+	public List<Article> findArticleByCategory(Category category) {
 		return queryFactory
 			.selectFrom(article)
 			.where(article.category.eq(category))
