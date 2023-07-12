@@ -13,6 +13,7 @@ import com.chiwawa.lionheart.common.dto.ApiResponse;
 import com.chiwawa.lionheart.domain.domain.article.Category;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
@@ -27,8 +28,9 @@ public class ArticleRetrieveController {
 	@Operation(summary = "카테고리 별 아티클 조회")
 	@Auth
 	@GetMapping("/article")
-	public ApiResponse<CategoryArticleResponse> findArticlesByCategory(@MemberId final Long memberId,
-		@RequestParam final Category category) {
+	public ApiResponse<CategoryArticleResponse> findArticlesByCategory(
+		@MemberId final Long memberId,
+		@Parameter(description = "카테고리명", required = true, example = "BUDGET") @RequestParam final Category category) {
 
 		return ApiResponse.success(articleService.findArticlesByCategory(memberId, category));
 	}
