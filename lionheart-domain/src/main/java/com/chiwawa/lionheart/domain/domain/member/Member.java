@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.chiwawa.lionheart.domain.domain.article.articlebookmark.ArticleBookmark;
+import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.challenge.Attendance;
 import com.chiwawa.lionheart.domain.domain.challenge.Challenge;
 import com.chiwawa.lionheart.domain.domain.common.BaseEntity;

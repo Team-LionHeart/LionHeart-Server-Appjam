@@ -1,4 +1,4 @@
-package com.chiwawa.lionheart.domain.domain.article.articlebookmark;
+package com.chiwawa.lionheart.domain.domain.articlebookmark;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

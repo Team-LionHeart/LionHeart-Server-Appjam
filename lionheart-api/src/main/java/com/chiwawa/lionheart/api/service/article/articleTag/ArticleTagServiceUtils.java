@@ -1,4 +1,4 @@
-package com.chiwawa.lionheart.api.service.articleTag;
+package com.chiwawa.lionheart.api.service.article.articleTag;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,11 +1,11 @@
-package com.chiwawa.lionheart.domain.domain.article.articlebookmark.repository;
+package com.chiwawa.lionheart.domain.domain.articlebookmark.repository;
 
 import static com.chiwawa.lionheart.domain.domain.article.articlebookmark.QArticleBookmark.*;
 
 import java.util.Optional;
 
 import com.chiwawa.lionheart.domain.domain.article.Article;
-import com.chiwawa.lionheart.domain.domain.article.articlebookmark.ArticleBookmark;
+import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;

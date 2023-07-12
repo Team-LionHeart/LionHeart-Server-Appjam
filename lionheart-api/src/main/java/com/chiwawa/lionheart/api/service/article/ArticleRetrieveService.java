@@ -10,9 +10,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chiwawa.lionheart.api.service.article.articleTag.ArticleTagServiceUtils;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
-import com.chiwawa.lionheart.api.service.articleTag.ArticleTagServiceUtils;
 import com.chiwawa.lionheart.common.exception.ErrorCode;
 import com.chiwawa.lionheart.common.exception.NotFoundException;
 import com.chiwawa.lionheart.common.util.MessageUtils;
@@ -21,9 +21,9 @@ import com.chiwawa.lionheart.domain.domain.article.Category;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.repository.ArticleContentRepository;
 import com.chiwawa.lionheart.domain.domain.article.articleTag.repository.ArticleTagRepository;
-import com.chiwawa.lionheart.domain.domain.article.articlebookmark.ArticleBookmark;
-import com.chiwawa.lionheart.domain.domain.article.articlebookmark.repository.ArticleBookmarkRepository;
 import com.chiwawa.lionheart.domain.domain.article.repository.ArticleRepository;
+import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
+import com.chiwawa.lionheart.domain.domain.articlebookmark.repository.ArticleBookmarkRepository;
 
 import lombok.RequiredArgsConstructor;
 

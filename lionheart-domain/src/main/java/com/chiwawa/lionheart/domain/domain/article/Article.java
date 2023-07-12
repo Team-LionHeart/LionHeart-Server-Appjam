@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
 import com.chiwawa.lionheart.domain.domain.article.articleTag.ArticleTag;
-import com.chiwawa.lionheart.domain.domain.article.articlebookmark.ArticleBookmark;
+import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.common.BaseEntity;
 
 import lombok.AccessLevel;
