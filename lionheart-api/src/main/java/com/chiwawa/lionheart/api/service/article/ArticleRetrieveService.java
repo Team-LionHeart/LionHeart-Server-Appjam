@@ -39,7 +39,7 @@ public class ArticleRetrieveService {
 
 	public CategoryArticleResponse findArticlesByCategory(Long memberId, Category category) {
 
-		List<CategoryArticleDto> categoryArticles = articleRepository.findArticleByCategory(category)
+		List<CategoryArticleDto> categoryArticles = articleRepository.findArticlesByCategory(category)
 			.stream()
 			.map(c -> formatCategoryArticleResponse(memberId, c))
 			.collect(Collectors.toList());
