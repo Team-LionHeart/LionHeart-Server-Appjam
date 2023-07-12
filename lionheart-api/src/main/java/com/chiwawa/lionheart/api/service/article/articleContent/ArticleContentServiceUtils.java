@@ -3,7 +3,7 @@ package com.chiwawa.lionheart.api.service.article.articleContent;
 import static com.chiwawa.lionheart.common.constant.message.CategoryErrorMessage.*;
 
 import com.chiwawa.lionheart.common.exception.ErrorCode;
-import com.chiwawa.lionheart.common.exception.NotFoundException;
+import com.chiwawa.lionheart.common.exception.model.NotFoundException;
 import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
