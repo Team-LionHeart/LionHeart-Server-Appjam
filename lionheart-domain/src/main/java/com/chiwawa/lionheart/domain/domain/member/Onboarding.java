@@ -32,7 +32,7 @@ public class Onboarding extends BaseEntity {
 	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MEMBER_ID", nullable = true)
+	@JoinColumn(name = "MEMBER_ID", nullable = false)
 	private Member member;
 
 	@Column(name = "PREGNANT_WEEKS", nullable = false)

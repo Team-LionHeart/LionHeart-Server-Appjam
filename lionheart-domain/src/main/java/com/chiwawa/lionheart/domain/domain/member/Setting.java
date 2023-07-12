@@ -34,7 +34,7 @@ public class Setting extends BaseEntity {
 	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MEMBER_ID", nullable = true)
+	@JoinColumn(name = "MEMBER_ID", nullable = false)
 	private Member member;
 
 	@Column(name = "NOTIFICATION_STATUS", nullable = false)
