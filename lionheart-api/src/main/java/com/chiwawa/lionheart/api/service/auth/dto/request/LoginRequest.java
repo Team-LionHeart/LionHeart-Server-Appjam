@@ -25,4 +25,9 @@ public class LoginRequest {
 	@Schema(description = "소셜 토큰", example = "eyJhbGciOiJIUzUxdfadfadsMiJ9.udnKnDSK08EuX56E5k-")
 	@NotBlank(message = "{auth.token.notBlank}")
 	private String token;
+
+	@Schema(description = "fcm 토큰", example = "dfdafjdslkfjslfjslifsjvmdsklvdosijsmvsdjvosadjvosd")
+	@NotBlank(message = "{auth.fcmToken.notBlank}")
+	private String fcmToken;
+
 }

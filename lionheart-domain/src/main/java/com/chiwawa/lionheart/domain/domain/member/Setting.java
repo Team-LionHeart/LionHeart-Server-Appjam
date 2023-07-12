@@ -2,6 +2,8 @@ package com.chiwawa.lionheart.domain.domain.member;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,34 +20,31 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "ONBOARDING")
+@Table(name = "SETTING")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
-public class Onboarding extends BaseEntity {
+public class Setting extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ONBOARDING_ID")
+	@Column(name = "SETTING_ID")
 	private Long id;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEMBER_ID", nullable = false)
 	private Member member;
 
-	@Column(name = "PREGNANT_WEEKS", nullable = false)
-	private byte pregnantWeeks;
+	@Column(name = "NOTIFICATION_STATUS", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private NotificationStatus notificationStatus;
 
-	@Column(name = "BABY_NICKNAME", nullable = false, length = 30)
-	private String babyNickname;
-
-	public static Onboarding newInstance(Member member, byte pregnantWeeks, String babyNickname) {
-		return builder()
+	public static Setting newInstance(Member member) {
+		return Setting.builder()
 			.member(member)
-			.pregnantWeeks(pregnantWeeks)
-			.babyNickname(babyNickname)
+			.notificationStatus(NotificationStatus.ON)
 			.build();
 	}
 }

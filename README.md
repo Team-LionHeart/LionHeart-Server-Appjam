@@ -14,6 +14,16 @@
 [PgmJun](https://github.com/PgmJun) | [orijoon98](https://github.com/orijoon98) | [sookyungg](https://github.com/sookyungg) | 
 <br>
 
+<br><br>
+##  💻 LionHeart-Server Developers Roles
+
+최승준 | 공혁준 | 강수경 |
+|:---------:|:----------:|:---------:|
+CI/CD 배포 세팅 | 알림서버 구현 | OAuth2 로그인 구현 |
+API 개발 | API 개발 | API 개발 |
+<br>
+
+<br><br>
 
 ## 💻 Development Environment
 

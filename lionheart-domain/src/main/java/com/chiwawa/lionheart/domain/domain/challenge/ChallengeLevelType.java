@@ -11,7 +11,7 @@ public enum ChallengeLevelType {
 	LEVEL_TWO("2단계"),
 	LEVEL_THREE("3단계"),
 	LEVEL_FOUR("4단계"),
-	COMPLETE("챌린지 완료");
+	LEVEL_FIVE("5단계");
 
 	private final String value;
 }

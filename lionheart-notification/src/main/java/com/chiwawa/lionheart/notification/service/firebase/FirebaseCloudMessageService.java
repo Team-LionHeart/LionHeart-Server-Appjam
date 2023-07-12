@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import com.chiwawa.lionheart.common.exception.InternalServerException;
+import com.chiwawa.lionheart.common.exception.model.InternalServerException;
 import com.chiwawa.lionheart.external.client.firebase.FirebaseApiCaller;
 import com.chiwawa.lionheart.notification.service.firebase.dto.request.FcmMessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.chiwawa.lionheart.common.exception.BadGatewayException;
-import com.chiwawa.lionheart.common.exception.ValidationException;
+import com.chiwawa.lionheart.common.exception.model.BadGatewayException;
+import com.chiwawa.lionheart.common.exception.model.ValidationException;
 import com.chiwawa.lionheart.common.util.MessageUtils;
 
 import lombok.RequiredArgsConstructor;
