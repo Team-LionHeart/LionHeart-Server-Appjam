@@ -20,6 +20,7 @@ import lombok.ToString;
 public class CategoryArticleDto {
 
 	private String title;
+	private String mainImageUrl;
 	private String content;
 	private int time;
 	private Boolean isMarked;
@@ -29,6 +30,7 @@ public class CategoryArticleDto {
 		boolean isMarked) {
 		return CategoryArticleDto.builder()
 			.title(article.getTitle())
+			.mainImageUrl(article.getMainImageUrl())
 			.content(content.getContent())
 			.time(article.getTime())
 			.isMarked(isMarked)
