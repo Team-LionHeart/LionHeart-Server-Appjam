@@ -20,8 +20,9 @@ public class ArticleContentRepositoryImpl implements ArticleContentRepositoryCus
 	public Optional<ArticleContent> findArticleFirstBodyByArticle(Article article) {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(articleContent)
-			.where(articleContent.article.eq(article))
-			.where(articleContent.type.eq(ArticleContentType.BODY))
+			.where(
+				articleContent.article.eq(article),
+				articleContent.type.eq(ArticleContentType.BODY))
 			.orderBy(articleContent.order.asc())
 			.fetchFirst());
 	}
