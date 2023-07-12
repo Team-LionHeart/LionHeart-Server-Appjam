@@ -22,7 +22,7 @@ public class CategoryArticleDto {
 	private String title;
 	private String content;
 	private int time;
-	private boolean isMarked;
+	private Boolean isMarked;
 	private List<String> tag;
 
 	public static CategoryArticleDto of(Article article, ArticleContent content, List<String> tag,
