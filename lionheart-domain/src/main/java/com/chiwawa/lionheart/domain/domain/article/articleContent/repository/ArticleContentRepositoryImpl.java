@@ -16,7 +16,7 @@ public class ArticleContentRepositoryImpl implements ArticleContentRepositoryCus
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public Optional<ArticleContent> findFirstContentByArticle(Article article) {
+	public Optional<ArticleContent> findArticleFirstContentByArticle(Article article) {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(articleContent)
 			.where(articleContent.article.eq(article))

@@ -7,5 +7,5 @@ import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 
 public interface ArticleBookmarkRepositoryCustom {
 
-	Optional<ArticleBookmark> findByMemberIdAndArticleId(Long memberId, Article article);
+	Optional<ArticleBookmark> findArticleBookmarkByMemberAndArticle(Long memberId, Article article);
 }

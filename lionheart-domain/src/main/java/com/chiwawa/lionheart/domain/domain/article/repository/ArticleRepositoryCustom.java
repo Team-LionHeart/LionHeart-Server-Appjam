@@ -7,5 +7,5 @@ import com.chiwawa.lionheart.domain.domain.article.Category;
 
 public interface ArticleRepositoryCustom {
 
-	List<Article> findByCategory(Category category);
+	List<Article> findArticleByCategory(Category category);
 }

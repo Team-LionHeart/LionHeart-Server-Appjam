@@ -15,7 +15,7 @@ public class ArticleBookmarkRepositoryImpl implements ArticleBookmarkRepositoryC
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public Optional<ArticleBookmark> findByMemberIdAndArticleId(Long memberId, Article article) {
+	public Optional<ArticleBookmark> findArticleBookmarkByMemberAndArticle(Long memberId, Article article) {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(articleBookmark)
 			.where(articleBookmark.article.eq(article))
