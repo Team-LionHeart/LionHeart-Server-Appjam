@@ -40,4 +40,12 @@ public class Onboarding extends BaseEntity {
 
 	@Column(name = "BABY_NICKNAME", nullable = false, length = 30)
 	private String babyNickname;
+
+	public static Onboarding newInstance(Member member, byte pregnantWeeks, String babyNickname) {
+		return builder()
+			.member(member)
+			.pregnantWeeks(pregnantWeeks)
+			.babyNickname(babyNickname)
+			.build();
+	}
 }
