@@ -1,5 +1,7 @@
 package com.chiwawa.lionheart.api.service.article;
 
+import static com.chiwawa.lionheart.common.constant.message.CategoryErrorMessage.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
 import com.chiwawa.lionheart.api.service.articleTag.ArticleTagServiceUtils;
+import com.chiwawa.lionheart.common.exception.ErrorCode;
+import com.chiwawa.lionheart.common.exception.NotFoundException;
+import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.Category;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
@@ -47,7 +52,12 @@ public class ArticleRetrieveService {
 	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findByMemberIdAndArticleId(
 			memberId, article);
-		ArticleContent content = articleContentRepository.findByArticle(article).orElseThrow();
+
+		ArticleContent content = articleContentRepository.findFirstContentByArticle(article)
+			.orElseThrow(() -> new NotFoundException(
+				MessageUtils.generate(NOT_EXIST_ARTICLE_CONTENT_ERROR_MESSAGE, article.getId()),
+				ErrorCode.NOT_FOUND_ARTICLE_CONTENT_EXCEPTION));
+
 		List<String> articleTags = ArticleTagServiceUtils.findArticleTagByArticle(articleTagRepository, article);
 
 		return CategoryArticleDto.of(article, content, articleTags, bookmark.isPresent());

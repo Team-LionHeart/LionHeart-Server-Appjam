@@ -44,6 +44,9 @@ public class ArticleContent extends BaseEntity {
 	@Column(name = "CAPTION", nullable = false)
 	private String caption;
 
+	@Column(name = "ORDER", nullable = false)
+	private byte order;
+
 	@Column(name = "TYPE", nullable = false, length = 30)
 	@Enumerated(EnumType.STRING)
 	private ArticleContentType type;

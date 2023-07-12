@@ -77,6 +77,7 @@ CREATE TABLE `ARTICLE_CONTENT`
     `ARTICLE_CONTENT_ID` bigint auto_increment primary key,
     `ARTICLE_ID`         bigint      NOT NULL,
     `TYPE`               varchar(30) NOT NULL,
+    `ORDER`              tinyint     NOT NULL,
     `CONTENT`            text        NOT NULL,
     `CAPTION`            varchar(100) NULL,
     `CREATED_AT`         datetime    NOT NULL,

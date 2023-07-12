@@ -16,11 +16,11 @@ public class ArticleContentRepositoryImpl implements ArticleContentRepositoryCus
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public Optional<ArticleContent> findByArticle(Article article) {
+	public Optional<ArticleContent> findFirstContentByArticle(Article article) {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(articleContent)
 			.where(articleContent.article.eq(article))
-			.orderBy(articleContent.createdAt.asc())
+			.orderBy(articleContent.order.asc())
 			.fetchFirst());
 	}
 

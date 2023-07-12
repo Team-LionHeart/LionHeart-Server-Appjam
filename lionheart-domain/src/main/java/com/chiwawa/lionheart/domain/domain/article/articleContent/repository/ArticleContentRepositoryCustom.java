@@ -7,5 +7,5 @@ import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent
 
 public interface ArticleContentRepositoryCustom {
 
-	Optional<ArticleContent> findByArticle(Article article);
+	Optional<ArticleContent> findFirstContentByArticle(Article article);
 }
