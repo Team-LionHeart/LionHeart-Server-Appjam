@@ -7,5 +7,5 @@ import com.chiwawa.lionheart.domain.domain.article.articleTag.ArticleTag;
 
 public interface ArticleTagRepositoryCustom {
 
-	List<ArticleTag> findArticleTagByArticle(Article article);
+	List<ArticleTag> findArticleTagsByArticle(Article article);
 }

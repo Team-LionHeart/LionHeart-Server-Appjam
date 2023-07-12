@@ -16,7 +16,7 @@ public class ArticleTagRepositoryImpl implements ArticleTagRepositoryCustom {
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public List<ArticleTag> findArticleTagByArticle(Article article) {
+	public List<ArticleTag> findArticleTagsByArticle(Article article) {
 		return queryFactory
 			.selectFrom(articleTag)
 			.where(articleTag.article.eq(article))

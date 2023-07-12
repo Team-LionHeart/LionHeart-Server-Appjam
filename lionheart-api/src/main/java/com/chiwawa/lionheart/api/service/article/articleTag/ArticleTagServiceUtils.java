@@ -9,8 +9,8 @@ import com.chiwawa.lionheart.domain.domain.article.articleTag.repository.Article
 
 public class ArticleTagServiceUtils {
 
-	public static List<String> findArticleTagByArticle(ArticleTagRepository articleTagRepository, Article article) {
-		List<ArticleTag> articleTags = articleTagRepository.findArticleTagByArticle(article);
+	public static List<String> findArticleTagsByArticle(ArticleTagRepository articleTagRepository, Article article) {
+		List<ArticleTag> articleTags = articleTagRepository.findArticleTagsByArticle(article);
 
 		return articleTags.stream()
 			.map(tag -> tag.getTagName())
