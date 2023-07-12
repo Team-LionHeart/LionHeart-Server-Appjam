@@ -58,8 +58,8 @@ public class Article extends BaseEntity {
 	@Column(name = "DAY", nullable = false)
 	private byte day;
 
-	@Column(name = "TIME", nullable = false)
-	private byte time;
+	@Column(name = "REQUIRED_TIME", nullable = false)
+	private byte requiredTime;
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleContent> articleContents = new ArrayList<>();

@@ -22,7 +22,7 @@ public class CategoryArticleDto {
 	private String title;
 	private String mainImageUrl;
 	private String firstBodyContent;
-	private int time;
+	private int requiredTime;
 	private Boolean isMarked;
 	private List<String> tags;
 
@@ -31,8 +31,8 @@ public class CategoryArticleDto {
 		return CategoryArticleDto.builder()
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
+			.requiredTime(article.getRequiredTime())
 			.firstBodyContent(content.getContent())
-			.time(article.getTime())
 			.isMarked(isMarked)
 			.tags(tag)
 			.build();

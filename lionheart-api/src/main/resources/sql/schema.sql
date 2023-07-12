@@ -39,7 +39,7 @@ CREATE TABLE `ARTICLE`
     `MAIN_IMAGE_CAPTION` varchar(100) NOT NULL,
     `WEEK`               tinyint      NOT NULL,
     `DAY`                tinyint      NOT NULL,
-    `TIME`               tinyint      NOT NULL,
+    `REQUIRED_TIME`               tinyint      NOT NULL,
     `POSTED_AT`          datetime     NOT NULL,
     `CREATED_AT`         datetime     NOT NULL,
     `MODIFIED_AT`        datetime     NOT NULL
