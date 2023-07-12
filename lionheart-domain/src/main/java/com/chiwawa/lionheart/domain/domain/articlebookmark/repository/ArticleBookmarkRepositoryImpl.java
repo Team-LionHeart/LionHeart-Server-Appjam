@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
+import com.chiwawa.lionheart.domain.domain.member.Member;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,11 @@ public class ArticleBookmarkRepositoryImpl implements ArticleBookmarkRepositoryC
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public Optional<ArticleBookmark> findArticleBookmarkByMemberAndArticle(Long memberId, Article article) {
+	public Optional<ArticleBookmark> findArticleBookmarkByMemberAndArticle(Member member, Article article) {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(articleBookmark)
 			.where(articleBookmark.article.eq(article))
-			.where(articleBookmark.member.id.eq(memberId))
+			.where(articleBookmark.member.eq(member))
 			.fetchOne());
 	}
 }
