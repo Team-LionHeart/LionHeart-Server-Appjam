@@ -36,7 +36,7 @@ public class ArticleTag extends BaseEntity {
 	@JoinColumn(name = "ARTICLE_ID", nullable = false)
 	private Article article;
 
-	@Column(name = "TAG_NAME", nullable = false)
+	@Column(name = "TAG_NAME", nullable = false, length = 30)
 	private String tagName;
 
 }
