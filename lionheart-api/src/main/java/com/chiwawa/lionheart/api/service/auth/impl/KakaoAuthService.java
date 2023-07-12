@@ -32,7 +32,7 @@ public class KakaoAuthService implements AuthService {
 	@Override
 	public Long signUp(SignUpRequest request) {
 		KakaoProfileResponse response = kakaoApiCaller.getProfileInfo(request.getToken());
-		return memberService.registerMember(request.toCreateUserDto(response.getId()));
+		return memberService.registerMember(request.toCreateMemberDto(response.getId()));
 	}
 
 	@Override

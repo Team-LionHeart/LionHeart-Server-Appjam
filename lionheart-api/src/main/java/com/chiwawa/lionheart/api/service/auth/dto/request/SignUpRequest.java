@@ -45,7 +45,7 @@ public class SignUpRequest {
 	@NotNull(message = "{onboarding.babyNickname.notNull}")
 	private String babyNickname;
 
-	public CreateMemberRequestDto toCreateUserDto(String socialId) {
+	public CreateMemberRequestDto toCreateMemberDto(String socialId) {
 		return CreateMemberRequestDto.of(socialId, socialType, fcmToken, pregnantWeeks, babyNickname);
 	}
 }
