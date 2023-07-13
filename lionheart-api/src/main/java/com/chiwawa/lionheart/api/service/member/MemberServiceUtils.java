@@ -45,9 +45,7 @@ public class MemberServiceUtils {
 				NOT_FOUND_MEMBER_EXCEPTION));
 	}
 
-	public static WeekAndDay findMemberWeekAndDay(MemberRepository memberRepository, Long memberId) {
-		Member member = findMemberById(memberRepository, memberId);
-
+	public static WeekAndDay findMemberWeekAndDay(Member member) {
 		LocalDate startDay = LocalDate.from(member.getCreatedAt());
 		short startWeek = member.getOnboarding().getPregnantWeeks();
 

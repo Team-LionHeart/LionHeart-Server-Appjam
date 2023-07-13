@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
-import com.chiwawa.lionheart.api.service.onboarding.OnboardingServiceUtils;
 import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.Category;
@@ -26,9 +25,7 @@ import com.chiwawa.lionheart.domain.domain.article.repository.ArticleRepository;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.repository.ArticleBookmarkRepository;
 import com.chiwawa.lionheart.domain.domain.member.Member;
-import com.chiwawa.lionheart.domain.domain.member.Onboarding;
 import com.chiwawa.lionheart.domain.domain.member.repository.MemberRepository;
-import com.chiwawa.lionheart.domain.domain.member.repository.OnboardingRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,7 +39,6 @@ public class ArticleRetrieveService {
 	private final ArticleContentRepository articleContentRepository;
 	private final ArticleTagRepository articleTagRepository;
 	private final MemberRepository memberRepository;
-	private final OnboardingRepository onboardingRepository;
 
 	public CategoryArticleResponse findArticlesByCategory(Long memberId, Category category) {
 
@@ -57,14 +53,14 @@ public class ArticleRetrieveService {
 
 	public TodayArticleResponse findTodayArticleByMemberId(Long memberId) {
 
-		WeekAndDay weekAndDay = findMemberWeekAndDay(memberRepository, memberId);
-		Article article = ArticleServiceUtils.findArticleByWeekAndDay(articleRepository, weekAndDay);
 		Member member = findMemberById(memberRepository, memberId);
-		Onboarding onboarding = OnboardingServiceUtils.findOnboardingByMember(onboardingRepository, member);
+		WeekAndDay weekAndDay = findMemberWeekAndDay(member);
+		Article article = ArticleServiceUtils.findArticleByWeekAndDay(articleRepository, weekAndDay);
+
 		ArticleContent editorNoteContent = findArticleEditorNoteContentByArticle(
 			articleContentRepository, article);
 
-		return TodayArticleResponse.of(article, onboarding, weekAndDay, editorNoteContent);
+		return TodayArticleResponse.of(article, member.getOnboarding(), weekAndDay, editorNoteContent);
 	}
 
 	// TODO: DB 조회 성능을 위해 리팩토링
