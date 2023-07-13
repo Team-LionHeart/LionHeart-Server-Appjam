@@ -16,6 +16,14 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 	private final JPAQueryFactory queryFactory;
 
 	@Override
+	public Optional<Article> findArticleById(Long id) {
+		return Optional.ofNullable(queryFactory
+			.selectFrom(article)
+			.where(article.id.eq(id))
+			.fetchOne());
+	}
+
+	@Override
 	public List<Article> findArticlesByCategory(Category category) {
 		return queryFactory
 			.selectFrom(article)

@@ -9,4 +9,7 @@ import com.chiwawa.lionheart.domain.domain.member.Member;
 public interface ArticleBookmarkRepositoryCustom {
 
 	Optional<ArticleBookmark> findArticleBookmarkByMemberAndArticle(Member member, Article article);
+
 }
+
+

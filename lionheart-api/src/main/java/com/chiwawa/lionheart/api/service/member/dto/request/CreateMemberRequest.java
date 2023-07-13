@@ -14,17 +14,17 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
-public class CreateMemberRequestDto {
+public class CreateMemberRequest {
 
 	private String socialId;
 	private MemberSocialType socialType;
 	private String fcmToken;
-	private byte pregnantWeeks;
+	private short pregnantWeeks;
 	private String babyNickname;
 
-	public static CreateMemberRequestDto of(String socialId, MemberSocialType socialType, String fcmToken,
-		byte pregnantWeeks, String babyNickname) {
-		return CreateMemberRequestDto.builder()
+	public static CreateMemberRequest of(String socialId, MemberSocialType socialType, String fcmToken,
+		short pregnantWeeks, String babyNickname) {
+		return CreateMemberRequest.builder()
 			.socialId(socialId)
 			.socialType(socialType)
 			.fcmToken(fcmToken)
