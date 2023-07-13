@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
+import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.Category;
@@ -53,8 +54,8 @@ public class ArticleRetrieveService {
 
 	public TodayArticleResponse findTodayArticleByMemberId(Long memberId) {
 
-		Member member = findMemberById(memberRepository, memberId);
-		WeekAndDay weekAndDay = findMemberWeekAndDay(member);
+		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
+		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
 		Article article = ArticleServiceUtils.findArticleByWeekAndDay(articleRepository, weekAndDay);
 
 		ArticleContent editorNoteContent = findArticleEditorNoteContentByArticle(
