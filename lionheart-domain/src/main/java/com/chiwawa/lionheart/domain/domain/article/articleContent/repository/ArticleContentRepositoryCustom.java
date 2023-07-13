@@ -8,4 +8,6 @@ import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent
 public interface ArticleContentRepositoryCustom {
 
 	Optional<ArticleContent> findArticleFirstBodyByArticle(Article article);
+
+	Optional<ArticleContent> findArticleEditorNoteContentByArticle(Article article);
 }

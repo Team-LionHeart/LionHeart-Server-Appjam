@@ -1,9 +1,9 @@
 package com.chiwawa.lionheart.api.service.article.dto.response;
 
-import java.util.List;
-
+import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
+import com.chiwawa.lionheart.domain.domain.member.Onboarding;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,24 +17,26 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
-public class CategoryArticleDto {
+public class TodayArticleResponse {
 
+	private String babyNickname;
 	private String title;
 	private String mainImageUrl;
-	private String firstBodyContent;
-	private int requiredTime;
-	private Boolean isMarked;
-	private List<String> tags;
+	private String editorNoteContent;
+	private int week;
+	private int day;
 
-	public static CategoryArticleDto of(Article article, ArticleContent content, List<String> tag,
-		boolean isMarked) {
-		return builder()
+	public static TodayArticleResponse of(Article article, Onboarding onboarding, WeekAndDay weekAndDay,
+		ArticleContent editorNoteContent) {
+		return TodayArticleResponse.builder()
+			.babyNickname(onboarding.getBabyNickname())
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
-			.requiredTime(article.getRequiredTime())
-			.firstBodyContent(content.getContent())
-			.isMarked(isMarked)
-			.tags(tag)
+			.editorNoteContent(editorNoteContent.getContent())
+			.week(weekAndDay.getWeek())
+			.day(weekAndDay.getDay())
 			.build();
+
 	}
+
 }

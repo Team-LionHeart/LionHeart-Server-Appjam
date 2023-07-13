@@ -27,4 +27,14 @@ public class ArticleContentRepositoryImpl implements ArticleContentRepositoryCus
 			.fetchFirst());
 	}
 
+	@Override
+	public Optional<ArticleContent> findArticleEditorNoteContentByArticle(Article article) {
+		return Optional.ofNullable(queryFactory
+			.selectFrom(articleContent)
+			.where(
+				articleContent.article.eq(article),
+				articleContent.type.eq(ArticleContentType.EDITOR_NOTE))
+			.fetchOne());
+	}
+
 }

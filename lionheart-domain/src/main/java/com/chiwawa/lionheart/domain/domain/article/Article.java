@@ -53,13 +53,13 @@ public class Article extends BaseEntity {
 	private String author;
 
 	@Column(name = "WEEK", nullable = false)
-	private byte week;
+	private short week;
 
 	@Column(name = "DAY", nullable = false)
-	private byte day;
+	private short day;
 
 	@Column(name = "REQUIRED_TIME", nullable = false)
-	private byte requiredTime;
+	private short requiredTime;
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleContent> articleContents = new ArrayList<>();

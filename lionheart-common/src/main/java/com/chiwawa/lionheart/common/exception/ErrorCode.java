@@ -25,6 +25,9 @@ public enum ErrorCode {
 	NOT_FOUND_MEMBER_EXCEPTION("N002", "탈퇴했거나 존재하지 않는 회원입니다."),
 	NOT_FOUND_ARTICLE_CONTENT_EXCEPTION("N003", "아티클의 컨텐츠가 존재하지 않습니다."),
 
+	NOT_FOUND_ARTICLE_IN_WEEK_AND_DAY_EXCEPTION("N006", "해당 주차 일차에 해당하는 아티클이 존재하지 않습니다."),
+	NOT_FOUND_ONBOARDING_OF_USER_EXCEPTION("N007", "해당 유저의 온보딩 정보가 존재하지 않습니다."),
+
 	// Conflict Exception
 	CONFLICT_EXCEPTION("C001", "이미 존재합니다."),
 	CONFLICT_MEMBER_EXCEPTION("C002", "이미 해당 계정으로 회원가입하셨습니다.\n로그인 해주세요."),

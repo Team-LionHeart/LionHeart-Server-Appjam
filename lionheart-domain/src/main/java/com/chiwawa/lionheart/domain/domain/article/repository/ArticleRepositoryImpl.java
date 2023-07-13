@@ -3,6 +3,7 @@ package com.chiwawa.lionheart.domain.domain.article.repository;
 import static com.chiwawa.lionheart.domain.domain.article.QArticle.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.Category;
@@ -21,4 +22,15 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 			.where(article.category.eq(category))
 			.fetch();
 	}
+
+	@Override
+	public Optional<Article> findArticleByWeekAndDay(short week, short day) {
+		return Optional.ofNullable(queryFactory
+			.selectFrom(article)
+			.where(
+				article.week.eq(week),
+				article.day.eq(day))
+			.fetchOne());
+	}
+
 }
