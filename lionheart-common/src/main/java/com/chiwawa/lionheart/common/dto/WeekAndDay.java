@@ -23,4 +23,21 @@ public class WeekAndDay {
 			.day(day)
 			.build();
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || this.getClass() != o.getClass()) {
+			return false;
+		}
+		WeekAndDay other = (WeekAndDay)o;
+		return this.week == other.week && this.day == other.day;
+	}
+
+	@Override
+	public int hashCode() {
+		return week + day;
+	}
 }
