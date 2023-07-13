@@ -19,7 +19,9 @@ public class ArticleBookmarkRepositoryImpl implements ArticleBookmarkRepositoryC
 	public Optional<ArticleBookmark> findArticleBookmarkByMemberAndArticle(Member member, Article article) {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(articleBookmark)
-			.where(articleBookmark.member.eq(member), articleBookmark.article.eq(article))
+			.where(
+				articleBookmark.member.eq(member),
+				articleBookmark.article.eq(article))
 			.fetchOne());
 	}
 }
