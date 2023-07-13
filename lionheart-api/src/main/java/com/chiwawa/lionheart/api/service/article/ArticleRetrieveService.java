@@ -21,8 +21,6 @@ import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.Category;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
-import com.chiwawa.lionheart.domain.domain.article.articleContent.repository.ArticleContentRepository;
-import com.chiwawa.lionheart.domain.domain.article.articleTag.repository.ArticleTagRepository;
 import com.chiwawa.lionheart.domain.domain.article.repository.ArticleRepository;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.repository.ArticleBookmarkRepository;
@@ -38,8 +36,6 @@ public class ArticleRetrieveService {
 
 	private final ArticleRepository articleRepository;
 	private final ArticleBookmarkRepository articleBookmarkRepository;
-	private final ArticleContentRepository articleContentRepository;
-	private final ArticleTagRepository articleTagRepository;
 	private final MemberRepository memberRepository;
 
 	public CategoryArticleResponse findArticlesByCategory(Long memberId, Category category) {
@@ -59,8 +55,7 @@ public class ArticleRetrieveService {
 		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
 		Article article = ArticleServiceUtils.findArticleByWeekAndDay(articleRepository, weekAndDay);
 
-		ArticleContent editorNoteContent = findArticleEditorNoteContentByArticle(
-			articleContentRepository, article);
+		ArticleContent editorNoteContent = findArticleEditorNoteContentByArticle(article);
 
 		return TodayArticleResponse.of(article, member.getOnboarding(), weekAndDay, editorNoteContent);
 	}

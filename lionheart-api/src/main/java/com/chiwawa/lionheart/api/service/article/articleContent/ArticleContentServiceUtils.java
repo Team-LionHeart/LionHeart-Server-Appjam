@@ -10,7 +10,6 @@ import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContent;
 import com.chiwawa.lionheart.domain.domain.article.articleContent.ArticleContentType;
-import com.chiwawa.lionheart.domain.domain.article.articleContent.repository.ArticleContentRepository;
 
 public class ArticleContentServiceUtils {
 
@@ -18,17 +17,18 @@ public class ArticleContentServiceUtils {
 		return article.getArticleContents()
 			.stream()
 			.filter(a -> a.getType() == ArticleContentType.BODY)
-			.sorted(Comparator.comparing(ArticleContent::getOrder))
-			.findFirst()
+			.min(Comparator.comparing(ArticleContent::getOrder))
 			.orElseThrow(() -> new NotFoundException(
 				MessageUtils.generate(NOT_EXIST_ARTICLE_CONTENT_ERROR_MESSAGE, article.getId()),
 				ErrorCode.NOT_FOUND_ARTICLE_CONTENT_EXCEPTION));
 	}
 
-	public static ArticleContent findArticleEditorNoteContentByArticle(
-		ArticleContentRepository articleContentRepository,
-		Article article) {
-		return articleContentRepository.findArticleEditorNoteContentByArticle(article)
+	public static ArticleContent findArticleEditorNoteContentByArticle(Article article) {
+
+		return article.getArticleContents()
+			.stream()
+			.filter(a -> a.getType() == ArticleContentType.EDITOR_NOTE)
+			.min(Comparator.comparing(ArticleContent::getOrder))
 			.orElseThrow(() -> new NotFoundException(
 				MessageUtils.generate(NOT_EXIST_ARTICLE_CONTENT_ERROR_MESSAGE, article.getId()),
 				ErrorCode.NOT_FOUND_ARTICLE_CONTENT_EXCEPTION));
