@@ -24,8 +24,8 @@ public enum ErrorCode {
 	NOT_FOUND_EXCEPTION("N001", "존재하지 않습니다."),
 	NOT_FOUND_MEMBER_EXCEPTION("N002", "탈퇴했거나 존재하지 않는 회원입니다."),
 	NOT_FOUND_ARTICLE_CONTENT_EXCEPTION("N003", "아티클의 컨텐츠가 존재하지 않습니다."),
-  NOT_FOUND_CHALLENGE_EXCEPTION("N004", "존재하지 않는 챌린지입니다."),
-  NOT_FOUND_ARTICLE_EXCEPTION("N005", "삭제되었거나 존재하지 않는 아티클입니다."),
+	NOT_FOUND_CHALLENGE_EXCEPTION("N004", "존재하지 않는 챌린지입니다."),
+	NOT_FOUND_ARTICLE_EXCEPTION("N005", "삭제되었거나 존재하지 않는 아티클입니다."),
 
 	// Conflict Exception
 	CONFLICT_EXCEPTION("C001", "이미 존재합니다."),
