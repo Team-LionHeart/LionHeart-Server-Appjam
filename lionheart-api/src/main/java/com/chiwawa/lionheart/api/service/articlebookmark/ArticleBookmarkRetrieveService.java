@@ -21,7 +21,7 @@ public class ArticleBookmarkRetrieveService {
 	private final ArticleBookmarkRepository articleBookmarkRepository;
 	private final MemberRepository memberRepository;
 
-	public ArticleBookmarkResponse getArticleBookmark(Long memberId) {
+	public ArticleBookmarkResponse getArticleBookmarks(Long memberId) {
 		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
 		List<ArticleBookmark> articleBookmarks = articleBookmarkRepository.findArticleBookmarksByMember(member);
 		return ArticleBookmarkResponse.of(member, articleBookmarks);

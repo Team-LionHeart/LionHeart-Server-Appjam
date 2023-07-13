@@ -26,6 +26,6 @@ public class ArticleBookmarkRetrieveController {
 	@Auth
 	@GetMapping("/article/bookmarks")
 	public ApiResponse<ArticleBookmarkResponse> getArticleBookmarks(@MemberId Long memberId) {
-		return ApiResponse.success(articleBookmarkRetrieveService.getArticleBookmark(memberId));
+		return ApiResponse.success(articleBookmarkRetrieveService.getArticleBookmarks(memberId));
 	}
 }
