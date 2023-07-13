@@ -40,4 +40,11 @@ public class ArticleBookmark extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ARTICLE_ID", nullable = false)
 	private Article article;
+
+	public static ArticleBookmark newInstance(Member member, Article article) {
+		return builder()
+			.member(member)
+			.article(article)
+			.build();
+	}
 }

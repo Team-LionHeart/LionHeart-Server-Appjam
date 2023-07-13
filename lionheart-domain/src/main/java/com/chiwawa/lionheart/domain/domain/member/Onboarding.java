@@ -36,12 +36,12 @@ public class Onboarding extends BaseEntity {
 	private Member member;
 
 	@Column(name = "PREGNANT_WEEKS", nullable = false)
-	private byte pregnantWeeks;
+	private short pregnantWeeks;
 
 	@Column(name = "BABY_NICKNAME", nullable = false, length = 30)
 	private String babyNickname;
 
-	public static Onboarding newInstance(Member member, byte pregnantWeeks, String babyNickname) {
+	public static Onboarding newInstance(Member member, short pregnantWeeks, String babyNickname) {
 		return builder()
 			.member(member)
 			.pregnantWeeks(pregnantWeeks)
