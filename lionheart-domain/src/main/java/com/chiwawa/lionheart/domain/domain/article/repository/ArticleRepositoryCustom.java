@@ -9,8 +9,10 @@ import com.chiwawa.lionheart.domain.domain.article.Category;
 public interface ArticleRepositoryCustom {
 
 	List<Article> findArticlesByCategory(Category category);
+
 	Optional<Article> findArticleByWeekAndDay(short week, short day);
-  Optional<Article> findArticleById(Long id);
-  
+
+	Optional<Article> findArticleById(Long id);
+
 }
 
