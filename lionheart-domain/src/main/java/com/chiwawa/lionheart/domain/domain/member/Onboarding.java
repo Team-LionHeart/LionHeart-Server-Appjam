@@ -42,7 +42,7 @@ public class Onboarding extends BaseEntity {
 	private String babyNickname;
 
 	public static Onboarding newInstance(Member member, short pregnantWeeks, String babyNickname) {
-		return builder()
+		return Onboarding.builder()
 			.member(member)
 			.pregnantWeeks(pregnantWeeks)
 			.babyNickname(babyNickname)

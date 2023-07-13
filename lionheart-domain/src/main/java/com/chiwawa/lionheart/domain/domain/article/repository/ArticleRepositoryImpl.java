@@ -30,4 +30,15 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 			.where(article.category.eq(category))
 			.fetch();
 	}
+
+	@Override
+	public Optional<Article> findArticleByWeekAndDay(short week, short day) {
+		return Optional.ofNullable(queryFactory
+			.selectFrom(article)
+			.where(
+				article.week.eq(week),
+				article.day.eq(day))
+			.fetchOne());
+	}
+
 }

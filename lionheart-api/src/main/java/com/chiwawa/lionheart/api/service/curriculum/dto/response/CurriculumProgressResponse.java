@@ -1,5 +1,6 @@
 package com.chiwawa.lionheart.api.service.curriculum.dto.response;
 
+import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,11 +30,11 @@ public class CurriculumProgressResponse {
 	@Schema(description = "진척도")
 	private int progress;
 
-	public static CurriculumProgressResponse of(Member member, int week, int day, int progress) {
+	public static CurriculumProgressResponse of(Member member, WeekAndDay weekAndDay, int progress) {
 		return CurriculumProgressResponse.builder()
 			.babyNickname(member.getOnboarding().getBabyNickname())
-			.week(week)
-			.day(day)
+			.week(weekAndDay.getWeek())
+			.day(weekAndDay.getDay())
 			.progress(progress)
 			.build();
 	}

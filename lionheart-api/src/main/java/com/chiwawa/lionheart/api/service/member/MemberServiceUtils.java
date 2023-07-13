@@ -3,10 +3,13 @@ package com.chiwawa.lionheart.api.service.member;
 import static com.chiwawa.lionheart.common.constant.message.MemberErrorMessage.*;
 import static com.chiwawa.lionheart.common.exception.ErrorCode.*;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
+import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.common.exception.model.ConflictException;
 import com.chiwawa.lionheart.common.exception.model.NotFoundException;
+import com.chiwawa.lionheart.common.util.DateUtils;
 import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 import com.chiwawa.lionheart.domain.domain.member.MemberSocialType;
@@ -40,7 +43,12 @@ public class MemberServiceUtils {
 		return member.orElseThrow(() ->
 			new NotFoundException(MessageUtils.generate(NOT_EXIST_MEMBER_ID_ERROR_MESSAGE, memberId),
 				NOT_FOUND_MEMBER_EXCEPTION));
-
 	}
 
+	public static WeekAndDay findMemberWeekAndDay(Member member) {
+		LocalDate startDay = LocalDate.from(member.getCreatedAt());
+		short startWeek = member.getOnboarding().getPregnantWeeks();
+
+		return DateUtils.getWeekAndDay(startWeek, startDay);
+	}
 }

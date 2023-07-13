@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.chiwawa.lionheart.api.service.curriculum.dto.response.CurriculumProgressResponse;
 import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
+import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.common.util.DateUtils;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 import com.chiwawa.lionheart.domain.domain.member.repository.MemberRepository;
@@ -22,13 +23,11 @@ public class CurriculumRetrieveService {
 
 	public CurriculumProgressResponse getCurriculumProgress(Long memberId) {
 		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
-		LocalDate today = DateUtils.today();
 		LocalDate startDay = LocalDate.from(member.getCreatedAt());
-		int startWeek = member.getOnboarding().getPregnantWeeks();
-		int passedDay = DateUtils.getDayDifference(today, startDay);
-		int week = startWeek + passedDay / 7;
-		int day = 1 + passedDay % 7;
+		short startWeek = member.getOnboarding().getPregnantWeeks();
+		WeekAndDay weekAndDay = DateUtils.getWeekAndDay(startWeek, startDay);
+
 		int progress = 100; // TODO: 2023/07/12 progress 일별/월별 확정나면 로직 수정하기
-		return CurriculumProgressResponse.of(member, week, day, progress);
+		return CurriculumProgressResponse.of(member, weekAndDay, progress);
 	}
 }
