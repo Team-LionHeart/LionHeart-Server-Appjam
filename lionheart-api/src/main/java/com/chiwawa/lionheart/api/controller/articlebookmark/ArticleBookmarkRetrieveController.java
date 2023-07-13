@@ -22,7 +22,7 @@ public class ArticleBookmarkRetrieveController {
 
 	private final ArticleBookmarkRetrieveService articleBookmarkRetrieveService;
 
-	@Operation(summary = "아티클 북마크 조회")
+	@Operation(summary = "아티클 북마크 목 조회")
 	@Auth
 	@GetMapping("/article/bookmarks")
 	public ApiResponse<ArticleBookmarkResponse> getArticleBookmark(@MemberId Long memberId) {
