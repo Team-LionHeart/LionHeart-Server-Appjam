@@ -1,7 +1,6 @@
 package com.chiwawa.lionheart.api.service.article;
 
 import static com.chiwawa.lionheart.api.service.article.articleContent.ArticleContentServiceUtils.*;
-import static com.chiwawa.lionheart.api.service.article.articleTag.ArticleTagServiceUtils.*;
 import static com.chiwawa.lionheart.api.service.member.MemberServiceUtils.*;
 
 import java.util.Collections;
@@ -12,6 +11,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chiwawa.lionheart.api.service.article.articleContent.ArticleContentServiceUtils;
+import com.chiwawa.lionheart.api.service.article.articleTag.ArticleTagServiceUtils;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
@@ -64,15 +65,13 @@ public class ArticleRetrieveService {
 		return TodayArticleResponse.of(article, member.getOnboarding(), weekAndDay, editorNoteContent);
 	}
 
-	// TODO: DB 조회 성능을 위해 리팩토링
 	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
 
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			findMemberById(memberRepository, memberId), article);
 
-		ArticleContent content = findArticleFirstBodyByArticle(articleContentRepository, article);
-
-		List<String> articleTags = findArticleTagsByArticle(articleTagRepository, article);
+		ArticleContent content = ArticleContentServiceUtils.findArticleFirstBodyByArticle(article);
+		List<String> articleTags = ArticleTagServiceUtils.findArticleTagsByArticle(article);
 
 		return CategoryArticleDto.of(article, content, articleTags, bookmark.isPresent());
 	}
