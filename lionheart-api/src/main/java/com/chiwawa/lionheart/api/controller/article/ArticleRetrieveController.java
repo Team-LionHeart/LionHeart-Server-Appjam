@@ -26,7 +26,7 @@ public class ArticleRetrieveController {
 
 	private final ArticleRetrieveService articleService;
 
-	@Operation(summary = "카테고리 별 아티클 조회")
+	@Operation(summary = "[인증] 카테고리 별 아티클 조회")
 	@Auth
 	@GetMapping("/article")
 	public ApiResponse<CategoryArticleResponse> findArticlesByCategory(
@@ -36,9 +36,9 @@ public class ArticleRetrieveController {
 		return ApiResponse.success(articleService.findArticlesByCategory(memberId, category));
 	}
 
-	@Operation
+	@Operation(summary = "[인증] 투데이 아티클 조회")
 	@Auth
-	@GetMapping("/")
+	@GetMapping("/article/today")
 	public ApiResponse<TodayArticleResponse> findTodayArticle(@MemberId final Long memberId) {
 		return ApiResponse.success(articleService.findTodayArticleByMemberId(memberId));
 	}
