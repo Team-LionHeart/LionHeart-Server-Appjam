@@ -22,10 +22,10 @@ public class ArticleBookmarkRetrieveController {
 
 	private final ArticleBookmarkRetrieveService articleBookmarkRetrieveService;
 
-	@Operation(summary = "아티클 북마크 목 조회")
+	@Operation(summary = "[인증] 아티클 북마크 목록 조회")
 	@Auth
 	@GetMapping("/article/bookmarks")
-	public ApiResponse<ArticleBookmarkResponse> getArticleBookmark(@MemberId Long memberId) {
+	public ApiResponse<ArticleBookmarkResponse> getArticleBookmarks(@MemberId Long memberId) {
 		return ApiResponse.success(articleBookmarkRetrieveService.getArticleBookmark(memberId));
 	}
 }
