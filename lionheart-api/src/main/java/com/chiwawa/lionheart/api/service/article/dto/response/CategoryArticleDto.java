@@ -28,7 +28,7 @@ public class CategoryArticleDto {
 
 	public static CategoryArticleDto of(Article article, ArticleContent content, List<String> tag,
 		boolean isMarked) {
-		return builder()
+		return CategoryArticleDto.builder()
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
 			.requiredTime(article.getRequiredTime())

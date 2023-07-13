@@ -42,7 +42,7 @@ public class ArticleBookmark extends BaseEntity {
 	private Article article;
 
 	public static ArticleBookmark newInstance(Member member, Article article) {
-		return builder()
+		return ArticleBookmark.builder()
 			.member(member)
 			.article(article)
 			.build();
