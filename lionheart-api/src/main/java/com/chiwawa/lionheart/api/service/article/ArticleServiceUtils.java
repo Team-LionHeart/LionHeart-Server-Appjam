@@ -19,4 +19,12 @@ public class ArticleServiceUtils {
 						weekAndDay.getDay()),
 					NOT_FOUND_ARTICLE_IN_WEEK_AND_DAY_EXCEPTION));
 	}
+
+	public static Article findArticleById(ArticleRepository articleRepository, Long articleId) {
+		return articleRepository.findArticleById(articleId)
+			.orElseThrow(() ->
+				new NotFoundException(
+					MessageUtils.generate("", articleId),
+					NOT_FOUND_ARTICLE_EXCEPTION));
+	}
 }

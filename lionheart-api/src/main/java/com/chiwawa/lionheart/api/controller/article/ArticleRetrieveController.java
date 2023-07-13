@@ -1,6 +1,7 @@
 package com.chiwawa.lionheart.api.controller.article;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,15 @@ public class ArticleRetrieveController {
 	@GetMapping("/article/today")
 	public ApiResponse<TodayArticleResponse> findTodayArticle(@MemberId final Long memberId) {
 		return ApiResponse.success(articleService.findTodayArticleByMemberId(memberId));
+	}
+
+	@Operation(summary = "[인증] 아티클 상세 조회")
+	@Auth
+	@GetMapping("/article/{articleId}")
+	public ApiResponse<?> findTodayArticle(
+		@MemberId final Long memberId,
+		@Parameter(description = "아티클ID", required = true, example = "1L") @PathVariable final Long articleId) {
+		return ApiResponse.success(articleService.findArticleDetail(memberId, articleId));
 	}
 
 }
