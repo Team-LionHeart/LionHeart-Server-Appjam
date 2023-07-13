@@ -2,8 +2,11 @@ package com.chiwawa.lionheart.api.config.swagger;
 
 import java.util.Arrays;
 
+import org.springdoc.core.SpringDocUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.chiwawa.lionheart.api.config.resolver.MemberId;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -35,4 +38,7 @@ public class SwaggerConfig {
 			.info(info);
 	}
 
+	static {
+		SpringDocUtils.getConfig().addAnnotationsToIgnore(MemberId.class);
+	}
 }

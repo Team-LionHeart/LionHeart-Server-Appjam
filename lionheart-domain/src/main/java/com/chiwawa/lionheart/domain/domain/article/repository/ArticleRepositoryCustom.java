@@ -1,6 +1,7 @@
 package com.chiwawa.lionheart.domain.domain.article.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.Category;
@@ -8,4 +9,7 @@ import com.chiwawa.lionheart.domain.domain.article.Category;
 public interface ArticleRepositoryCustom {
 
 	List<Article> findArticlesByCategory(Category category);
+  Optional<Article> findArticleById(Long id);
+  
 }
+

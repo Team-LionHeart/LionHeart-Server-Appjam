@@ -25,7 +25,7 @@ CREATE TABLE `ONBOARDING`
 (
     `ONBOARDING_ID`  bigint auto_increment primary key,
     `MEMBER_ID`      bigint      NOT NULL,
-    `PREGNANT_WEEKS` tinyint     NOT NULL,
+    `PREGNANT_WEEKS` smallint     NOT NULL,
     `BABY_NICKNAME`  varchar(30) NOT NULL,
     `CREATED_AT`     datetime    NOT NULL,
     `MODIFIED_AT`    datetime    NOT NULL
@@ -38,9 +38,9 @@ CREATE TABLE `ARTICLE`
     `AUTHOR`             varchar(30)  NOT NULL,
     `MAIN_IMAGE_URL`     varchar(300) NOT NULL,
     `MAIN_IMAGE_CAPTION` varchar(100) NOT NULL,
-    `WEEK`               tinyint      NOT NULL,
-    `DAY`                tinyint      NOT NULL,
-    `REQUIRED_TIME`      tinyint      NOT NULL,
+    `WEEK`               smallint      NOT NULL,
+    `DAY`                smallint      NOT NULL,
+    `REQUIRED_TIME`      smallint      NOT NULL,
     `POSTED_AT`          datetime     NOT NULL,
     `CREATED_AT`         datetime     NOT NULL,
     `MODIFIED_AT`        datetime     NOT NULL
@@ -78,7 +78,7 @@ CREATE TABLE `ARTICLE_CONTENT`
     `ARTICLE_CONTENT_ID` bigint auto_increment primary key,
     `ARTICLE_ID`         bigint      NOT NULL,
     `TYPE`               varchar(30) NOT NULL,
-    `ORDER`              tinyint     NOT NULL,
+    `ORDER`              smallint     NOT NULL,
     `CONTENT`            text        NOT NULL,
     `CAPTION`            varchar(100) NULL,
     `CREATED_AT`         datetime    NOT NULL,
