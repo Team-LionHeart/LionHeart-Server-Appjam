@@ -1,4 +1,4 @@
-package com.chiwawa.lionheart.api.service.articleBookmark.dto.request;
+package com.chiwawa.lionheart.api.service.articlebookmark.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;

@@ -1,4 +1,4 @@
-package com.chiwawa.lionheart.api.service.articleBookmark;
+package com.chiwawa.lionheart.api.service.articlebookmark;
 
 import static com.chiwawa.lionheart.common.constant.message.ArticleBookmarkErrorMessage.*;
 import static com.chiwawa.lionheart.common.constant.message.ArticleErrorMessage.*;

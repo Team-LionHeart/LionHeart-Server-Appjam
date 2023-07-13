@@ -1,4 +1,4 @@
-package com.chiwawa.lionheart.api.controller.ArticleBookmark;
+package com.chiwawa.lionheart.api.controller.articlebookmark;
 
 import javax.validation.Valid;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chiwawa.lionheart.api.config.interceptor.auth.Auth;
 import com.chiwawa.lionheart.api.config.resolver.MemberId;
-import com.chiwawa.lionheart.api.service.articleBookmark.ArticleBookmarkService;
-import com.chiwawa.lionheart.api.service.articleBookmark.dto.request.UpdateArticleBookmarkRequest;
+import com.chiwawa.lionheart.api.service.articlebookmark.ArticleBookmarkService;
+import com.chiwawa.lionheart.api.service.articlebookmark.dto.request.UpdateArticleBookmarkRequest;
 import com.chiwawa.lionheart.common.dto.ApiResponse;
 
 import io.swagger.v3.oas.annotations.Operation;

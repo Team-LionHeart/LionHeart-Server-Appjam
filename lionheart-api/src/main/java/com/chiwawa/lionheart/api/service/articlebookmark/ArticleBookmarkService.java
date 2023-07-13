@@ -1,11 +1,11 @@
-package com.chiwawa.lionheart.api.service.articleBookmark;
+package com.chiwawa.lionheart.api.service.articlebookmark;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.chiwawa.lionheart.api.service.articleBookmark.dto.request.UpdateArticleBookmarkRequest;
+import com.chiwawa.lionheart.api.service.articlebookmark.dto.request.UpdateArticleBookmarkRequest;
 import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.repository.ArticleRepository;
