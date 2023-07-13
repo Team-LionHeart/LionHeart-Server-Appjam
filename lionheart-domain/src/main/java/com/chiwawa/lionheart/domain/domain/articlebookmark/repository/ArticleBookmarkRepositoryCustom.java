@@ -11,3 +11,5 @@ public interface ArticleBookmarkRepositoryCustom {
 	Optional<ArticleBookmark> findArticleBookmarkByMemberAndArticle(Member member, Article article);
 
 }
+
+

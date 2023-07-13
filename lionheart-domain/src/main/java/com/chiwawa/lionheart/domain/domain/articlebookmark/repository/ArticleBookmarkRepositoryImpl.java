@@ -24,4 +24,5 @@ public class ArticleBookmarkRepositoryImpl implements ArticleBookmarkRepositoryC
 				articleBookmark.article.eq(article))
 			.fetchOne());
 	}
+  
 }

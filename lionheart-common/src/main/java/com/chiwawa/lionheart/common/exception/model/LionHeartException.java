@@ -1,6 +1,7 @@
 package com.chiwawa.lionheart.common.exception.model;
 
 import com.chiwawa.lionheart.common.exception.ErrorCode;
+
 import lombok.Getter;
 
 @Getter
