@@ -1,6 +1,7 @@
 package com.chiwawa.lionheart.api.service.articleBookmark;
 
 import static com.chiwawa.lionheart.common.constant.message.ArticleBookmarkErrorMessage.*;
+import static com.chiwawa.lionheart.common.constant.message.ArticleErrorMessage.*;
 import static com.chiwawa.lionheart.common.exception.ErrorCode.*;
 
 import java.util.Optional;
@@ -25,7 +26,7 @@ public class ArticleBookmarkServiceUtils {
 				NOT_FOUND_ARTICLE_EXCEPTION));
 	}
 
-	public static void validateBookmark(Optional<ArticleBookmark> articleBookmark, boolean bookmarkStatus) {
+	public static void validateBookmarkRequest(Optional<ArticleBookmark> articleBookmark, boolean bookmarkStatus) {
 		if (bookmarkStatus == true && articleBookmark.isPresent()) {
 			throw new ConflictException(
 				MessageUtils.generate(ALREADY_EXIST_BOOKMARK_ERROR_MESSAGE, articleBookmark.get().getId()),

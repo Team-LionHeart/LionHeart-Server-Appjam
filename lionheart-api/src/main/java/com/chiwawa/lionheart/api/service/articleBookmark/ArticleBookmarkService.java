@@ -31,7 +31,7 @@ public class ArticleBookmarkService {
 		Optional<ArticleBookmark> articleBookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			member, article);
 
-		ArticleBookmarkServiceUtils.validateBookmark(
+		ArticleBookmarkServiceUtils.validateBookmarkRequest(
 			articleBookmark,
 			request.isBookmarkStatus());
 

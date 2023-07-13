@@ -38,7 +38,7 @@ public class SignUpRequest {
 	@Min(value = 1, message = "{onboarding.pregnantWeeks.min}")
 	@Max(value = 40, message = "{onboarding.pregnantWeeks.max}")
 	@NotNull(message = "{onboarding.pregnantWeeks.notNull}")
-	private byte pregnantWeeks;
+	private short pregnantWeeks;
 
 	@Schema(description = "태명", example = "금쪽이")
 	@Size(min = 1, max = 10, message = "{onboarding.babyNickname.size}")

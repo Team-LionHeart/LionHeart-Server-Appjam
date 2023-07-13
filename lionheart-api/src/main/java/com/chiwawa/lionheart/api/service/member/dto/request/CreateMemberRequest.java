@@ -19,11 +19,11 @@ public class CreateMemberRequest {
 	private String socialId;
 	private MemberSocialType socialType;
 	private String fcmToken;
-	private byte pregnantWeeks;
+	private short pregnantWeeks;
 	private String babyNickname;
 
 	public static CreateMemberRequest of(String socialId, MemberSocialType socialType, String fcmToken,
-		byte pregnantWeeks, String babyNickname) {
+		short pregnantWeeks, String babyNickname) {
 		return CreateMemberRequest.builder()
 			.socialId(socialId)
 			.socialType(socialType)
