@@ -2,6 +2,7 @@ package com.chiwawa.lionheart.domain.domain.articlebookmark.repository;
 
 import static com.chiwawa.lionheart.domain.domain.articlebookmark.QArticleBookmark.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.chiwawa.lionheart.domain.domain.article.Article;
@@ -24,5 +25,12 @@ public class ArticleBookmarkRepositoryImpl implements ArticleBookmarkRepositoryC
 				articleBookmark.article.eq(article))
 			.fetchOne());
 	}
-  
+
+	@Override
+	public List<ArticleBookmark> findArticleBookmarksByMember(Member member) {
+		return queryFactory
+			.selectFrom(articleBookmark)
+			.where(articleBookmark.member.eq(member))
+			.fetch();
+	}
 }

@@ -25,7 +25,7 @@ public class ArticleBookmarkController {
 
 	private final ArticleBookmarkService articleBookmarkService;
 
-	@Operation(summary = "아티클 북마크 생성")
+	@Operation(summary = "[인증] 아티클 북마크 생성")
 	@Auth
 	@PostMapping("/article/bookmark")
 	public ApiResponse<String> updateArticleBookmark(@MemberId Long memberId, @Valid @RequestBody
