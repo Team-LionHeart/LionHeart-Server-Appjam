@@ -1,4 +1,4 @@
-package com.chiwawa.lionheart.notification.config.sqs.dto;
+package com.chiwawa.lionheart.common.dto.sqs;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

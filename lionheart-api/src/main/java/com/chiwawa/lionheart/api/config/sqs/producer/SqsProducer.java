@@ -1,4 +1,4 @@
-package com.chiwawa.lionheart.notification.config.sqs.producer;
+package com.chiwawa.lionheart.api.config.sqs.producer;
 
 import java.util.Map;
 import java.util.UUID;
@@ -10,8 +10,8 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import com.chiwawa.lionheart.common.constant.MessageType;
+import com.chiwawa.lionheart.common.dto.sqs.MessageDto;
 import com.chiwawa.lionheart.common.util.MessageUtils;
-import com.chiwawa.lionheart.notification.config.sqs.dto.MessageDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class SqsProducer {
-	@Value("${cloud.aws.sqs.api.url}")
+
+	@Value("${cloud.aws.sqs.notification.url}")
 	private String url;
 
 	private static final String messageGroupId = "sqs";

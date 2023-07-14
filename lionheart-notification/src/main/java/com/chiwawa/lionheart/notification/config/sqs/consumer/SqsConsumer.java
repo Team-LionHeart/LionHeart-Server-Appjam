@@ -10,8 +10,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import com.chiwawa.lionheart.common.constant.MessageType;
+import com.chiwawa.lionheart.common.dto.sqs.FirebaseDto;
 import com.chiwawa.lionheart.common.util.MessageUtils;
-import com.chiwawa.lionheart.notification.config.sqs.dto.FirebaseDto;
 import com.chiwawa.lionheart.notification.service.firebase.FirebaseCloudMessageService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
