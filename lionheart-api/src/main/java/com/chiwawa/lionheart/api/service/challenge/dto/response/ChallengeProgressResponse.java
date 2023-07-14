@@ -1,9 +1,9 @@
 package com.chiwawa.lionheart.api.service.challenge.dto.response;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.chiwawa.lionheart.common.util.DateUtils;
 import com.chiwawa.lionheart.domain.domain.challenge.Attendance;
 import com.chiwawa.lionheart.domain.domain.challenge.Challenge;
 import com.chiwawa.lionheart.domain.domain.challenge.ChallengeLevelType;
@@ -34,7 +34,7 @@ public class ChallengeProgressResponse {
 	private ChallengeLevelType level;
 
 	@Schema(description = "출석일")
-	private List<LocalDate> attendances;
+	private List<String> attendances;
 
 	public static ChallengeProgressResponse of(Member member, Challenge challenge,
 		int day, List<Attendance> attendances) {
@@ -44,7 +44,7 @@ public class ChallengeProgressResponse {
 			.level(challenge.getLevel())
 			.attendances(attendances
 				.stream()
-				.map(attendance -> LocalDate.from(attendance.getCreatedAt()))
+				.map(attendance -> DateUtils.formatToChallengeDate(attendance.getCreatedAt()))
 				.collect(Collectors.toList()))
 			.build();
 	}

@@ -50,4 +50,8 @@ public class DateUtils {
 
 		return (short)(passedDay + 1);
 	}
+
+	public static String formatToChallengeDate(LocalDateTime date) {
+		return String.format("%s/%s", date.getMonth().getValue(), date.getDayOfMonth());
+	}
 }
