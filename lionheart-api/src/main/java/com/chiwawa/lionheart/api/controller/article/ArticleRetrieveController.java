@@ -49,7 +49,7 @@ public class ArticleRetrieveController {
 	@GetMapping("/article/{articleId}")
 	public ApiResponse<?> findTodayArticle(
 		@MemberId final Long memberId,
-		@Parameter(description = "아티클ID", required = true, example = "1L") @PathVariable final Long articleId) {
+		@Parameter(description = "아티클ID", required = true, example = "1") @PathVariable final Long articleId) {
 		return ApiResponse.success(articleService.findArticleDetail(memberId, articleId));
 	}
 
