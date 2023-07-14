@@ -22,4 +22,13 @@ public class ChallengeRepositoryImpl implements ChallengeRepositoryCustom {
 			.where(challenge.member.eq(member))
 			.fetchOne());
 	}
+
+	@Override
+	public void checkAttendance(Member member) {
+		queryFactory
+			.insert(challenge)
+			.columns(challenge.member)
+			.values(member).execute();
+
+	}
 }

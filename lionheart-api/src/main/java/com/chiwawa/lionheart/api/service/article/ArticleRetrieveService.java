@@ -4,6 +4,7 @@ import static com.chiwawa.lionheart.api.service.article.articleContent.ArticleCo
 import static com.chiwawa.lionheart.api.service.member.MemberServiceUtils.*;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,9 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.chiwawa.lionheart.api.service.article.articleContent.ArticleContentServiceUtils;
 import com.chiwawa.lionheart.api.service.article.articleTag.ArticleTagServiceUtils;
+import com.chiwawa.lionheart.api.service.article.dto.response.ArticleContentDto;
+import com.chiwawa.lionheart.api.service.article.dto.response.ArticleDetailResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
+import com.chiwawa.lionheart.api.service.challenge.ChallengeService;
 import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.domain.domain.article.Article;
@@ -36,6 +40,7 @@ public class ArticleRetrieveService {
 
 	private final ArticleRepository articleRepository;
 	private final ArticleBookmarkRepository articleBookmarkRepository;
+	private final ChallengeService challengeService;
 	private final MemberRepository memberRepository;
 
 	public CategoryArticleResponse findArticlesByCategory(Long memberId, Category category) {
@@ -60,8 +65,31 @@ public class ArticleRetrieveService {
 		return TodayArticleResponse.of(article, member.getOnboarding(), weekAndDay, editorNoteContent);
 	}
 
-	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
+	public ArticleDetailResponse findArticleDetail(Long memberId, Long articleId) {
+		Article article = ArticleServiceUtils.findArticleById(articleRepository, articleId);
+		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
 
+		Optional<ArticleBookmark> articleBookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
+			member, article);
+
+		ArticleDetailResponse articleDetailResponse = ArticleDetailResponse.of(article, articleBookmark.isPresent(),
+			getOrderedArticleContents(article));
+
+		challengeService.checkAttendance(member);
+
+		return articleDetailResponse;
+	}
+
+	private List<ArticleContentDto> getOrderedArticleContents(Article article) {
+		return article.getArticleContents()
+			.stream()
+			.sorted(Comparator.comparing(ArticleContent::getOrder))
+			.map(ArticleContentDto::of)
+			.collect(Collectors.toList());
+	}
+
+	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
+		// TODO: 전체 조회해서 한번에 처리하도록 수정
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			findMemberById(memberRepository, memberId), article);
 

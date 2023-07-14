@@ -8,4 +8,6 @@ import com.chiwawa.lionheart.domain.domain.member.Member;
 public interface ChallengeRepositoryCustom {
 
 	Optional<Challenge> findChallengeByMember(Member member);
+
+	void checkAttendance(Member member);
 }

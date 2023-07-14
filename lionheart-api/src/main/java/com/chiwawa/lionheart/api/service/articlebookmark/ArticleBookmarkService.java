@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chiwawa.lionheart.api.service.article.ArticleServiceUtils;
 import com.chiwawa.lionheart.api.service.articlebookmark.dto.request.UpdateArticleBookmarkRequest;
 import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
@@ -27,7 +28,7 @@ public class ArticleBookmarkService {
 
 	public void updateArticleBookmark(Long memberId, UpdateArticleBookmarkRequest request) {
 		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
-		Article article = ArticleBookmarkServiceUtils.findArticleById(articleRepository, request.getArticleId());
+		Article article = ArticleServiceUtils.findArticleById(articleRepository, request.getArticleId());
 		Optional<ArticleBookmark> articleBookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			member, article);
 
