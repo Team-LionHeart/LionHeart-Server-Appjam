@@ -21,6 +21,7 @@ public class NotificationController {
 
 	private final NotificationService notificationService;
 
+	// TODO: 2023/07/14 관리자만 실행할 수 있도록 @Admin 어노테이션 추가하기
 	@Operation(summary = "[관리자] 모든 회원에게 커스텀 푸시 알림 전송")
 	@PostMapping("/notification/all")
 	public ApiResponse<String> sendCustomNotificationToAllMember(@RequestBody CustomNotificationRequest request) {
