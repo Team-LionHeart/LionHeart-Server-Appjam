@@ -17,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
-public class CategoryArticleDto {
+public class ArticleSummaryDto {
 
 	private String title;
 	private String mainImageUrl;
@@ -26,9 +26,9 @@ public class CategoryArticleDto {
 	private Boolean isMarked;
 	private List<String> tags;
 
-	public static CategoryArticleDto of(Article article, ArticleContent content, List<String> tag,
+	public static ArticleSummaryDto of(Article article, ArticleContent content, List<String> tag,
 		boolean isMarked) {
-		return CategoryArticleDto.builder()
+		return ArticleSummaryDto.builder()
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
 			.requiredTime(article.getRequiredTime())

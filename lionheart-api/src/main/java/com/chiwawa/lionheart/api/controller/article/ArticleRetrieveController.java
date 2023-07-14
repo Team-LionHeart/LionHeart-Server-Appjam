@@ -10,7 +10,7 @@ import com.chiwawa.lionheart.api.config.interceptor.auth.Auth;
 import com.chiwawa.lionheart.api.config.resolver.MemberId;
 import com.chiwawa.lionheart.api.service.article.ArticleRetrieveService;
 import com.chiwawa.lionheart.api.service.article.dto.response.ArticleDetailResponse;
-import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
+import com.chiwawa.lionheart.api.service.article.dto.response.ArticleSummaryResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
 import com.chiwawa.lionheart.common.dto.ApiResponse;
 import com.chiwawa.lionheart.domain.domain.article.Category;
@@ -31,7 +31,7 @@ public class ArticleRetrieveController {
 	@Operation(summary = "[인증] 카테고리 별 아티클 조회")
 	@Auth
 	@GetMapping("/article")
-	public ApiResponse<CategoryArticleResponse> findArticlesByCategory(
+	public ApiResponse<ArticleSummaryResponse> findArticlesByCategory(
 		@MemberId final Long memberId,
 		@Parameter(description = "카테고리명", required = true, example = "BUDGET") @RequestParam final Category category) {
 
@@ -43,6 +43,15 @@ public class ArticleRetrieveController {
 	@GetMapping("/article/today")
 	public ApiResponse<TodayArticleResponse> findTodayArticle(@MemberId final Long memberId) {
 		return ApiResponse.success(articleService.findTodayArticleByMemberId(memberId));
+	}
+
+	@Operation(summary = "[인증] 주차별 아티클 조회")
+	@Auth
+	@GetMapping("/article/week")
+	public ApiResponse<ArticleSummaryResponse> findArticlesOfWeek(
+		@MemberId final Long memberId,
+		@Parameter(description = "주차", required = true, example = "1") @RequestParam final short week) {
+		return ApiResponse.success(articleService.findArticlesByWeekAndMemberId(memberId, week));
 	}
 
 	@Operation(summary = "[인증] 아티클 상세 조회")

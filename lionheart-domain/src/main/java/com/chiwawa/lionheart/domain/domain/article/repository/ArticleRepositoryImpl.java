@@ -41,4 +41,13 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 			.fetchOne());
 	}
 
+	@Override
+	public List<Article> findOrderedArticleByWeek(short week) {
+		return queryFactory
+			.selectFrom(article)
+			.where(article.week.eq(week))
+			.orderBy(article.day.asc())
+			.fetch();
+	}
+
 }
