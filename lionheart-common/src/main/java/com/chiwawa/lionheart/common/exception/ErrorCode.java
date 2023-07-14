@@ -19,6 +19,7 @@ public enum ErrorCode {
 
 	// Forbidden Exception
 	FORBIDDEN_EXCEPTION("F001", "허용하지 않는 접근입니다."),
+	FORBIDDEN_ADMIN_EXCEPTION("F002", "관리자에게만 허용된 요청입니다."),
 
 	// NotFound Exception
 	NOT_FOUND_EXCEPTION("N001", "존재하지 않습니다."),
