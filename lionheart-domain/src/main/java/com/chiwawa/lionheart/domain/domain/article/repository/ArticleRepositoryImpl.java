@@ -42,7 +42,7 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 	}
 
 	@Override
-	public List<Article> findOrderedArticleByWeek(short week) {
+	public List<Article> findOrderedArticlesByWeek(short week) {
 		return queryFactory
 			.selectFrom(article)
 			.where(article.week.eq(week))

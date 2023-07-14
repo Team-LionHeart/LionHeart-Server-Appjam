@@ -66,7 +66,7 @@ public class ArticleRetrieveService {
 	public ArticleSummaryResponse findArticlesByWeekAndMemberId(Long memberId, short week) {
 
 		List<ArticleSummaryDto> weekArticles = formatSummaryArticleDtos(memberId,
-			articleRepository.findOrderedArticleByWeek(week));
+			articleRepository.findOrderedArticlesByWeek(week));
 
 		return ArticleSummaryResponse.of(weekArticles);
 
