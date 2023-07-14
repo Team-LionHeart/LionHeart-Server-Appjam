@@ -24,7 +24,7 @@ public class ArticleServiceUtils {
 		return articleRepository.findArticleById(articleId)
 			.orElseThrow(() ->
 				new NotFoundException(
-					MessageUtils.generate("", articleId),
+					MessageUtils.generate(NOT_EXIST_ARTICLE_ID_ERROR_MESSAGE, articleId),
 					NOT_FOUND_ARTICLE_EXCEPTION));
 	}
 }
