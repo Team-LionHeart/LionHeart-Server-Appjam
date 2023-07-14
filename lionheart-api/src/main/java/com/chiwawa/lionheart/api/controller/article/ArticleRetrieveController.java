@@ -47,10 +47,10 @@ public class ArticleRetrieveController {
 
 	@Operation(summary = "[인증] 주차별 아티클 조회")
 	@Auth
-	@GetMapping("/article/week")
+	@GetMapping("/article/week/{week}")
 	public ApiResponse<ArticleSummaryResponse> findArticlesOfWeek(
 		@MemberId final Long memberId,
-		@Parameter(description = "주차", required = true, example = "1") @RequestParam final short week) {
+		@Parameter(description = "주차", required = true, example = "1") @PathVariable final short week) {
 		return ApiResponse.success(articleService.findArticlesByWeekAndMemberId(memberId, week));
 	}
 
