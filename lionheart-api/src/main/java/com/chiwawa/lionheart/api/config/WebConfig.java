@@ -12,6 +12,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.chiwawa.lionheart.api.config.interceptor.admin.AdminInterceptor;
 import com.chiwawa.lionheart.api.config.interceptor.auth.AuthInterceptor;
 import com.chiwawa.lionheart.api.config.resolver.MemberIdResolver;
 
@@ -21,11 +22,13 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+	private final AdminInterceptor adminInterceptor;
 	private final AuthInterceptor authInterceptor;
 	private final MemberIdResolver memberIdResolver;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(adminInterceptor);
 		registry.addInterceptor(authInterceptor);
 	}
 

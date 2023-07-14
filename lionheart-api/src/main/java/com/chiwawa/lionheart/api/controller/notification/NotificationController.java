@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chiwawa.lionheart.api.config.interceptor.admin.Admin;
 import com.chiwawa.lionheart.api.controller.notification.dto.request.CustomNotificationRequest;
 import com.chiwawa.lionheart.api.service.notification.NotificationService;
 import com.chiwawa.lionheart.common.dto.ApiResponse;
@@ -21,8 +22,8 @@ public class NotificationController {
 
 	private final NotificationService notificationService;
 
-	// TODO: 2023/07/14 관리자만 실행할 수 있도록 @Admin 어노테이션 추가하기
 	@Operation(summary = "[관리자] 모든 회원에게 커스텀 푸시 알림 전송")
+	@Admin
 	@PostMapping("/notification/all")
 	public ApiResponse<String> sendCustomNotificationToAllMember(@RequestBody CustomNotificationRequest request) {
 		notificationService.sendCustomNotificationToAllMember(request);

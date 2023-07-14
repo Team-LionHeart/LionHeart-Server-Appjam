@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,6 +44,10 @@ public class Member extends BaseEntity {
 	@Embedded
 	private SocialInfo socialInfo;
 
+	@Column(name = "MEMBER_ROLE", nullable = false, length = 30)
+	@Enumerated(EnumType.STRING)
+	private MemberRole role;
+
 	@Column(name = "FCM_TOKEN", length = 300)
 	private String fcmToken;
 
@@ -66,6 +72,7 @@ public class Member extends BaseEntity {
 	public static Member newInstance(String socialId, MemberSocialType socialType, String fcmToken) {
 		return Member.builder()
 			.socialInfo(SocialInfo.of(socialId, socialType))
+			.role(MemberRole.MEMBER)
 			.fcmToken(fcmToken)
 			.build();
 	}

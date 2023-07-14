@@ -21,4 +21,6 @@ public class AuthErrorMessage {
 	public static String WRONG_KAKAO_ACCESS_TOKEN_ERROR_MESSAGE = "잘못된 카카오 액세스 토큰 (%s) 입니다.";
 	public static String KAKAO_LOGIN_ERROR_MESSAGE = "카카오 로그인 연동 중 에러가 발생하였습니다.";
 
+	// Admin Error Message
+	public static String ADMIN_ERROR_MESSAGE = "관리자에게만 허용된 요청입니다.";
 }
