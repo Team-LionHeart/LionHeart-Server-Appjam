@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS `ATTENDANCE`;
 DROP TABLE IF EXISTS `CHALLENGE`;
 DROP TABLE IF EXISTS `ARTICLE_CONTENT`;
 DROP TABLE IF EXISTS `ARTICLE_TAG`;
+DROP TABLE IF EXISTS `TODAY_ARTICLE_NOTIFICATION`;
 
 CREATE TABLE `MEMBER`
 (
@@ -102,4 +103,15 @@ CREATE TABLE `SETTING`
     `NOTIFICATION_STATUS` varchar(30) NOT NULL,
     `CREATED_AT`          datetime    NOT NULL,
     `MODIFIED_AT`         datetime    NOT NULL
+);
+
+CREATE TABLE `TODAY_ARTICLE_NOTIFICATION`
+(
+    `TODAY_ARTICLE_NOTIFICATION_ID` bigint auto_increment primary key,
+    `WEEK`                          smallint     NOT NULL,
+    `DAY`                           smallint     NOT NULL,
+    `TITLE`                         varchar(100) NOT NULL,
+    `BODY`                          varchar(100) NOT NULL,
+    `CREATED_AT`                    datetime     NOT NULL,
+    `MODIFIED_AT`                   datetime     NOT NULL
 );
