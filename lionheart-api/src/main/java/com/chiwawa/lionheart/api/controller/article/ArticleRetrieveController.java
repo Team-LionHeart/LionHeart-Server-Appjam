@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chiwawa.lionheart.api.config.interceptor.auth.Auth;
 import com.chiwawa.lionheart.api.config.resolver.MemberId;
 import com.chiwawa.lionheart.api.service.article.ArticleRetrieveService;
+import com.chiwawa.lionheart.api.service.article.dto.response.ArticleDetailResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
 import com.chiwawa.lionheart.common.dto.ApiResponse;
@@ -47,7 +48,7 @@ public class ArticleRetrieveController {
 	@Operation(summary = "[인증] 아티클 상세 조회")
 	@Auth
 	@GetMapping("/article/{articleId}")
-	public ApiResponse<?> findTodayArticle(
+	public ApiResponse<ArticleDetailResponse> findTodayArticle(
 		@MemberId final Long memberId,
 		@Parameter(description = "아티클ID", required = true, example = "1") @PathVariable final Long articleId) {
 		return ApiResponse.success(articleService.findArticleDetail(memberId, articleId));
