@@ -14,7 +14,7 @@ import com.chiwawa.lionheart.common.util.DateUtils;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 import com.chiwawa.lionheart.domain.domain.member.repository.MemberRepository;
 import com.chiwawa.lionheart.domain.domain.notification.TodayArticleNotification;
-import com.chiwawa.lionheart.domain.domain.notification.repository.TodayTodayArticleNotificationRepository;
+import com.chiwawa.lionheart.domain.domain.notification.repository.TodayArticleNotificationRepository;
 import com.chiwawa.lionheart.notification.service.firebase.FirebaseCloudMessageService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class SchedulerService {
 
 	private final MemberRepository memberRepository;
-	private final TodayTodayArticleNotificationRepository todayTodayArticleNotificationRepository;
+	private final TodayArticleNotificationRepository todayArticleNotificationRepository;
 	private final FirebaseCloudMessageService firebaseCloudMessageService;
 
 	/**
@@ -47,7 +47,7 @@ public class SchedulerService {
 
 	private Map<WeekAndDay, TodayArticleNotification> getTodayArticleNotificationMap() {
 		Map<WeekAndDay, TodayArticleNotification> map = new HashMap<>();
-		todayTodayArticleNotificationRepository.findAll()
+		todayArticleNotificationRepository.findAll()
 			.forEach(notification -> {
 				WeekAndDay weekAndDay = WeekAndDay.of(notification.getWeek(), notification.getDay());
 				map.put(weekAndDay, notification);
