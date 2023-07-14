@@ -34,7 +34,7 @@ public class ArticleSummaryDto {
 				.stream()
 				.map(articleTag -> articleTag.getTagName())
 				.collect(Collectors.toList()))
-			.bookmarkStatus(articleBookmark.getMember().getId().equals(member.getId()))
+			.bookmarkStatus(true)
 			.build();
 	}
 }
