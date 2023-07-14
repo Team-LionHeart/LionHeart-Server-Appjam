@@ -23,7 +23,7 @@ public class ArticleSummaryDto {
 	private String title;
 	private String mainImageUrl;
 	private List<String> tags;
-	private boolean bookmarkStatus;
+	private Boolean isMarked;
 
 	public static ArticleSummaryDto of(ArticleBookmark articleBookmark, Member member) {
 		Article article = articleBookmark.getArticle();
@@ -34,7 +34,7 @@ public class ArticleSummaryDto {
 				.stream()
 				.map(articleTag -> articleTag.getTagName())
 				.collect(Collectors.toList()))
-			.bookmarkStatus(true)
+			.isMarked(true)
 			.build();
 	}
 }
