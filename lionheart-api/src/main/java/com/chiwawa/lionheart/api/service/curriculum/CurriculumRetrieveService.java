@@ -26,8 +26,7 @@ public class CurriculumRetrieveService {
 		LocalDate startDay = LocalDate.from(member.getCreatedAt());
 		short startWeek = member.getOnboarding().getPregnantWeeks();
 		WeekAndDay weekAndDay = DateUtils.getWeekAndDay(startWeek, startDay);
-
-		int progress = 100; // TODO: 2023/07/12 progress 일별/월별 확정나면 로직 수정하기
-		return CurriculumProgressResponse.of(member, weekAndDay, progress);
+		int month = DateUtils.getPassedMonth(weekAndDay.getWeek());
+		return CurriculumProgressResponse.of(member, weekAndDay, month - 1);
 	}
 }
