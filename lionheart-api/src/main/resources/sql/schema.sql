@@ -16,6 +16,7 @@ CREATE TABLE `MEMBER`
     `MEMBER_ID`         bigint auto_increment primary key,
     `SOCIAL_ID`         varchar(300) NOT NULL,
     `SOCIAL_TYPE`       varchar(30)  NOT NULL,
+    `MEMBER_ROLE`       varchar(30)  NOT NULL,
     `FCM_TOKEN`         varchar(300) NULL,
     `PROFILE_IMAGE_URL` varchar(300) NULL,
     `CREATED_AT`        datetime     NOT NULL,
