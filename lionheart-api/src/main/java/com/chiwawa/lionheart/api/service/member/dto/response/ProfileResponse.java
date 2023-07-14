@@ -1,5 +1,6 @@
 package com.chiwawa.lionheart.api.service.member.dto.response;
 
+import com.chiwawa.lionheart.domain.domain.challenge.ChallengeLevelType;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 import com.chiwawa.lionheart.domain.domain.member.NotificationStatus;
 
@@ -21,8 +22,8 @@ public class ProfileResponse {
 	@Schema(description = "태명")
 	private String babyNickname;
 
-	@Schema(description = "프로필 이미지")
-	private String profileImageUrl;
+	@Schema(description = "레벨")
+	private ChallengeLevelType level;
 
 	@Schema(description = "알림 상태 - ON / OFF")
 	private NotificationStatus notificationStatus;
@@ -30,7 +31,7 @@ public class ProfileResponse {
 	public static ProfileResponse of(Member member) {
 		return ProfileResponse.builder()
 			.babyNickname(member.getOnboarding().getBabyNickname())
-			.profileImageUrl(member.getProfileImageUrl())
+			.level(member.getChallenge().getLevel())
 			.notificationStatus(member.getSetting().getNotificationStatus())
 			.build();
 	}
