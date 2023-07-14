@@ -12,6 +12,8 @@ public interface ArticleRepositoryCustom {
 
 	Optional<Article> findArticleByWeekAndDay(short week, short day);
 
+	List<Article> findOrderedArticlesByWeek(short week);
+
 	Optional<Article> findArticleById(Long id);
 
 }

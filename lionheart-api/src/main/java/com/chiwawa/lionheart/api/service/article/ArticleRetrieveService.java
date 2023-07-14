@@ -16,8 +16,8 @@ import com.chiwawa.lionheart.api.service.article.articleContent.ArticleContentSe
 import com.chiwawa.lionheart.api.service.article.articleTag.ArticleTagServiceUtils;
 import com.chiwawa.lionheart.api.service.article.dto.response.ArticleContentDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.ArticleDetailResponse;
-import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleDto;
-import com.chiwawa.lionheart.api.service.article.dto.response.CategoryArticleResponse;
+import com.chiwawa.lionheart.api.service.article.dto.response.ArticleSummaryDto;
+import com.chiwawa.lionheart.api.service.article.dto.response.ArticleSummaryResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
 import com.chiwawa.lionheart.api.service.challenge.ChallengeService;
 import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
@@ -43,15 +43,13 @@ public class ArticleRetrieveService {
 	private final ChallengeService challengeService;
 	private final MemberRepository memberRepository;
 
-	public CategoryArticleResponse findArticlesByCategory(Long memberId, Category category) {
+	public ArticleSummaryResponse findArticlesByCategory(Long memberId, Category category) {
 
-		List<CategoryArticleDto> categoryArticles = articleRepository.findArticlesByCategory(category)
-			.stream()
-			.map(c -> formatCategoryArticleResponse(memberId, c))
-			.collect(Collectors.toList());
+		List<ArticleSummaryDto> categoryArticles = formatSummaryArticleDtos(memberId,
+			articleRepository.findArticlesByCategory(category));
 
 		Collections.shuffle(categoryArticles);
-		return CategoryArticleResponse.of(categoryArticles);
+		return ArticleSummaryResponse.of(categoryArticles);
 	}
 
 	public TodayArticleResponse findTodayArticleByMemberId(Long memberId) {
@@ -63,6 +61,15 @@ public class ArticleRetrieveService {
 		ArticleContent editorNoteContent = findArticleEditorNoteContentByArticle(article);
 
 		return TodayArticleResponse.of(article, member.getOnboarding(), weekAndDay, editorNoteContent);
+	}
+
+	public ArticleSummaryResponse findArticlesByWeekAndMemberId(Long memberId, short week) {
+
+		List<ArticleSummaryDto> weekArticles = formatSummaryArticleDtos(memberId,
+			articleRepository.findOrderedArticlesByWeek(week));
+
+		return ArticleSummaryResponse.of(weekArticles);
+
 	}
 
 	public ArticleDetailResponse findArticleDetail(Long memberId, Long articleId) {
@@ -88,7 +95,14 @@ public class ArticleRetrieveService {
 			.collect(Collectors.toList());
 	}
 
-	private CategoryArticleDto formatCategoryArticleResponse(Long memberId, Article article) {
+	private List<ArticleSummaryDto> formatSummaryArticleDtos(Long memberId, List<Article> articles) {
+		return articles
+			.stream()
+			.map(c -> formatSummaryArticleDto(memberId, c))
+			.collect(Collectors.toList());
+	}
+
+	private ArticleSummaryDto formatSummaryArticleDto(Long memberId, Article article) {
 		// TODO: 전체 조회해서 한번에 처리하도록 수정
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			findMemberById(memberRepository, memberId), article);
@@ -96,6 +110,6 @@ public class ArticleRetrieveService {
 		ArticleContent content = ArticleContentServiceUtils.findArticleFirstBodyByArticle(article);
 		List<String> articleTags = ArticleTagServiceUtils.findArticleTagsByArticle(article);
 
-		return CategoryArticleDto.of(article, content, articleTags, bookmark.isPresent());
+		return ArticleSummaryDto.of(article, content, articleTags, bookmark.isPresent());
 	}
 }

@@ -15,13 +15,13 @@ import lombok.ToString;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(access = AccessLevel.PRIVATE)
-public class CategoryArticleResponse {
+public class ArticleSummaryResponse {
 
-	@Schema(description = "카테코리 별 아티클 정보")
-	private List<CategoryArticleDto> categoryArticles;
+	@Schema(description = "아티클 요약 정보")
+	private List<ArticleSummaryDto> categoryArticles;
 
-	public static CategoryArticleResponse of(List<CategoryArticleDto> categoryArticles) {
-		return CategoryArticleResponse
+	public static ArticleSummaryResponse of(List<ArticleSummaryDto> categoryArticles) {
+		return ArticleSummaryResponse
 			.builder()
 			.categoryArticles(categoryArticles)
 			.build();
