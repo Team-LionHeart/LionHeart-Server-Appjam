@@ -28,16 +28,21 @@ public class AdminCheckHandler {
 		String bearerToken = request.getHeader("Authorization");
 		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
 			String accessToken = bearerToken.substring("Bearer ".length());
-			if (jwtUtils.validateToken(accessToken)) {
-				Long memberId = jwtUtils.getMemberIdFromJwt(accessToken);
-				if (memberId != null) {
-					Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
-					if (member.getRole().equals(MemberRole.ADMIN)) {
-						return;
-					}
-				}
+			if (hasAdminAuthority(accessToken)) {
+				return;
 			}
 		}
 		throw new ForbiddenException(ADMIN_ERROR_MESSAGE, FORBIDDEN_ADMIN_EXCEPTION);
+	}
+
+	private boolean hasAdminAuthority(String accessToken) {
+		if (jwtUtils.validateToken(accessToken)) {
+			Long memberId = jwtUtils.getMemberIdFromJwt(accessToken);
+			if (memberId != null) {
+				Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);
+				return member.getRole().equals(MemberRole.ADMIN);
+			}
+		}
+		return false;
 	}
 }
