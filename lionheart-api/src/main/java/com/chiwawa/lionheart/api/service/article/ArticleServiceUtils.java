@@ -9,6 +9,10 @@ import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.article.repository.ArticleRepository;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ArticleServiceUtils {
 
 	public static Article findArticleByWeekAndDay(ArticleRepository articleRepository, WeekAndDay weekAndDay) {
