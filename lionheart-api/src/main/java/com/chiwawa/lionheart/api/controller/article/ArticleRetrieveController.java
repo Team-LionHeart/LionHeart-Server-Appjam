@@ -63,4 +63,8 @@ public class ArticleRetrieveController {
 		return ApiResponse.success(articleService.findArticleDetail(memberId, articleId));
 	}
 
+	@GetMapping("/test")
+	public void error() {
+		throw new IllegalArgumentException();
+	}
 }

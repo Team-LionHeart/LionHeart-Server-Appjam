@@ -2,7 +2,10 @@ package com.chiwawa.lionheart.api.controller.advice;
 
 import static com.chiwawa.lionheart.common.exception.ErrorCode.*;
 
+import java.io.IOException;
 import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.chiwawa.lionheart.api.service.notification.slack.SlackService;
 import com.chiwawa.lionheart.common.dto.ApiResponse;
 import com.chiwawa.lionheart.common.exception.model.BadGatewayException;
 import com.chiwawa.lionheart.common.exception.model.ConflictException;
@@ -31,6 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RestControllerAdvice
 public class ControllerAdvice {
+
+	private final SlackService slackService;
 
 	/**
 	 * 400 BadRequest
@@ -143,8 +149,10 @@ public class ControllerAdvice {
 	 */
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
-	protected ApiResponse<Object> handleException(final Exception exception) {
+	protected ApiResponse<Object> handleException(final Exception exception, final HttpServletRequest request) throws
+		IOException {
 		log.error(exception.getMessage(), exception);
+		slackService.sendAlert(exception, request);
 		return ApiResponse.error(INTERNAL_SERVER_EXCEPTION);
 	}
 }

@@ -50,3 +50,7 @@ cloud:
 
 jwt:
   secret: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey
+
+slack:
+  webhook:
+    url: ${SLACK_WEBHOOK_URL_DEV}

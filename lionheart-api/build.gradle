@@ -20,6 +20,13 @@ dependencies {
     // sqs
     implementation "org.springframework.cloud:spring-cloud-aws-messaging:2.2.6.RELEASE"
 
+    // Slack Webhook
+    implementation 'com.slack.api:slack-api-client:1.28.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.slack.api:slack-app-backend:1.28.0'
+    implementation 'com.slack.api:slack-api-model:1.28.0'
+
 //    // s3
 //    implementation "org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE"
 }
