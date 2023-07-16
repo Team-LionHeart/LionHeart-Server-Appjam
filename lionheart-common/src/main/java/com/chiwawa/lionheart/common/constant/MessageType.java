@@ -8,4 +8,5 @@ public final class MessageType {
 
 	public static final String MESSAGE_TYPE_HEADER = "TYPE";
 	public static final String FIREBASE = "FIREBASE";
+	public static final String SLACK = "SLACK";
 }

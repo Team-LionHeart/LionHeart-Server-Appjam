@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SqsProducer {
 
 	@Value("${cloud.aws.sqs.notification.url}")
-	private String url;
+	private String notificationUrl;
 
 	private static final String messageGroupId = "sqs";
 	private final ObjectMapper objectMapper;
@@ -36,7 +36,8 @@ public class SqsProducer {
 
 	public void produce(MessageDto dto) {
 		try {
-			SendMessageRequest sendMessageRequest = new SendMessageRequest(url, objectMapper.writeValueAsString(dto))
+			SendMessageRequest sendMessageRequest = new SendMessageRequest(notificationUrl,
+				objectMapper.writeValueAsString(dto))
 				.withMessageGroupId(messageGroupId)
 				.withMessageDeduplicationId(UUID.randomUUID().toString())
 				.withMessageAttributes(createMessageAttributes(dto.getType()));
