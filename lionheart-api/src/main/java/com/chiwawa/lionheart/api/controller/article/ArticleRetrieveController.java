@@ -62,9 +62,5 @@ public class ArticleRetrieveController {
 		@Parameter(description = "아티클ID", required = true, example = "1") @PathVariable final Long articleId) {
 		return ApiResponse.success(articleService.findArticleDetail(memberId, articleId));
 	}
-
-	@GetMapping("/test")
-	public void error() {
-		throw new IllegalArgumentException();
-	}
+	
 }
