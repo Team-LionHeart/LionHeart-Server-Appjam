@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class NotificationService {
 
 	private final MemberRepository memberRepository;
@@ -31,7 +31,7 @@ public class NotificationService {
 	}
 
 	public void sendCustomNotificationToSlack(SlackNotificationRequest request) {
-		sqsProducer.produce(SlackDto.of(request.getError(), request.getRequestMethod(), request.getRequestURI()));
+		sqsProducer.produce(SlackDto.of(request.getError(), request.getRequestMethod(), request.getRequestUri()));
 	}
 
 }

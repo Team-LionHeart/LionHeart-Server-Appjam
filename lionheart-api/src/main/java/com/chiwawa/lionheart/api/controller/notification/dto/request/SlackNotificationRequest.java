@@ -17,14 +17,14 @@ import lombok.Setter;
 public class SlackNotificationRequest {
 
 	private String requestMethod;
-	private String requestURI;
+	private String requestUri;
 	private Exception error;
 
 	public static SlackNotificationRequest of(Exception error, HttpServletRequest request) {
 		return SlackNotificationRequest.builder()
 			.error(error)
 			.requestMethod(request.getMethod())
-			.requestURI(request.getRequestURI())
+			.requestUri(request.getRequestURI())
 			.build();
 	}
 }
