@@ -46,6 +46,12 @@ public class DateUtils {
 		return WeekAndDay.of(week, day);
 	}
 
+	public static int getRemainingDay(WeekAndDay nowWeekAndDay) {
+		int totalDay = 40 * 7 + 7;
+		int passedDay = nowWeekAndDay.getWeek() * 7 + nowWeekAndDay.getDay();
+		return totalDay - passedDay;
+	}
+
 	public static short getDay(LocalDate startDay) {
 		short passedDay = DateUtils.getDayDifference(today(), startDay);
 
