@@ -3,6 +3,7 @@ package com.chiwawa.lionheart.api.service.articlebookmark.dto.response;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.chiwawa.lionheart.api.service.article.dto.response.ArticleBookmarkSummaryDto;
 import com.chiwawa.lionheart.domain.domain.articlebookmark.ArticleBookmark;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 
@@ -24,15 +25,14 @@ public class ArticleBookmarkResponse {
 	private String babyNickname;
 
 	@Schema(description = "북마크 한 아티클 정보")
-	private List<ArticleSummaryDto> articleSummaries;
+	private List<ArticleBookmarkSummaryDto> articleSummaries;
 
 	public static ArticleBookmarkResponse of(Member member, List<ArticleBookmark> articleBookmarks) {
-		return ArticleBookmarkResponse
-			.builder()
+		return ArticleBookmarkResponse.builder()
 			.babyNickname(member.getOnboarding().getBabyNickname())
 			.articleSummaries(articleBookmarks
 				.stream()
-				.map(articleBookmark -> ArticleSummaryDto.of(articleBookmark, member))
+				.map(articleBookmark -> ArticleBookmarkSummaryDto.of(articleBookmark))
 				.collect(Collectors.toList()))
 			.build();
 	}
