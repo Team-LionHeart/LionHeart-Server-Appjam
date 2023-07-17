@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.chiwawa.lionheart.common.constant.ProfileType;
 import com.slack.api.Slack;
 import com.slack.api.model.block.Blocks;
 import com.slack.api.model.block.LayoutBlock;
@@ -28,7 +29,6 @@ public class SlackMessageService {
 	private String webhookUrl;
 	private final static String NEW_LINE = "\n";
 	private final static String DOUBLE_NEW_LINE = "\n\n";
-	private final static String ENV_LOCAL = "local";
 	private final Environment env;
 
 	private StringBuilder sb = new StringBuilder();
@@ -36,8 +36,9 @@ public class SlackMessageService {
 	// Slack으로 알림 보내기
 	public void sendAlert(Exception error, String requestMethod, String requestURI) throws IOException {
 		final String ENV_ACTIVE = env.getActiveProfiles()[0];
+
 		// 현재 profile이 특정 profile이 아니면 알림보내지 않기
-		if (ENV_ACTIVE.equals(ENV_LOCAL)) {
+		if (checkIsNotLocalProfile(ENV_ACTIVE)) {
 			return;
 		}
 
@@ -54,6 +55,10 @@ public class SlackMessageService {
 						"https://user-images.githubusercontent.com/64000241/252282249-08381e4c-15b5-42b9-8ffc-1e887e688f16.png")
 					// 메시지 내용
 					.blocks(layoutBlocks)));
+	}
+
+	private boolean checkIsNotLocalProfile(String ENV_ACTIVE) {
+		return ENV_ACTIVE.equals(ProfileType.LOCAL);
 	}
 
 	// 전체 메시지가 담긴 LayoutBlock 생성
