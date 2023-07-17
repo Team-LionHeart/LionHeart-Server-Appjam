@@ -4,6 +4,8 @@ import static com.chiwawa.lionheart.common.exception.ErrorCode.*;
 
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.chiwawa.lionheart.api.controller.notification.dto.request.SlackNotificationRequest;
+import com.chiwawa.lionheart.api.service.notification.NotificationService;
 import com.chiwawa.lionheart.common.dto.ApiResponse;
 import com.chiwawa.lionheart.common.exception.model.BadGatewayException;
 import com.chiwawa.lionheart.common.exception.model.ConflictException;
@@ -31,6 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RestControllerAdvice
 public class ControllerAdvice {
+
+	private final NotificationService notificationService;
 
 	/**
 	 * 400 BadRequest
@@ -133,8 +139,10 @@ public class ControllerAdvice {
 	 */
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
 	@ExceptionHandler(BadGatewayException.class)
-	protected ApiResponse<Object> handleBadGatewayException(final BadGatewayException exception) {
+	protected ApiResponse<Object> handleBadGatewayException(final BadGatewayException exception,
+		final HttpServletRequest request) {
 		log.error(exception.getMessage(), exception);
+		notificationService.sendCustomNotificationToSlack(SlackNotificationRequest.of(exception, request));
 		return ApiResponse.error(exception.getErrorCode());
 	}
 
@@ -143,8 +151,9 @@ public class ControllerAdvice {
 	 */
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
-	protected ApiResponse<Object> handleException(final Exception exception) {
+	protected ApiResponse<Object> handleException(final Exception exception, final HttpServletRequest request) {
 		log.error(exception.getMessage(), exception);
+		notificationService.sendCustomNotificationToSlack(SlackNotificationRequest.of(exception, request));
 		return ApiResponse.error(INTERNAL_SERVER_EXCEPTION);
 	}
 }

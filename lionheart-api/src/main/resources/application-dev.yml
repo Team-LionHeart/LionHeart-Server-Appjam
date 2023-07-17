@@ -49,3 +49,7 @@ cloud:
 
 jwt:
   secret: ${JWT_SECRET_DEV}
+
+slack:
+  webhook:
+    url: ${SLACK_WEBHOOK_URL_DEV}
