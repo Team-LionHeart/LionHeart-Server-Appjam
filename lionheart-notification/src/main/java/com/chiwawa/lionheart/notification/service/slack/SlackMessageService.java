@@ -36,7 +36,7 @@ public class SlackMessageService {
 	// Slack으로 알림 보내기
 	public void sendAlert(Exception error, String requestMethod, String requestURI) throws IOException {
 		final String ENV_ACTIVE = env.getActiveProfiles()[0];
-		// 현재 프로파일이 특정 프로파일이 아니면 알림보내지 않기
+		// 현재 profile이 특정 profile이 아니면 알림보내지 않기
 		if (ENV_ACTIVE.equals(ENV_LOCAL)) {
 			return;
 		}
