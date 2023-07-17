@@ -139,8 +139,10 @@ public class ControllerAdvice {
 	 */
 	@ResponseStatus(HttpStatus.BAD_GATEWAY)
 	@ExceptionHandler(BadGatewayException.class)
-	protected ApiResponse<Object> handleBadGatewayException(final BadGatewayException exception) {
+	protected ApiResponse<Object> handleBadGatewayException(final BadGatewayException exception,
+		final HttpServletRequest request) {
 		log.error(exception.getMessage(), exception);
+		notificationService.sendCustomNotificationToSlack(SlackNotificationRequest.of(exception, request));
 		return ApiResponse.error(exception.getErrorCode());
 	}
 
