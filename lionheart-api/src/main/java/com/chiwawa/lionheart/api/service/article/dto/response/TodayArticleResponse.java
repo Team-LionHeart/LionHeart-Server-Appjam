@@ -20,6 +20,9 @@ import lombok.ToString;
 @Builder(access = AccessLevel.PRIVATE)
 public class TodayArticleResponse {
 
+	@Schema(description = "아티클ID")
+	private Long articleId;
+
 	@Schema(description = "태명")
 	private String babyNickname;
 
@@ -41,6 +44,7 @@ public class TodayArticleResponse {
 	public static TodayArticleResponse of(Article article, Onboarding onboarding, WeekAndDay weekAndDay,
 		ArticleContent editorNoteContent) {
 		return TodayArticleResponse.builder()
+			.articleId(article.getId())
 			.babyNickname(onboarding.getBabyNickname())
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
