@@ -21,8 +21,6 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class KakaoAuthService implements AuthService {
 
-	private static final MemberSocialType socialType = MemberSocialType.KAKAO;
-
 	private final KakaoApiCaller kakaoApiCaller;
 
 	private final MemberRepository memberRepository;
@@ -39,7 +37,7 @@ public class KakaoAuthService implements AuthService {
 	public Long login(LoginRequest request) {
 		KakaoProfileResponse response = kakaoApiCaller.getProfileInfo(request.getToken());
 		Member member = MemberServiceUtils.findMemberBySocialIdAndSocialType(memberRepository, response.getId(),
-			socialType);
+			MemberSocialType.KAKAO);
 		member.updateFcmToken(request.getFcmToken());
 		return member.getId();
 	}
