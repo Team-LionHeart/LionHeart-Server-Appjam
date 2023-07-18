@@ -35,15 +35,15 @@ CREATE TABLE `ONBOARDING`
 
 CREATE TABLE `ARTICLE`
 (
-    `ARTICLE_ID`         bigint       NOT NULL,
+    `ARTICLE_ID`         bigint auto_increment NOT NULL,
     `ARTICLE_TYPE`       varchar(30)  NOT NULL,
     `TITLE`              varchar(100) NOT NULL,
     `AUTHOR`             varchar(30)  NOT NULL,
-    `CATEGORY`           varchar(30)  NOT NULL,
+    `CATEGORY`           varchar(30) NULL,
     `MAIN_IMAGE_URL`     varchar(300) NOT NULL,
     `MAIN_IMAGE_CAPTION` varchar(100) NOT NULL,
-    `WEEK`               smallint     NOT NULL,
-    `DAY`                smallint     NOT NULL,
+    `WEEK`               smallint NULL,
+    `DAY`                smallint NULL,
     `REQUIRED_TIME`      smallint     NOT NULL,
     `CREATED_AT`         datetime     NOT NULL,
     `MODIFIED_AT`        datetime     NOT NULL

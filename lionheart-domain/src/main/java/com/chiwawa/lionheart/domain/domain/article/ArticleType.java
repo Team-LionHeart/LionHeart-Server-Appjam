@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public enum ArticleType {
 
 	CATEGORY("카테고리"),
-	WEEK_AND_DAY("주차,일차"),
+	WEEK_AND_DAY("주차, 일차"),
 	;
 
 	private final String type;
