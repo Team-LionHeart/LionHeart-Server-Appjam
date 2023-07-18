@@ -27,6 +27,6 @@ public class CurriculumRetrieveService {
 		short startWeek = member.getOnboarding().getPregnantWeeks();
 		WeekAndDay weekAndDay = DateUtils.getWeekAndDay(startWeek, startDay);
 		int month = DateUtils.getPassedMonth(weekAndDay.getWeek());
-		return CurriculumProgressResponse.of(member, weekAndDay, month - 1);
+		return CurriculumProgressResponse.of(weekAndDay, month - 1);
 	}
 }
