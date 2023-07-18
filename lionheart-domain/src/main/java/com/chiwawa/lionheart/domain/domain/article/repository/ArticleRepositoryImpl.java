@@ -40,7 +40,7 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(article)
 			.where(
-				article.articleType.eq(ArticleType.WEEK_AND_DAY),
+				article.articleType.eq(ArticleType.WEEK_DAY),
 				article.week.eq(week),
 				article.day.eq(day))
 			.fetchOne());
@@ -51,7 +51,7 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 		return queryFactory
 			.selectFrom(article)
 			.where(
-				article.articleType.eq(ArticleType.WEEK_AND_DAY),
+				article.articleType.eq(ArticleType.WEEK_DAY),
 				article.week.eq(week)
 			)
 			.orderBy(article.day.asc())
