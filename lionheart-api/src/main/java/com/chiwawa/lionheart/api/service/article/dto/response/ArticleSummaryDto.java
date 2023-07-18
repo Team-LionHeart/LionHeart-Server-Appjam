@@ -19,6 +19,7 @@ import lombok.ToString;
 @Builder(access = AccessLevel.PRIVATE)
 public class ArticleSummaryDto {
 
+	private Long articleId;
 	private String title;
 	private String mainImageUrl;
 	private String firstBodyContent;
@@ -29,6 +30,7 @@ public class ArticleSummaryDto {
 	public static ArticleSummaryDto of(Article article, ArticleContent content, List<String> tag,
 		boolean isMarked) {
 		return ArticleSummaryDto.builder()
+			.articleId(article.getId())
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
 			.requiredTime(article.getRequiredTime())

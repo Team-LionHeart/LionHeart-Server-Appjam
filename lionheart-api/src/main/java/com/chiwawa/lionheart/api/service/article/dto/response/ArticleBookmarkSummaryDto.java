@@ -20,6 +20,7 @@ import lombok.ToString;
 @Builder(access = AccessLevel.PRIVATE)
 public class ArticleBookmarkSummaryDto {
 
+	private Long articleId;
 	private String title;
 	private String mainImageUrl;
 	private Boolean isMarked;
@@ -28,6 +29,7 @@ public class ArticleBookmarkSummaryDto {
 	public static ArticleBookmarkSummaryDto of(ArticleBookmark articleBookmark) {
 		Article article = articleBookmark.getArticle();
 		return ArticleBookmarkSummaryDto.builder()
+			.articleId(article.getId())
 			.title(article.getTitle())
 			.mainImageUrl(article.getMainImageUrl())
 			.tags(article.getArticleTags()
