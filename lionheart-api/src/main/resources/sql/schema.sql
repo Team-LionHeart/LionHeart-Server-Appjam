@@ -35,7 +35,8 @@ CREATE TABLE `ONBOARDING`
 
 CREATE TABLE `ARTICLE`
 (
-    `ARTICLE_ID`         bigint auto_increment primary key,
+    `ARTICLE_ID`         bigint       NOT NULL,
+    `ARTICLE_TYPE`       varchar(30)  NOT NULL,
     `TITLE`              varchar(100) NOT NULL,
     `AUTHOR`             varchar(30)  NOT NULL,
     `CATEGORY`           varchar(30)  NOT NULL,

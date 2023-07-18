@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -60,6 +62,10 @@ public class Article extends BaseEntity {
 
 	@Column(name = "REQUIRED_TIME", nullable = false)
 	private short requiredTime;
+
+	@Column(name = "ARTICLE_TYPE", nullable = false)
+	@Enumerated(value = EnumType.STRING)
+	private ArticleType articleType;
 
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<ArticleContent> articleContents = new ArrayList<>();
