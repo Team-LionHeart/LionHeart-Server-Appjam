@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.chiwawa.lionheart.domain.domain.article.Article;
+import com.chiwawa.lionheart.domain.domain.article.ArticleType;
 import com.chiwawa.lionheart.domain.domain.article.Category;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -27,7 +28,10 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 	public List<Article> findArticlesByCategory(Category category) {
 		return queryFactory
 			.selectFrom(article)
-			.where(article.category.eq(category))
+			.where(
+				article.articleType.eq(ArticleType.CATEGORY),
+				article.category.eq(category)
+			)
 			.fetch();
 	}
 
@@ -36,6 +40,7 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 		return Optional.ofNullable(queryFactory
 			.selectFrom(article)
 			.where(
+				article.articleType.eq(ArticleType.WEEK_DAY),
 				article.week.eq(week),
 				article.day.eq(day))
 			.fetchOne());
@@ -45,7 +50,10 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
 	public List<Article> findOrderedArticlesByWeek(short week) {
 		return queryFactory
 			.selectFrom(article)
-			.where(article.week.eq(week))
+			.where(
+				article.articleType.eq(ArticleType.WEEK_DAY),
+				article.week.eq(week)
+			)
 			.orderBy(article.day.asc())
 			.fetch();
 	}

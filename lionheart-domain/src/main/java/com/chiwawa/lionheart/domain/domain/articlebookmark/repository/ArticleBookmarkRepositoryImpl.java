@@ -31,6 +31,7 @@ public class ArticleBookmarkRepositoryImpl implements ArticleBookmarkRepositoryC
 		return queryFactory
 			.selectFrom(articleBookmark)
 			.where(articleBookmark.member.eq(member))
+			.orderBy(articleBookmark.createdAt.desc())
 			.fetch();
 	}
 }

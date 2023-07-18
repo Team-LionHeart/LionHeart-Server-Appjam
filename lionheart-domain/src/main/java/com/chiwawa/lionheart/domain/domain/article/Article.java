@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,10 +39,14 @@ public class Article extends BaseEntity {
 	@Column(name = "ARTICLE_ID")
 	private Long id;
 
+	@Column(name = "ARTICLE_TYPE", nullable = false, length = 30)
+	@Enumerated(value = EnumType.STRING)
+	private ArticleType articleType;
+
 	@Column(name = "TITLE", nullable = false, length = 100)
 	private String title;
 
-	@Column(name = "CATEGORY", nullable = false, length = 30)
+	@Column(name = "CATEGORY", length = 30)
 	private Category category;
 
 	@Column(name = "MAIN_IMAGE_URL", nullable = false, length = 300)
@@ -52,10 +58,10 @@ public class Article extends BaseEntity {
 	@Column(name = "AUTHOR", nullable = false, length = 30)
 	private String author;
 
-	@Column(name = "WEEK", nullable = false)
+	@Column(name = "WEEK")
 	private short week;
 
-	@Column(name = "DAY", nullable = false)
+	@Column(name = "DAY")
 	private short day;
 
 	@Column(name = "REQUIRED_TIME", nullable = false)
