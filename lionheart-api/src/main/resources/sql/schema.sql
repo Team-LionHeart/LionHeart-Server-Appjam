@@ -44,7 +44,6 @@ CREATE TABLE `ARTICLE`
     `WEEK`               smallint     NOT NULL,
     `DAY`                smallint     NOT NULL,
     `REQUIRED_TIME`      smallint     NOT NULL,
-    `POSTED_AT`          datetime     NOT NULL,
     `CREATED_AT`         datetime     NOT NULL,
     `MODIFIED_AT`        datetime     NOT NULL
 );
