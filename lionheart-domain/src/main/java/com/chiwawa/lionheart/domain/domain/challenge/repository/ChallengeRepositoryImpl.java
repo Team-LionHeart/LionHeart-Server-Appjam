@@ -29,6 +29,5 @@ public class ChallengeRepositoryImpl implements ChallengeRepositoryCustom {
 			.insert(challenge)
 			.columns(challenge.member)
 			.values(member).execute();
-
 	}
 }

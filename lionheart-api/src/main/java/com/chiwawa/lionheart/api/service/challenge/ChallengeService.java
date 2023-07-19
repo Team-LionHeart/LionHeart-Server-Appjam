@@ -38,6 +38,9 @@ public class ChallengeService {
 
 		if (isTodayArticle && validateLastAttendanceIsNotToday(member)) {
 			challengeRepository.checkAttendance(member);
+
+			int attendanceCount = attendanceRepository.findAttendancesByMember(member).size();
+			member.getChallenge().levelUp(attendanceCount);
 		}
 	}
 
