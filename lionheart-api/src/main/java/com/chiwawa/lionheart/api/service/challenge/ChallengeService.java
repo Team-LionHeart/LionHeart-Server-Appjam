@@ -14,7 +14,6 @@ import com.chiwawa.lionheart.common.util.DateUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.challenge.Attendance;
 import com.chiwawa.lionheart.domain.domain.challenge.repository.AttendanceRepository;
-import com.chiwawa.lionheart.domain.domain.challenge.repository.ChallengeRepository;
 import com.chiwawa.lionheart.domain.domain.member.Member;
 
 import lombok.RequiredArgsConstructor;
@@ -23,31 +22,31 @@ import lombok.RequiredArgsConstructor;
 @Service
 @Transactional
 public class ChallengeService {
-	private final ChallengeRepository challengeRepository;
 	private final AttendanceRepository attendanceRepository;
 
 	private final static int ZERO = 0;
 
 	public void checkAttendance(Article article, Member member) {
 		if (isNotAttended(member)) {
-			return;
-		}
+			if (checkIsTodayArticle(article, member) && validateLastAttendanceIsNotToday(member)) {
+				attendanceRepository.save(Attendance.newInstance(member));
 
+				int attendanceCheckCount = attendanceRepository.findAttendancesByMember(member).size();
+				member.getChallenge().levelUp(attendanceCheckCount);
+			}
+		}
+	}
+
+	private boolean checkIsTodayArticle(Article article, Member member) {
 		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
-		boolean isTodayArticle = weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
 
-		if (isTodayArticle && validateLastAttendanceIsNotToday(member)) {
-			challengeRepository.checkAttendance(member);
-
-			int attendanceCount = attendanceRepository.findAttendancesByMember(member).size();
-			member.getChallenge().levelUp(attendanceCount);
-		}
+		return weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
 	}
 
 	private boolean validateLastAttendanceIsNotToday(Member member) {
 		Attendance latestMemberAttendance = findMemberLastAttendance(member).get();
-		int dayDifference = DateUtils.getDayDifference(LocalDateTime.now(), latestMemberAttendance.getCreatedAt());
 
+		int dayDifference = DateUtils.getDayDifference(LocalDateTime.now(), latestMemberAttendance.getCreatedAt());
 		if (dayDifference == ZERO) {
 			return true;
 		}
@@ -55,12 +54,11 @@ public class ChallengeService {
 	}
 
 	private boolean isNotAttended(Member member) {
-		Optional<Attendance> firstMemberAttendance = findMemberLastAttendance(member);
-		if (firstMemberAttendance.isEmpty()) {
+		Optional<Attendance> memberLatestAttendance = findMemberLastAttendance(member);
+		if (memberLatestAttendance.isEmpty()) {
 			return true;
 		}
-
-		return DateUtils.getDayDifference(LocalDateTime.now(), firstMemberAttendance.get().getCreatedAt()) != ZERO;
+		return DateUtils.getDayDifference(LocalDateTime.now(), memberLatestAttendance.get().getCreatedAt()) != ZERO;
 	}
 
 	private Optional<Attendance> findMemberLastAttendance(Member member) {
