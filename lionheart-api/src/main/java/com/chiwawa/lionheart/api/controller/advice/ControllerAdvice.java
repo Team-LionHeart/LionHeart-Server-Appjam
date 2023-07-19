@@ -16,6 +16,7 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.chiwawa.lionheart.api.controller.notification.dto.request.SlackNotificationRequest;
 import com.chiwawa.lionheart.api.service.notification.NotificationService;
@@ -55,6 +56,15 @@ public class ControllerAdvice {
 		log.error(exception.getMessage(), exception);
 		return ApiResponse.error(VALIDATION_EXCEPTION,
 			Objects.requireNonNull(exception.getBindingResult().getFieldError()).getDefaultMessage());
+	}
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	protected ApiResponse<Object> handleMethodArgumentTypeMismatchException(
+		MethodArgumentTypeMismatchException exception) {
+		log.error(exception.getMessage(), exception);
+		return ApiResponse.error(VALIDATION_EXCEPTION,
+			Objects.requireNonNull(exception.getMessage()));
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
