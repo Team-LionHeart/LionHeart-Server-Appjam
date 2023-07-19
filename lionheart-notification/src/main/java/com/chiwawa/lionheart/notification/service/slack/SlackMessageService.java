@@ -58,7 +58,7 @@ public class SlackMessageService {
 	}
 
 	private boolean checkIsNotLocalProfile(String ENV_ACTIVE) {
-		return ENV_ACTIVE.equals(ProfileType.LOCAL);
+		return !ENV_ACTIVE.equals(ProfileType.LOCAL);
 	}
 
 	// 전체 메시지가 담긴 LayoutBlock 생성
