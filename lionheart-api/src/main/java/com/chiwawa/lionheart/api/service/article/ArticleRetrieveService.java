@@ -82,7 +82,7 @@ public class ArticleRetrieveService {
 		ArticleDetailResponse articleDetailResponse = ArticleDetailResponse.of(article, articleBookmark.isPresent(),
 			getOrderedArticleContents(article));
 
-		challengeService.checkAttendance(member);
+		challengeService.checkAttendance(article, member);
 
 		return articleDetailResponse;
 	}

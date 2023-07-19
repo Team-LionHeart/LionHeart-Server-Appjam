@@ -9,10 +9,13 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
+import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.common.exception.ErrorCode;
 import com.chiwawa.lionheart.common.exception.model.NotFoundException;
 import com.chiwawa.lionheart.common.util.DateUtils;
 import com.chiwawa.lionheart.common.util.MessageUtils;
+import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.challenge.Attendance;
 import com.chiwawa.lionheart.domain.domain.challenge.repository.AttendanceRepository;
 import com.chiwawa.lionheart.domain.domain.challenge.repository.ChallengeRepository;
@@ -27,18 +30,25 @@ public class ChallengeService {
 	private final ChallengeRepository challengeRepository;
 	private final AttendanceRepository attendanceRepository;
 
-	private final static int ATTENDANCE = 0;
+	private final static int ZERO = 0;
 
-	public void checkAttendance(Member member) {
-		if (compareLastAttendanceDate(member) != ATTENDANCE) {
+	public void checkAttendance(Article article, Member member) {
+		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
+		boolean isTodayArticle = weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
+
+		if (isTodayArticle && validateLastAttendanceIsNotToday(member)) {
 			challengeRepository.checkAttendance(member);
 		}
 	}
 
-	private int compareLastAttendanceDate(Member member) {
-		Attendance firstMemberAttendance = findMemberLastAttendance(member);
+	private boolean validateLastAttendanceIsNotToday(Member member) {
+		Attendance latestMemberAttendance = findMemberLastAttendance(member);
+		int dayDifference = DateUtils.getDayDifference(LocalDateTime.now(), latestMemberAttendance.getCreatedAt());
 
-		return DateUtils.getDayDifference(LocalDateTime.now(), firstMemberAttendance.getCreatedAt());
+		if (dayDifference == ZERO) {
+			return true;
+		}
+		return false;
 	}
 
 	private Attendance findMemberLastAttendance(Member member) {
