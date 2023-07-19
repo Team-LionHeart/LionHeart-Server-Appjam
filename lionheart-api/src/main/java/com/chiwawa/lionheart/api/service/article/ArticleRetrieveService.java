@@ -72,6 +72,7 @@ public class ArticleRetrieveService {
 
 	}
 
+	@Transactional
 	public ArticleDetailResponse findArticleDetail(Long memberId, Long articleId) {
 		Article article = ArticleServiceUtils.findArticleById(articleRepository, articleId);
 		Member member = MemberServiceUtils.findMemberById(memberRepository, memberId);

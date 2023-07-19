@@ -47,6 +47,7 @@ public class Article extends BaseEntity {
 	private String title;
 
 	@Column(name = "CATEGORY", length = 30)
+	@Enumerated(value = EnumType.STRING)
 	private Category category;
 
 	@Column(name = "MAIN_IMAGE_URL", nullable = false, length = 300)
@@ -59,10 +60,10 @@ public class Article extends BaseEntity {
 	private String author;
 
 	@Column(name = "WEEK")
-	private short week;
+	private Short week;
 
 	@Column(name = "DAY")
-	private short day;
+	private Short day;
 
 	@Column(name = "REQUIRED_TIME", nullable = false)
 	private short requiredTime;

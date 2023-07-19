@@ -35,4 +35,10 @@ public class Attendance extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEMBER_ID", nullable = false)
 	private Member member;
+
+	public static Attendance newInstance(Member member) {
+		return Attendance.builder()
+			.member(member)
+			.build();
+	}
 }

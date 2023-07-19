@@ -1,20 +1,16 @@
 package com.chiwawa.lionheart.api.service.challenge;
 
-import static com.chiwawa.lionheart.common.constant.message.AttendanceErrorMessage.*;
-
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.common.dto.WeekAndDay;
-import com.chiwawa.lionheart.common.exception.ErrorCode;
-import com.chiwawa.lionheart.common.exception.model.NotFoundException;
 import com.chiwawa.lionheart.common.util.DateUtils;
-import com.chiwawa.lionheart.common.util.MessageUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
 import com.chiwawa.lionheart.domain.domain.challenge.Attendance;
 import com.chiwawa.lionheart.domain.domain.challenge.repository.AttendanceRepository;
@@ -33,6 +29,10 @@ public class ChallengeService {
 	private final static int ZERO = 0;
 
 	public void checkAttendance(Article article, Member member) {
+		if (isNotAttended(member)) {
+			return;
+		}
+
 		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
 		boolean isTodayArticle = weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
 
@@ -45,7 +45,7 @@ public class ChallengeService {
 	}
 
 	private boolean validateLastAttendanceIsNotToday(Member member) {
-		Attendance latestMemberAttendance = findMemberLastAttendance(member);
+		Attendance latestMemberAttendance = findMemberLastAttendance(member).get();
 		int dayDifference = DateUtils.getDayDifference(LocalDateTime.now(), latestMemberAttendance.getCreatedAt());
 
 		if (dayDifference == ZERO) {
@@ -54,13 +54,17 @@ public class ChallengeService {
 		return false;
 	}
 
-	private Attendance findMemberLastAttendance(Member member) {
-		List<Attendance> memberAttendances = attendanceRepository.findAttendancesByMember(member);
+	private boolean isNotAttended(Member member) {
+		Optional<Attendance> firstMemberAttendance = findMemberLastAttendance(member);
+		if (firstMemberAttendance.isEmpty()) {
+			return true;
+		}
 
-		return memberAttendances.stream().max(Comparator.comparing(Attendance::getCreatedAt))
-			.orElseThrow(() ->
-				new NotFoundException(
-					MessageUtils.generate(NOT_EXIST_MEMBER_ATTENDANCE_DATA_ERROR_MESSAGE, member.getId()),
-					ErrorCode.NOT_FOUND_MEMBER_ATTENDANCE_DATA_EXCEPTION));
+		return DateUtils.getDayDifference(LocalDateTime.now(), firstMemberAttendance.get().getCreatedAt()) != ZERO;
+	}
+
+	private Optional<Attendance> findMemberLastAttendance(Member member) {
+		List<Attendance> memberAttendances = attendanceRepository.findAttendancesByMember(member);
+		return memberAttendances.stream().max(Comparator.comparing(Attendance::getCreatedAt));
 	}
 }
