@@ -28,7 +28,6 @@ public enum ErrorCode {
 	NOT_FOUND_CHALLENGE_EXCEPTION("N004", "존재하지 않는 챌린지입니다."),
 	NOT_FOUND_ARTICLE_EXCEPTION("N005", "삭제되었거나 존재하지 않는 아티클입니다."),
 	NOT_FOUND_ARTICLE_IN_WEEK_AND_DAY_EXCEPTION("N006", "해당 주차 일차에 해당하는 아티클이 존재하지 않습니다."),
-	NOT_FOUND_MEMBER_ATTENDANCE_DATA_EXCEPTION("N007", "해당 유저의 출석체크 정보가 존재하지 않습니다"),
 
 	// Conflict Exception
 	CONFLICT_EXCEPTION("C001", "이미 존재합니다."),
