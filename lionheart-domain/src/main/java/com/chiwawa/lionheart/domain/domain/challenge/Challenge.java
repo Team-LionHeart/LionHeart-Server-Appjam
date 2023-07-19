@@ -46,10 +46,7 @@ public class Challenge extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private ChallengePopupType popup;
 
-	private static final int LEVEL_TWO_STANDARD = 5;
-	private static final int LEVEL_THREE_STANDARD = 10;
-	private static final int LEVEL_FOUR_STANDARD = 15;
-	private static final int LEVEL_FIVE_STANDARD = 20;
+	private static final int LEVEL_UP_STANDARD = 5;
 
 	public static Challenge newInstance(Member member) {
 		return Challenge.builder()
@@ -60,15 +57,8 @@ public class Challenge extends BaseEntity {
 	}
 
 	public void levelUp(int attendanceCheckCount) {
-		if (level.equals(ChallengeLevelType.LEVEL_ONE) && attendanceCheckCount >= LEVEL_TWO_STANDARD) {
-			level = ChallengeLevelType.LEVEL_TWO;
-		} else if (level.equals(ChallengeLevelType.LEVEL_TWO) && attendanceCheckCount >= LEVEL_THREE_STANDARD) {
-			level = ChallengeLevelType.LEVEL_THREE;
-		} else if (level.equals(ChallengeLevelType.LEVEL_THREE) && attendanceCheckCount >= LEVEL_FOUR_STANDARD) {
-			level = ChallengeLevelType.LEVEL_FOUR;
-		} else if (level.equals(ChallengeLevelType.LEVEL_FOUR) && attendanceCheckCount >= LEVEL_FIVE_STANDARD) {
-			level = ChallengeLevelType.LEVEL_FIVE;
-		}
+		int level = (attendanceCheckCount % LEVEL_UP_STANDARD) + 1;
+		this.level = ChallengeLevelType.findByLevel(level);
 	}
 
 }

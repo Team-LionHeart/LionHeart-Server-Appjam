@@ -26,9 +26,10 @@ public class ChallengeService {
 
 	private final static int ZERO = 0;
 
+
 	public void checkAttendance(Article article, Member member) {
-		if (isNotAttended(member)) {
-			if (checkIsTodayArticle(article, member) && validateLastAttendanceIsNotToday(member)) {
+		if (checkIsNotAttended(member)) {
+			if (checkIsTodayArticle(article, member)) {
 				attendanceRepository.save(Attendance.newInstance(member));
 
 				int attendanceCheckCount = attendanceRepository.findAttendancesByMember(member).size();
@@ -43,22 +44,15 @@ public class ChallengeService {
 		return weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
 	}
 
-	private boolean validateLastAttendanceIsNotToday(Member member) {
-		Attendance latestMemberAttendance = findMemberLastAttendance(member).get();
-
-		int dayDifference = DateUtils.getDayDifference(LocalDateTime.now(), latestMemberAttendance.getCreatedAt());
-		if (dayDifference == ZERO) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean isNotAttended(Member member) {
+	private boolean checkIsNotAttended(Member member) {
 		Optional<Attendance> memberLatestAttendance = findMemberLastAttendance(member);
 		if (memberLatestAttendance.isEmpty()) {
 			return true;
 		}
-		return DateUtils.getDayDifference(LocalDateTime.now(), memberLatestAttendance.get().getCreatedAt()) != ZERO;
+		boolean isNotAttended =
+			DateUtils.getDayDifference(LocalDateTime.now(), memberLatestAttendance.get().getCreatedAt()) != ZERO;
+
+		return isNotAttended;
 	}
 
 	private Optional<Attendance> findMemberLastAttendance(Member member) {
@@ -66,3 +60,4 @@ public class ChallengeService {
 		return memberAttendances.stream().max(Comparator.comparing(Attendance::getCreatedAt));
 	}
 }
+
