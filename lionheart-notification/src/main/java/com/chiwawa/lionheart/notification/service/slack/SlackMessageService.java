@@ -38,7 +38,7 @@ public class SlackMessageService {
 		final String ENV_ACTIVE = env.getActiveProfiles()[0];
 
 		// 현재 profile이 특정 profile이 아니면 알림보내지 않기
-		if (checkIsNotLocalProfile(ENV_ACTIVE)) {
+		if (isLocalProfile(ENV_ACTIVE)) {
 			return;
 		}
 
@@ -57,8 +57,8 @@ public class SlackMessageService {
 					.blocks(layoutBlocks)));
 	}
 
-	private boolean checkIsNotLocalProfile(String ENV_ACTIVE) {
-		return !ENV_ACTIVE.equals(ProfileType.LOCAL);
+	private boolean isLocalProfile(String ENV_ACTIVE) {
+		return ENV_ACTIVE.equals(ProfileType.LOCAL);
 	}
 
 	// 전체 메시지가 담긴 LayoutBlock 생성
