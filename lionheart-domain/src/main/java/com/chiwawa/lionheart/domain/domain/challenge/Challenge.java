@@ -42,10 +42,17 @@ public class Challenge extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private ChallengeLevelType level;
 
+  
 	public static Challenge newInstance(Member member) {
 		return Challenge.builder()
 			.member(member)
 			.level(ChallengeLevelType.LEVEL_ONE)
 			.build();
 	}
+
+	public void levelUp(int attendanceCheckCount) {
+		int level = (attendanceCheckCount % LEVEL_UP_STANDARD) + 1;
+		this.level = ChallengeLevelType.find(level);
+	}
+
 }
