@@ -46,6 +46,8 @@ public class Challenge extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private ChallengePopupType popup;
 
+	private static final int LEVEL_UP_STANDARD = 5;
+
 	public static Challenge newInstance(Member member) {
 		return Challenge.builder()
 			.member(member)
@@ -53,4 +55,10 @@ public class Challenge extends BaseEntity {
 			.popup(ChallengePopupType.START)
 			.build();
 	}
+
+	public void levelUp(int attendanceCheckCount) {
+		int level = (attendanceCheckCount % LEVEL_UP_STANDARD) + 1;
+		this.level = ChallengeLevelType.find(level);
+	}
+
 }
