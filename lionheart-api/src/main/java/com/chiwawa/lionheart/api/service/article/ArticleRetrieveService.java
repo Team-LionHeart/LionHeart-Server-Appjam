@@ -45,11 +45,11 @@ public class ArticleRetrieveService {
 
 	public ArticleSummaryResponse findArticlesByCategory(Long memberId, Category category) {
 
-		List<ArticleSummaryDto> categoryArticles = formatSummaryArticleDtos(memberId,
+		List<ArticleSummaryDto> articleSummaries = formatSummaryArticleDtos(memberId,
 			articleRepository.findArticlesByCategory(category));
 
-		Collections.shuffle(categoryArticles);
-		return ArticleSummaryResponse.of(categoryArticles);
+		Collections.shuffle(articleSummaries);
+		return ArticleSummaryResponse.of(articleSummaries);
 	}
 
 	public TodayArticleResponse findTodayArticleByMemberId(Long memberId) {

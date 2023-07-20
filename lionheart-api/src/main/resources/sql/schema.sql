@@ -71,7 +71,6 @@ CREATE TABLE `CHALLENGE`
     `CHALLENGE_ID` bigint auto_increment primary key,
     `MEMBER_ID`    bigint      NOT NULL,
     `LEVEL`        varchar(30) NOT NULL,
-    `POPUP`        varchar(30) NOT NULL,
     `CREATED_AT`   datetime    NOT NULL,
     `MODIFIED_AT`  datetime    NOT NULL
 );

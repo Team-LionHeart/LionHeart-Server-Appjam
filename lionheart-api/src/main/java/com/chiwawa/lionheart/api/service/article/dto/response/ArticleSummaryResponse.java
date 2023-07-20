@@ -18,12 +18,12 @@ import lombok.ToString;
 public class ArticleSummaryResponse {
 
 	@Schema(description = "아티클 요약 정보")
-	private List<ArticleSummaryDto> categoryArticles;
+	private List<ArticleSummaryDto> articleSummaries;
 
-	public static ArticleSummaryResponse of(List<ArticleSummaryDto> categoryArticles) {
+	public static ArticleSummaryResponse of(List<ArticleSummaryDto> articleSummaries) {
 		return ArticleSummaryResponse
 			.builder()
-			.categoryArticles(categoryArticles)
+			.articleSummaries(articleSummaries)
 			.build();
 	}
 }

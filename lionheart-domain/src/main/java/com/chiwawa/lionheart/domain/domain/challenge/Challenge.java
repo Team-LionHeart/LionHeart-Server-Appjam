@@ -42,17 +42,12 @@ public class Challenge extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private ChallengeLevelType level;
 
-	@Column(name = "POPUP", nullable = false, length = 30)
-	@Enumerated(EnumType.STRING)
-	private ChallengePopupType popup;
-
 	private static final int LEVEL_UP_STANDARD = 5;
-
+  
 	public static Challenge newInstance(Member member) {
 		return Challenge.builder()
 			.member(member)
 			.level(ChallengeLevelType.LEVEL_ONE)
-			.popup(ChallengePopupType.START)
 			.build();
 	}
 
