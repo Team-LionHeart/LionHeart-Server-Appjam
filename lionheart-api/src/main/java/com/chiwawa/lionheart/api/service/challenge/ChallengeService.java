@@ -28,8 +28,8 @@ public class ChallengeService {
 
 
 	public void checkAttendance(Article article, Member member) {
-		if (checkIsNotAttended(member)) {
-			if (checkIsTodayArticle(article, member)) {
+		if (isNotAttended(member)) {
+			if (isTodayArticle(article, member)) {
 				attendanceRepository.save(Attendance.newInstance(member));
 
 				int attendanceCheckCount = attendanceRepository.findAttendancesByMember(member).size();
@@ -38,21 +38,19 @@ public class ChallengeService {
 		}
 	}
 
-	private boolean checkIsTodayArticle(Article article, Member member) {
+	private boolean isTodayArticle(Article article, Member member) {
 		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
 
 		return weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
 	}
 
-	private boolean checkIsNotAttended(Member member) {
+	private boolean isNotAttended(Member member) {
 		Optional<Attendance> memberLatestAttendance = findMemberLastAttendance(member);
 		if (memberLatestAttendance.isEmpty()) {
 			return true;
 		}
-		boolean isNotAttended =
-			DateUtils.getDayDifference(LocalDateTime.now(), memberLatestAttendance.get().getCreatedAt()) != ZERO;
 
-		return isNotAttended;
+		return DateUtils.getDayDifference(LocalDateTime.now(), memberLatestAttendance.get().getCreatedAt()) != ZERO;
 	}
 
 	private Optional<Attendance> findMemberLastAttendance(Member member) {

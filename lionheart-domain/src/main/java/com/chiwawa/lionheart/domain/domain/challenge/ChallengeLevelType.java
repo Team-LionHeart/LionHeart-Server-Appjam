@@ -19,7 +19,7 @@ public enum ChallengeLevelType {
 	private final int level;
 	private final String value;
 
-	public static ChallengeLevelType findByLevel(int level) {
+	public static ChallengeLevelType find(int level) {
 		return Arrays.stream(values())
 			.filter(t -> t.level == level)
 			.findFirst()

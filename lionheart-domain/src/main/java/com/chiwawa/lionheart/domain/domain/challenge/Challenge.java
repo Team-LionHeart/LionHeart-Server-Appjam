@@ -58,7 +58,7 @@ public class Challenge extends BaseEntity {
 
 	public void levelUp(int attendanceCheckCount) {
 		int level = (attendanceCheckCount % LEVEL_UP_STANDARD) + 1;
-		this.level = ChallengeLevelType.findByLevel(level);
+		this.level = ChallengeLevelType.find(level);
 	}
 
 }
