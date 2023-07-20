@@ -42,6 +42,7 @@ public class Challenge extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private ChallengeLevelType level;
 
+	private static final int LEVEL_UP_STANDARD = 5;
   
 	public static Challenge newInstance(Member member) {
 		return Challenge.builder()
