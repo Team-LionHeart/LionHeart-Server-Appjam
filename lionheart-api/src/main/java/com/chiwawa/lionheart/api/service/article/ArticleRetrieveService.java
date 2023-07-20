@@ -19,6 +19,7 @@ import com.chiwawa.lionheart.api.service.article.dto.response.ArticleDetailRespo
 import com.chiwawa.lionheart.api.service.article.dto.response.ArticleSummaryDto;
 import com.chiwawa.lionheart.api.service.article.dto.response.ArticleSummaryResponse;
 import com.chiwawa.lionheart.api.service.article.dto.response.TodayArticleResponse;
+import com.chiwawa.lionheart.api.service.article.dto.response.WeekArticleSummaryResponse;
 import com.chiwawa.lionheart.api.service.challenge.ChallengeService;
 import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.common.dto.WeekAndDay;
@@ -63,12 +64,12 @@ public class ArticleRetrieveService {
 		return TodayArticleResponse.of(article, member.getOnboarding(), weekAndDay, editorNoteContent);
 	}
 
-	public ArticleSummaryResponse findArticlesByWeekAndMemberId(Long memberId, short week) {
+	public WeekArticleSummaryResponse findArticlesByWeekAndMemberId(Long memberId, short week) {
 
 		List<ArticleSummaryDto> weekArticles = formatSummaryArticleDtos(memberId,
 			articleRepository.findOrderedArticlesByWeek(week));
 
-		return ArticleSummaryResponse.of(weekArticles);
+		return WeekArticleSummaryResponse.of(weekArticles, week);
 
 	}
 
