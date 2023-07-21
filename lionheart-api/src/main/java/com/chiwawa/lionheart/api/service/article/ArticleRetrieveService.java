@@ -100,7 +100,7 @@ public class ArticleRetrieveService {
 	private List<ArticleSummaryDto> formatSummaryArticleDtos(Long memberId, List<Article> articles) {
 		return articles
 			.stream()
-			.map(c -> formatSummaryArticleDto(memberId, c))
+			.map(article -> formatSummaryArticleDto(memberId, article))
 			.collect(Collectors.toList());
 	}
 
@@ -109,7 +109,7 @@ public class ArticleRetrieveService {
 		Optional<ArticleBookmark> bookmark = articleBookmarkRepository.findArticleBookmarkByMemberAndArticle(
 			findMemberById(memberRepository, memberId), article);
 
-		ArticleContent content = ArticleContentServiceUtils.findArticleFirstBodyByArticle(article);
+		ArticleContent content = ArticleContentServiceUtils.findArticleEditorNoteContentByArticle(article);
 		List<String> articleTags = ArticleTagServiceUtils.findArticleTagsByArticle(article);
 
 		return ArticleSummaryDto.of(article, content, articleTags, bookmark.isPresent());
