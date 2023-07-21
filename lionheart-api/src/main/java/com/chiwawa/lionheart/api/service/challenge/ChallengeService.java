@@ -12,6 +12,7 @@ import com.chiwawa.lionheart.api.service.member.MemberServiceUtils;
 import com.chiwawa.lionheart.common.dto.WeekAndDay;
 import com.chiwawa.lionheart.common.util.DateUtils;
 import com.chiwawa.lionheart.domain.domain.article.Article;
+import com.chiwawa.lionheart.domain.domain.article.ArticleType;
 import com.chiwawa.lionheart.domain.domain.challenge.Attendance;
 import com.chiwawa.lionheart.domain.domain.challenge.repository.AttendanceRepository;
 import com.chiwawa.lionheart.domain.domain.member.Member;
@@ -36,8 +37,10 @@ public class ChallengeService {
 	}
 
 	private boolean isTodayArticle(Article article, Member member) {
+		if (article.getArticleType().equals(ArticleType.CATEGORY)) {
+			return false;
+		}
 		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
-
 		return weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
 	}
 
