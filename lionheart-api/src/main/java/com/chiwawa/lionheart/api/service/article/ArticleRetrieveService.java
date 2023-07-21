@@ -3,7 +3,6 @@ package com.chiwawa.lionheart.api.service.article;
 import static com.chiwawa.lionheart.api.service.article.articleContent.ArticleContentServiceUtils.*;
 import static com.chiwawa.lionheart.api.service.member.MemberServiceUtils.*;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -48,8 +47,7 @@ public class ArticleRetrieveService {
 
 		List<ArticleSummaryDto> articleSummaries = formatSummaryArticleDtos(memberId,
 			articleRepository.findArticlesByCategory(category));
-
-		Collections.shuffle(articleSummaries);
+		
 		return ArticleSummaryResponse.of(articleSummaries);
 	}
 
