@@ -47,7 +47,7 @@ public class Challenge extends BaseEntity {
 	public static Challenge newInstance(Member member) {
 		return Challenge.builder()
 			.member(member)
-			.level(ChallengeLevelType.LEVEL_ONE)
+			.level(ChallengeLevelType.LEVEL_FIVE) //TODO: 데모데이 종료 후, LEVEL_ONE으로 변경
 			.build();
 	}
 
