@@ -28,7 +28,7 @@ public class ChallengeService {
 	private final static int ZERO = 0;
 
 	public void checkAttendance(Article article, Member member) {
-		if (isNotAttended(member) && isTodayArticle(article, member)) {
+		if (isNotAttended(member) && isTodayArticle(article, member) && isWeekDayArticleType(article)) {
 			attendanceRepository.save(Attendance.newInstance(member));
 
 			int attendanceCheckCount = attendanceRepository.findAttendancesByMember(member).size();
@@ -37,11 +37,12 @@ public class ChallengeService {
 	}
 
 	private boolean isTodayArticle(Article article, Member member) {
-		if (article.getArticleType().equals(ArticleType.CATEGORY)) {
-			return false;
-		}
 		WeekAndDay weekAndDay = MemberServiceUtils.findMemberWeekAndDay(member);
 		return weekAndDay.equals(WeekAndDay.of(article.getWeek(), article.getDay()));
+	}
+
+	private boolean isWeekDayArticleType(Article article) {
+		return article.getArticleType().equals(ArticleType.WEEK_DAY);
 	}
 
 	private boolean isNotAttended(Member member) {
