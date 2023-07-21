@@ -22,11 +22,11 @@ if [ ! -z ${TARGET_PID} ]; then
 fi
 
 if [ ${HOST_NAME} == "lionheart-prod-server" ]; then
-  nohup java -jar -Dserver.port=${TARGET_PORT} -Dspring.profiles.active=prod /home/ubuntu/api-server/*.jar >> /home/ubuntu/api-server/deploy.log 2>/home/ubuntu/api-server/deploy_err.log &
+  nohup java -jar -Dserver.port=${TARGET_PORT} -Duser.timezone=Asia/Seoul -Dspring.profiles.active=prod /home/ubuntu/api-server/*.jar >> /home/ubuntu/api-server/deploy.log 2>/home/ubuntu/api-server/deploy_err.log &
   echo "[$NOW_TIME] Now new WAS runs at ${TARGET_PORT}." >> /home/ubuntu/api-server/deploy.log
   exit 0
 else
-  nohup java -jar -Dserver.port=${TARGET_PORT} -Dspring.profiles.active=dev /home/ubuntu/api-server/*.jar >> /home/ubuntu/api-server/deploy.log 2>/home/ubuntu/api-server/deploy_err.log &
+  nohup java -jar -Dserver.port=${TARGET_PORT} -Duser.timezone=Asia/Seoul -Dspring.profiles.active=dev /home/ubuntu/api-server/*.jar >> /home/ubuntu/api-server/deploy.log 2>/home/ubuntu/api-server/deploy_err.log &
   echo "[$NOW_TIME] Now new WAS runs at ${TARGET_PORT}." >> /home/ubuntu/api-server/deploy.log
   exit 0
 fi
