@@ -18,5 +18,5 @@ public class UpdateArticleBookmarkRequest {
 	private Long articleId;
 
 	@Schema(description = "북마크 요청 상태")
-	private boolean bookmarkStatus;
+	private boolean bookmarkRequestStatus;
 }

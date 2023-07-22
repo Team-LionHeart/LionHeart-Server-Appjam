@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ArticleBookmarkServiceUtils {
 
-	public static void validateBookmarkRequest(Optional<ArticleBookmark> articleBookmark, boolean bookmarkStatus) {
-		if (bookmarkStatus == true && articleBookmark.isPresent()) {
+	public static void validateBookmarkRequest(Optional<ArticleBookmark> articleBookmark, boolean bookmarkRequestStatus) {
+		if (bookmarkRequestStatus == true && articleBookmark.isPresent()) {
 			throw new ConflictException(
 				MessageUtils.generate(ALREADY_EXIST_BOOKMARK_ERROR_MESSAGE, articleBookmark.get().getId()),
 				CONFLICT_BOOKMARK_EXCEPTION);
 		}
-		if (bookmarkStatus == false && articleBookmark.isEmpty()) {
+		if (bookmarkRequestStatus == false && articleBookmark.isEmpty()) {
 			throw new ConflictException(ALREADY_EMPTY_BOOKMARK_ERROR_MESSAGE, CONFLICT_BOOKMARK_EXCEPTION);
 		}
 	}

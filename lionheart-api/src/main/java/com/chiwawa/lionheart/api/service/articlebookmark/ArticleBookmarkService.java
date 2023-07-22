@@ -34,12 +34,12 @@ public class ArticleBookmarkService {
 
 		ArticleBookmarkServiceUtils.validateBookmarkRequest(
 			articleBookmark,
-			request.isBookmarkStatus());
+			request.isBookmarkRequestStatus());
 
-		if (request.isBookmarkStatus()) {
+		if (request.isBookmarkRequestStatus()) {
 			articleBookmarkRepository.save(ArticleBookmark.newInstance(member, article));
 		}
-		if (!request.isBookmarkStatus()) {
+		if (!request.isBookmarkRequestStatus()) {
 			articleBookmarkRepository.delete(articleBookmark.get());
 		}
 	}
