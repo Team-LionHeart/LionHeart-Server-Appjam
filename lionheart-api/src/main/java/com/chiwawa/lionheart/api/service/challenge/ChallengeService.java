@@ -28,7 +28,7 @@ public class ChallengeService {
 	private final static int ZERO = 0;
 
 	public void checkAttendance(Article article, Member member) {
-		if (isNotAttended(member) && isTodayArticle(article, member) && isWeekDayArticleType(article)) {
+		if (isWeekDayArticleType(article) && isNotAttended(member) && isTodayArticle(article, member)) {
 			attendanceRepository.save(Attendance.newInstance(member));
 
 			int attendanceCheckCount = attendanceRepository.findAttendancesByMember(member).size();
